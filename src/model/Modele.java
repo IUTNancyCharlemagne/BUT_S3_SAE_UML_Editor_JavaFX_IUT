@@ -1,5 +1,7 @@
 package model;
 
+import model.elements.Classe;
+
 import java.util.ArrayList;
 import java.util.List;
 
