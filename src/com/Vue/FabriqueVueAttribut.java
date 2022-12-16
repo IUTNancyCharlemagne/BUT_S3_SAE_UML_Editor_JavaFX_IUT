@@ -1,6 +1,6 @@
-package Vue;
+package com.Vue;
 
-public class FabriqueVueMethode implements FabriqueDeVue {
+public class FabriqueVueAttribut implements FabriqueDeVue {
     @Override
     public VueElementClasse creerVueElement() {
         return new VueElementClasse();

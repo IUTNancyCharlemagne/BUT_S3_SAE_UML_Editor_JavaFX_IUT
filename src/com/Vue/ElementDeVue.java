@@ -1,4 +1,4 @@
-package Vue;
+package com.Vue;
 
 public interface ElementDeVue {
 }

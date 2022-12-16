@@ -1,4 +1,4 @@
-package Vue;
+package com.Vue;
 
 public class FabriqueVueClasse implements FabriqueDeVue {
 
