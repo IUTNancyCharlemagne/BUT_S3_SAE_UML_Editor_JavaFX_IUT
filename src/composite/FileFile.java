@@ -1,6 +1,5 @@
 package composite;
 
-import java.io.File;
 import java.lang.reflect.*;
 import java.lang.reflect.Constructor;
 
