@@ -1,4 +1,6 @@
 package model.elements;
 
-public class Attribut {
+public class Attribut
+{
+
 }
