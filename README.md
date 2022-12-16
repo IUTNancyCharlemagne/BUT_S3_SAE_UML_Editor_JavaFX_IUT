@@ -5,7 +5,7 @@
 ###### `COLLIN Hugo`
 ###### `MALAVASI Valentin`<br><br><br>
 
-## ***Liste de nos questions :***<br>
+## ***Liste de nos questions / commentaires :***<br>
 
 a) <br>
 b) <br>
