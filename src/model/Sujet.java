@@ -1,5 +1,7 @@
 package model;
 
+import com.Vue.Observateur;
+
 import java.util.List;
 
 public interface Sujet

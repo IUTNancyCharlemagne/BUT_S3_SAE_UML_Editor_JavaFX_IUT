@@ -1,11 +1,10 @@
 package model;
 
-import Vue.Observateur;
+import com.Vue.Observateur;
 import composite.FileDirectory;
 import model.elements.Classe;
 import model.export.Format;
 
-import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
 import composite.*;
@@ -43,6 +42,7 @@ public class Modele implements Sujet
     public void supprimerFichiers(FileComposite fichier)
     {
     }
+
 
     @Override
     public void enregistrerObservateur(Observateur obs) {
