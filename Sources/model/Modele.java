@@ -2,8 +2,10 @@ package model;
 
 import model.elements.Classe;
 
+import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
+import composite.*;
 
 public class Modele implements Sujet
 {
