@@ -20,8 +20,9 @@ public class FileDirectory extends FileComposite{
             else {
 
                 if (fichier.getName().endsWith(".java")) {
-                    fichier.getName();
-                    f = new FileMyFile(fichier.getName(), fichier.getPath());
+                    String name;
+                    name = this.name+"."+fichier.getName().replace(".java","");
+                    f = new FileFile(name, "");
                     aff += "\n| " + f.list();
                 }
             }
