@@ -2,8 +2,10 @@ package model;
 
 import model.elements.Classe;
 
+import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
+import composite.*;
 
 public class Modele implements Sujet
 {
@@ -28,7 +30,7 @@ public class Modele implements Sujet
 
     }
 
-    public List<FileComposite> getFichiers()
+    public String getFichiers()
     {
         return this.dossier.list();
     }
