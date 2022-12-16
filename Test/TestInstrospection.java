@@ -1,6 +1,5 @@
 import composite.FileComposite;
 import composite.FileDirectory;
-import composite.FileFile;
 
 public class TestInstrospection {
     public static void main(String[] args) {
