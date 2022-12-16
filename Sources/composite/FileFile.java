@@ -23,12 +23,10 @@ public class FileFile extends FileComposite{
      */
     public String list() {
         String aff = ">"+ this.name;
-        if (this.path.contains(".class")){
-            try {
-                aff += this.contenu(this.name);
-            }catch (ClassNotFoundException e){
-                System.out.println("La classe n'existe pas");
-            }
+        try {
+            aff += this.contenu(this.name);
+        }catch (ClassNotFoundException e){
+            System.out.println("La classe n'existe pas");
         }
         return aff;
     }
