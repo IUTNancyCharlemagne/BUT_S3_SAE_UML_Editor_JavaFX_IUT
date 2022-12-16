@@ -30,7 +30,7 @@ public class Modele implements Sujet
 
     }
 
-    public List<FileComposite> getFichiers()
+    public String getFichiers()
     {
         return this.dossier.list();
     }
