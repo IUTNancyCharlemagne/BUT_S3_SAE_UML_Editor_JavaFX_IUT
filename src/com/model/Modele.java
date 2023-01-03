@@ -1,13 +1,15 @@
-package model;
+package com.model;
 
-import com.Vue.Observateur;
-import composite.FileDirectory;
-import model.elements.Classe;
-import model.export.Format;
+import com.model.composite.FileDirectory;
+import com.vue.Observateur;
+import com.model.composite.FileComposite;
+import com.model.elements.Classe;
+import com.model.export.Format;
 
 import java.util.ArrayList;
 import java.util.List;
-import composite.*;
+
+import com.model.composite.*;
 
 public class Modele implements Sujet
 {

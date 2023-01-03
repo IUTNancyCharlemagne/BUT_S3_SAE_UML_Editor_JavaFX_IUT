@@ -1,4 +1,4 @@
-package com.Vue;
+package com.vue;
 
 public interface FabriqueDeVue {
     ElementDeVue creerVueElement();
