@@ -1,4 +1,4 @@
-package com.model.composite;
+package com.modele.composite;
 
 public abstract class FileComposite{
 

@@ -1,4 +1,4 @@
-package com.model.composite;
+package com.modele.composite;
 
 import java.io.File;
 

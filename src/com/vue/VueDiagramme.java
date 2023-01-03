@@ -1,7 +1,7 @@
 package com.vue;
 
 import javafx.scene.layout.StackPane;
-import com.model.Sujet;
+import com.modele.Sujet;
 
 import java.util.ArrayList;
 

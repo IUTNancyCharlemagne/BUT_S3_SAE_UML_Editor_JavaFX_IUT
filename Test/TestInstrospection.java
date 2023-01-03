@@ -1,5 +1,5 @@
-import com.model.composite.FileComposite;
-import com.model.composite.FileDirectory;
+import com.modele.composite.FileComposite;
+import com.modele.composite.FileDirectory;
 
 public class TestInstrospection {
     public static void main(String[] args) {

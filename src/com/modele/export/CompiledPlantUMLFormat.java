@@ -1,6 +1,6 @@
-package com.model.export;
+package com.modele.export;
 
-import com.model.composite.FileComposite;
+import com.modele.composite.FileComposite;
 
 import java.util.List;
 

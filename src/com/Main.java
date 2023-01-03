@@ -1,6 +1,6 @@
 package com;
 
-import com.model.Modele;
+import com.modele.Modele;
 import com.vue.VueDiagramme;
 import javafx.application.Application;
 import javafx.scene.Scene;
