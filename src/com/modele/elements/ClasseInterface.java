@@ -1,13 +1,14 @@
 package com.modele.elements;
 
-public class Attribut implements Element
+import java.util.List;
+
+public class ClasseInterface implements Element
 {
-    private String nom, type;
+    private String nom;
     private char visibilite;
 
-    public Attribut(String nom, String type, char visibilite) {
+    public ClasseInterface(String nom, char visibilite) {
         this.nom = nom;
-        this.type = type;
         this.visibilite = visibilite;
     }
 
@@ -17,14 +18,6 @@ public class Attribut implements Element
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public char getVisibilite() {
