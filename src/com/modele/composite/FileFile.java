@@ -106,15 +106,11 @@ public class FileFile extends FileComposite{
         StringBuilder aff = new StringBuilder("");
         // On récupère le premier paramère du tableau
         aff.append(params[0].getType().getSimpleName()); // On récupère le type du paramètre
-        aff.append(" ");
-        aff.append(params[0].getName()); // On récupère le nom du paramètre
         int i = 1;
         // On parcours les autres paramètres
         while (i < params.length){
             aff.append(", ");
             aff.append(params[i].getType().getSimpleName()); // On récupère le type du paramètre
-            aff.append(" ");
-            aff.append(params[i].getName()); // On récupère le nom du paramètre
             i++;
         }
         return aff.toString();
