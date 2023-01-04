@@ -1,5 +1,6 @@
 package com.vue;
 
+import com.modele.elements.ClasseInterface;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -55,4 +56,15 @@ public class VueDiagramme extends Pane implements Observateur {
         this.setPrefSize(800, 600);
         this.setStyle("-fx-background-color: #FFFFFF");
     }
+
+    /*
+    public void positionnerClasses()
+    {
+        int count = 0;
+        for (VueClasse classe : classes)
+        {
+            classe.setPos();
+        }
+    }
+         */
 }
