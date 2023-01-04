@@ -1,6 +1,7 @@
 package com.modele;
 
 import com.modele.composite.FileDirectory;
+import com.modele.elements.ClasseInterface;
 import com.modele.elements.Element;
 import com.vue.Observateur;
 import com.modele.composite.FileComposite;
@@ -12,7 +13,7 @@ import java.util.List;
 public class Modele implements Sujet
 {
     private List<Observateur> observateurs;
-    private List<Element> elements;
+    private List<ClasseInterface> elements;
     private FileDirectory dossier;
     private Format format;
 
@@ -60,7 +61,7 @@ public class Modele implements Sujet
     }
 
     @Override
-    public List<Element> getElements() {
+    public List<ClasseInterface> getClasses() {
         return elements;
     }
 }

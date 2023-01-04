@@ -39,6 +39,5 @@ public class VueSelectionRepertoire extends Application{
             name = selectedDirectory.getName();
             path = selectedDirectory.getPath();
         }
-        primaryStage.show();
     }
 }

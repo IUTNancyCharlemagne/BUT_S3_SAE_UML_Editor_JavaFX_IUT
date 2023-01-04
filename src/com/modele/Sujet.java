@@ -1,5 +1,6 @@
 package com.modele;
 
+import com.modele.elements.ClasseInterface;
 import com.modele.elements.Element;
 import com.vue.Observateur;
 
@@ -13,5 +14,5 @@ public interface Sujet
 
     public void notifierObservateurs();
 
-    List<Element> getElements();
+    List<ClasseInterface> getClasses();
 }

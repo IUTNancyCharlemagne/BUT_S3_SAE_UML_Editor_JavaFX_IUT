@@ -2,14 +2,14 @@ package com.modele.elements;
 
 public class Association implements Element
 {
-    private ClasseInterface initClasse, type;
+    private ClasseInterface initClasse, destinationClasse;
     private String nom;
     private char visibilite;
 
     public Association(ClasseInterface i, ClasseInterface t, String n, char v)
     {
         this.initClasse = i;
-        this.type = t;
+        this.destinationClasse = t;
         this.nom = n;
         this.visibilite = v;
     }
@@ -22,12 +22,12 @@ public class Association implements Element
         this.initClasse = initClasse;
     }
 
-    public ClasseInterface getType() {
-        return type;
+    public ClasseInterface getDestination() {
+        return destinationClasse;
     }
 
-    public void setType(ClasseInterface type) {
-        this.type = type;
+    public void setDestination(ClasseInterface destination) {
+        this.destinationClasse = destination;
     }
 
     public String getNom() {

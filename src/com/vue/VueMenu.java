@@ -1,5 +1,7 @@
 package com.vue;
 
+import com.controlleur.ControlleurBoutton;
+import com.modele.Modele;
 import com.modele.Sujet;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
@@ -7,8 +9,11 @@ import javafx.scene.paint.Color;
 
 public class VueMenu extends HBox implements Observateur {
 
-    public VueMenu() {
+    private Modele modele;
+
+    public VueMenu(Modele modele) {
         super();
+        this.modele = modele;
         this.setSpacing(10);
         this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
@@ -16,10 +21,12 @@ public class VueMenu extends HBox implements Observateur {
 
     @Override
     public void actualiser(Sujet sujet) {
+        ControlleurBoutton controlleurBoutton = new ControlleurBoutton(modele);
         // On crée un bouton pour chaque action
         // On crée un bouton pour ouvrir un repertoire
         Button btnOuvrir = new Button("Ouvrir");
         btnOuvrir.setId("btnOuvrir");
+        btnOuvrir.setOnAction(controlleurBoutton);
 
         // on crée un bouton pour ajouter une classe
         Button btnAjouterClasse = new Button("Ajouter");

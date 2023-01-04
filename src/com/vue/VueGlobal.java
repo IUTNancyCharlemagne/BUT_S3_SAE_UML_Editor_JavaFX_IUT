@@ -14,7 +14,7 @@ public class VueGlobal extends BorderPane {
     }
 
     public void initBorderPane() {
-        vueMenu = new VueMenu();
+        vueMenu = new VueMenu(modele);
         vueDiagramme = new VueDiagramme();
         vueMenu.actualiser(modele);
         vueDiagramme.actualiser(modele);
