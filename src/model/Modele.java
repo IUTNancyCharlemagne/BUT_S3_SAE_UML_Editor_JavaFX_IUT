@@ -58,4 +58,17 @@ public class Modele implements Sujet
     public void notifierObservateurs() {
 
     }
+
+    /**
+     * Permet d'instancier un dossier à partir de son nom et de son chemin
+     * @param path le chemin du dossier
+     * @param name le nom du dossier
+     */
+    public void ouvrirDossier(String name, String path){
+        this.dossier = new FileDirectory(name, path);
+    }
+
+    public String lireDossier(){
+        return this.dossier.list();
+    }
 }
