@@ -1,11 +1,13 @@
 package com.vue;
 
+import javafx.geometry.Pos;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import com.modele.Sujet;
 
 import java.util.ArrayList;
 
-public class VueDiagramme extends StackPane implements Observateur {
+public class VueDiagramme extends Pane implements Observateur {
 
     private ArrayList<VueClasse> classes;
     public void actualiser(Sujet sujet) {
@@ -14,21 +16,23 @@ public class VueDiagramme extends StackPane implements Observateur {
 
         //for (Classe classe : classes) {
             FabriqueDeVue fabriqueDeVue = new FabriqueVueClasse();
-            VueClasse vueElement = (VueClasse) fabriqueDeVue.creerVueElement();
-            vueElement.setTitle("Classe");
+            VueClasse vueClasse = (VueClasse) fabriqueDeVue.creerVueElement();
+            vueClasse.setTitle("Classe");
+            vueClasse.setPos(100, 50);
+            StackPane test = new StackPane();
             fabriqueDeVue = new FabriqueVueAttribut();
             VueElementClasse vueAttribut = (VueElementClasse) fabriqueDeVue.creerVueElement();
         vueAttribut.setAccessibility("public");
         vueAttribut.setType("int");
         vueAttribut.setName("attribut");
-            vueElement.setAttribut(vueAttribut);
+            vueClasse.setAttribut(vueAttribut);
             fabriqueDeVue = new FabriqueVueMethode();
             VueElementClasse vueMethode = (VueElementClasse) fabriqueDeVue.creerVueElement();
         vueMethode.setAccessibility("public");
         vueMethode.setType("int");
         vueMethode.setName("attribut");
         vueMethode.setParameters(new String[]{"(String, ", "int)"});
-            vueElement.setMethode(vueMethode);
+            vueClasse.setMethode(vueMethode);
         /**
             for (Attribut attribut : classe.getAttributs()) {
                 fabriqueDeVue = new FabriqueVueAttribut();
@@ -41,7 +45,7 @@ public class VueDiagramme extends StackPane implements Observateur {
                 vueElement.setMethode(vueElementClasse);
             }
              */
-            this.getChildren().add(vueElement);
+            this.getChildren().add(vueClasse);
         //}
 
     }
