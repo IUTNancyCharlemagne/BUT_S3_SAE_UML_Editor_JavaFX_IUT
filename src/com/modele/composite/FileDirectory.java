@@ -16,7 +16,7 @@ public class FileDirectory extends FileComposite{
             File fichier = fichiers[i];
             FileComposite f;
             if (fichiers[i].isDirectory()){
-                f = new FileDirectory("", fichier.getPath());
+                    f = new FileDirectory("", fichier.getPath());
                 aff += f.list();
             }
             else {

@@ -8,6 +8,7 @@ import com.modele.composite.FileComposite;
 import com.modele.export.Format;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Modele implements Sujet
@@ -68,10 +69,9 @@ public class Modele implements Sujet
     /**
      * Permet d'instancier un dossier à partir de son nom et de son chemin
      * @param path le chemin du dossier
-     * @param name le nom du dossier
      */
-    public void ouvrirDossier(String name, String path){
-        this.dossier = new FileDirectory(name, path);
+    public void ouvrirDossier(String path){
+        this.dossier = new FileDirectory("", path);
     }
 
     public void lireDossier(){
@@ -90,7 +90,12 @@ public class Modele implements Sujet
             System.out.println("Attributs : "+tabAttributs[0]);
             System.out.println("Méthodes : "+tabMethodes[0]);
 
-
+            /**ClasseInterface classe = new ClasseInterface(tabNomClasse[0]);
+            classe.setHeritage(tabHeritage[0]);
+            classe.setImplementations(tabImplementations[0]);
+            classe.setAttributs(tabAttributs[0]);
+            classe.setMethodes(tabMethodes[0]);
+            this.elements.add(classe);*/
         }
     }
 }
