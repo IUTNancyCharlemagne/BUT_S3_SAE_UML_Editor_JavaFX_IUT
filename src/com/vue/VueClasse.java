@@ -10,10 +10,12 @@ import java.util.ArrayList;
 public class VueClasse extends StackPane implements ElementDeVue{
 
     private Label titleLabel;
-
     private VBox content;
     private ArrayList<VueElementClasse> attributs;
     private ArrayList<VueElementClasse> methodes;
+
+    private float posX, posY;
+
     public VueClasse() {
         super();
         content = new VBox();
@@ -24,6 +26,7 @@ public class VueClasse extends StackPane implements ElementDeVue{
         this.setMaxSize(150, 200);
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         this.setPadding(new Insets(10, 10, 10, 10));
+
         this.getChildren().add(content);
     }
 
@@ -42,5 +45,10 @@ public class VueClasse extends StackPane implements ElementDeVue{
     public void setMethode(VueElementClasse vueElementClasse){
         this.methodes.add(vueElementClasse);
         content.getChildren().add(vueElementClasse);
+    }
+
+    public void setPos(float posX, float posY) {
+        this.setLayoutX(posX);
+        this.setLayoutY(posY);
     }
 }
