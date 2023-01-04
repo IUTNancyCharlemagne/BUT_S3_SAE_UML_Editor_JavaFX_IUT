@@ -8,6 +8,7 @@ import com.modele.elements.ClasseInterface;
 import com.modele.export.Format;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Modele implements Sujet
@@ -63,13 +64,26 @@ public class Modele implements Sujet
     /**
      * Permet d'instancier un dossier à partir de son nom et de son chemin
      * @param path le chemin du dossier
-     * @param name le nom du dossier
      */
-    public void ouvrirDossier(String name, String path){
-        this.dossier = new FileDirectory(name, path);
+    public void ouvrirDossier(String path){
+        this.dossier = new FileDirectory("", path);
     }
 
-    public String lireDossier(){
-        return this.dossier.list();
+    public void lireDossier(){
+        String classes = this.dossier.list();
+        String[] tabClasses = classes.split("##########");
+        for (int i = 1; i < tabClasses.length; i++) {
+            String[] tabNomClasse = tabClasses[i].split("NOMCLASSE");
+            String[] tabHeritage = tabNomClasse[1].split("HERITAGE");
+            String[] tabImplementations = tabHeritage[1].split("IMPLEMENTATION");
+            String[] tabAttributs = tabImplementations[1].split("ATTRIBUTS");
+            String[] tabMethodes = tabAttributs[1].split("METHODES");
+
+            System.out.println("Nom de la classe : "+tabNomClasse[0]);
+            System.out.println("Héritage : "+tabHeritage[0]);
+            System.out.println("Implémentation : "+tabImplementations[0]);
+            System.out.println("Attributs : "+tabAttributs[0]);
+            System.out.println("Méthodes : "+tabMethodes[0]);
+        }
     }
 }
