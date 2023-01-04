@@ -69,11 +69,11 @@ public class ClasseInterface implements Element
         this.associations.add(association);
     }
 
-    public void ajouterImplementation(Implementation implementation) {
+    public void ajouterImplementation(String implementation) {
         this.implementation.add(implementation);
     }
 
-    public void ajouterHeritage(Heritage heritage) {
+    public void ajouterHeritage(String heritage) {
         this.heritage = heritage;
     }
 }

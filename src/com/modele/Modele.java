@@ -90,12 +90,12 @@ public class Modele implements Sujet
             System.out.println("Attributs : "+tabAttributs[0]);
             System.out.println("Méthodes : "+tabMethodes[0]);
 
-            /**ClasseInterface classe = new ClasseInterface(tabNomClasse[0]);
-            classe.setHeritage(tabHeritage[0]);
-            classe.setImplementations(tabImplementations[0]);
-            classe.setAttributs(tabAttributs[0]);
-            classe.setMethodes(tabMethodes[0]);
-            this.elements.add(classe);*/
+            ClasseInterface classe = new ClasseInterface(tabNomClasse[0]);
+            classe.ajouterHeritage(tabHeritage[0]);
+            classe.ajouterImplementation(tabImplementations[0]);
+            classe.ajouterAttribut(tabAttributs[0]);
+            classe.ajouterMethode(tabMethodes[0]);
+            this.elements.add(classe);
         }
     }
 }
