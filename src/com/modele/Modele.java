@@ -4,7 +4,6 @@ import com.modele.composite.FileDirectory;
 import com.modele.elements.Element;
 import com.vue.Observateur;
 import com.modele.composite.FileComposite;
-import com.modele.elements.ClasseInterface;
 import com.modele.export.Format;
 
 import java.util.ArrayList;
@@ -58,5 +57,10 @@ public class Modele implements Sujet
     @Override
     public void notifierObservateurs() {
 
+    }
+
+    @Override
+    public List<Element> getElements() {
+        return elements;
     }
 }

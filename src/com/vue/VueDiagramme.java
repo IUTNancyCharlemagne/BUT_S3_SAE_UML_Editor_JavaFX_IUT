@@ -1,6 +1,7 @@
 package com.vue;
 
 import com.modele.elements.Classe;
+import com.modele.elements.Element;
 import javafx.scene.layout.StackPane;
 import com.modele.Sujet;
 
@@ -11,8 +12,7 @@ public class VueDiagramme extends StackPane implements Observateur {
     private ArrayList<VueClasse> classes;
     public void actualiser(Sujet sujet) {
         this.getChildren().clear();
-        /**
-        ArrayList<Classe> classes = sujet.getClasses();
+        ArrayList<Element> classes = sujet.getElements();
 
         for (Classe classe : classes) {
 
@@ -28,8 +28,8 @@ public class VueDiagramme extends StackPane implements Observateur {
             }
 
             this.getChildren().add(vueElement);
-        //}
-*/
+            //}
+        }
     }
 
 
