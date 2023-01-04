@@ -1,4 +1,5 @@
 module sae.developpement.applications.grpUn.mangin.malavasi.kuenemann.collin {
     requires javafx.controls;
-    exports com.Vue;
+    exports com.vue;
+    exports com;
 }
