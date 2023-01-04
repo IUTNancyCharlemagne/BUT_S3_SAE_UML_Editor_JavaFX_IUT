@@ -70,10 +70,10 @@ public class ClasseInterface implements Element
     }
 
     public void ajouterImplementation(String implementation) {
-        this.implementation.add(implementation);
+        //this.implementation.add(implementation);
     }
 
     public void ajouterHeritage(String heritage) {
-        this.heritage = heritage;
+        //this.heritage = heritage;
     }
 }
