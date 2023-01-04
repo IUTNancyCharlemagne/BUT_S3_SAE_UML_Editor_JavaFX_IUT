@@ -9,7 +9,7 @@ public class FileDirectory extends FileComposite{
     }
     @Override
     public String list() {
-        String aff = "-"+this.name;
+        String aff = "";
         File monDossier = new File(this.path);
         File[] fichiers = monDossier.listFiles();
         for (int i = 0; i < fichiers.length; i++){
@@ -17,7 +17,7 @@ public class FileDirectory extends FileComposite{
             FileComposite f;
             if (fichiers[i].isDirectory()){
                 f = new FileDirectory(fichier.getName(), fichier.getPath());
-                aff += "\n| "+f.list();
+                aff += "\n "+f.list();
             }
             else {
 
@@ -25,7 +25,7 @@ public class FileDirectory extends FileComposite{
                     String name;
                     name = this.name+"."+fichier.getName().replace(".java","");
                     f = new FileFile(name, "");
-                    aff += "\n| " + f.list();
+                    aff += "##########\n" + f.list();
                 }
             }
         }
