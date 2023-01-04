@@ -1,6 +1,6 @@
-package com.Vue;
+package com.vue;
 
-import model.Sujet;
+import com.modele.Sujet;
 
 public interface Observateur {
     void actualiser(Sujet sujet);

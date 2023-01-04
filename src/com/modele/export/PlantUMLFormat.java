@@ -1,14 +1,14 @@
-package model.export;
+package com.modele.export;
 
-import composite.FileComposite;
+import com.modele.composite.FileComposite;
 
 import java.util.List;
 
-public class ImageFormat implements Format
+public class PlantUMLFormat implements Format
 {
-    ImageFormat instance;
+    PlantUMLFormat instance;
 
-    private ImageFormat()
+    private PlantUMLFormat()
     {
 
     }
@@ -22,7 +22,7 @@ public class ImageFormat implements Format
     @Override
     public Format getInstance() {
         if (this.instance == null)
-            this.instance = new ImageFormat();
+            this.instance = new PlantUMLFormat();
         return this.instance;
     }
 }

@@ -1,4 +1,4 @@
-package composite;
+package com.modele.composite;
 
 import java.lang.reflect.*;
 import java.lang.reflect.Constructor;

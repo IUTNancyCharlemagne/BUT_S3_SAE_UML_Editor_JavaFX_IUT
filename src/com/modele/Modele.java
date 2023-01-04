@@ -1,25 +1,26 @@
-package model;
+package com.modele;
 
-import com.Vue.Observateur;
-import composite.FileDirectory;
-import model.elements.Classe;
-import model.export.Format;
+import com.modele.composite.FileDirectory;
+import com.modele.elements.Element;
+import com.vue.Observateur;
+import com.modele.composite.FileComposite;
+import com.modele.elements.ClasseInterface;
+import com.modele.export.Format;
 
 import java.util.ArrayList;
 import java.util.List;
-import composite.*;
 
 public class Modele implements Sujet
 {
     private List<Observateur> observateurs;
-    private List<Classe> classes;
+    private List<Element> elements;
     private FileDirectory dossier;
     private Format format;
 
     public Modele()
     {
         this.observateurs = new ArrayList<Observateur>();
-        this.classes = new ArrayList<Classe>();
+        this.elements = new ArrayList<>();
     }
 
     public void ajouterFichiers()

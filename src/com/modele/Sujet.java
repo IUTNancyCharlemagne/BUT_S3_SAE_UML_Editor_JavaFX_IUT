@@ -1,8 +1,6 @@
-package model;
+package com.modele;
 
-import com.Vue.Observateur;
-
-import java.util.List;
+import com.vue.Observateur;
 
 public interface Sujet
 {
