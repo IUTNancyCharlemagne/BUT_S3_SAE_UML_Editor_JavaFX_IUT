@@ -51,4 +51,6 @@ public class VueClasse extends StackPane implements ElementDeVue{
         this.setLayoutX(posX);
         this.setLayoutY(posY);
     }
+
+
 }
