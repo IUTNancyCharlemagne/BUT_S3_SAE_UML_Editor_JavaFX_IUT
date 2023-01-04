@@ -5,10 +5,10 @@ import java.util.List;
 public class Methode
 {
     private String nom, type;
-    private char visibilite;
+    private String visibilite;
     private List<Attribut> parametres;
 
-    public Methode(String nom, String type, char visibilite, List<Attribut> parametres) {
+    public Methode(String nom, String type, String visibilite, List<Attribut> parametres) {
         this.nom = nom;
         this.type = type;
         this.visibilite = visibilite;
@@ -31,11 +31,11 @@ public class Methode
         this.type = type;
     }
 
-    public char getVisibilite() {
+    public String getVisibilite() {
         return visibilite;
     }
 
-    public void setVisibilite(char visibilite) {
+    public void setVisibilite(String visibilite) {
         this.visibilite = visibilite;
     }
 

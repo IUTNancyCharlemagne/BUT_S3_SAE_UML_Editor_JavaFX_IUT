@@ -21,7 +21,6 @@ public class VueDiagramme extends StackPane implements Observateur {
             vueElement.setTitle(classe.getNom());
 
             for (Attribut attribut : classe.getAttributs()) {
-
                 fabriqueDeVue = new FabriqueVueAttribut();
                 VueElementClasse vueAttribut = (VueElementClasse) fabriqueDeVue.creerVueElement();
                 vueElement.setAttribut(vueAttribut);

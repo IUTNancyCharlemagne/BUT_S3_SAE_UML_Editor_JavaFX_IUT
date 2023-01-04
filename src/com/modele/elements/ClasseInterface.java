@@ -6,16 +6,14 @@ import java.util.List;
 public class ClasseInterface implements Element
 {
     private String nom;
-    private String visibilite;
     private List<Attribut> attributs;
     private List<Methode> methodes;
     private List<Association> associations;
     private Heritage heritage;
     private List<Implementation> implementation;
 
-    public ClasseInterface(String nom, String visibilite) {
+    public ClasseInterface(String nom) {
         this.nom = nom;
-        this.visibilite = visibilite;
         this.attributs = new ArrayList<>();
         this.methodes = new ArrayList<>();
         this.associations = new ArrayList<>();
@@ -29,14 +27,6 @@ public class ClasseInterface implements Element
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public String getVisibilite() {
-        return visibilite;
-    }
-
-    public void setVisibilite(String visibilite) {
-        this.visibilite = visibilite;
     }
 
     public List<Attribut> getAttributs() {
@@ -57,5 +47,33 @@ public class ClasseInterface implements Element
 
     public Heritage getHeritage() {
         return heritage;
+    }
+
+    public void ajouterAttribut(String attribut) {
+        String accessibilite = attribut.split(" ")[0];
+        String type = attribut.split(" ")[1];
+        String nom = attribut.split(" ")[2];
+        this.attributs.add(new Attribut(nom, type, accessibilite));
+    }
+
+    public void ajouterMethode(String methode) {
+        String accessibilite = methode.split(" ")[0];
+        String type = methode.split(" ")[1];
+        String nom = methode.split(" ")[2];
+        List<Attribut> parametres = new ArrayList<>();
+        String attributs = methode.split("\\(")[1].split("\\)")[0];
+        this.methodes.add(new Methode(nom, type, accessibilite,parametres));
+    }
+
+    public void ajouterAssociation(Association association) {
+        this.associations.add(association);
+    }
+
+    public void ajouterImplementation(Implementation implementation) {
+        this.implementation.add(implementation);
+    }
+
+    public void ajouterHeritage(Heritage heritage) {
+        this.heritage = heritage;
     }
 }

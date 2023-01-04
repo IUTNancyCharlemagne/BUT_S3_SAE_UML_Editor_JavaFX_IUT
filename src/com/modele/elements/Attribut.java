@@ -2,10 +2,9 @@ package com.modele.elements;
 
 public class Attribut implements Element
 {
-    private String nom, type;
-    private char visibilite;
+    private String nom, type, visibilite;
 
-    public Attribut(ClasseInterface classe, String nom, String type, char visibilite) {
+    public Attribut(String nom, String type, String visibilite) {
         this.nom = nom;
         this.type = type;
         this.visibilite = visibilite;
@@ -27,11 +26,11 @@ public class Attribut implements Element
         this.type = type;
     }
 
-    public char getVisibilite() {
+    public String getVisibilite() {
         return visibilite;
     }
 
-    public void setVisibilite(char visibilite) {
+    public void setVisibilite(String visibilite) {
         this.visibilite = visibilite;
     }
 }

@@ -25,7 +25,7 @@ public class FileFile extends FileComposite{
         try {
             aff += this.contenu(this.name);
         }catch (ClassNotFoundException e){
-            System.out.println("La classe n'existe pas");
+            aff = ("La classe n'existe pas\n");
         }
         return aff;
     }
@@ -41,24 +41,24 @@ public class FileFile extends FileComposite{
         // On récupère la classe
         Class<?> classe = Class.forName(className);
         //On crée un StringBuilder qui contiendra l'affichage de la classe
-        StringBuilder aff = new StringBuilder("NOMCLASSE\n"+this.name+"\n");
+        StringBuilder aff = new StringBuilder(this.name+"\nNOMCLASSE\n");
 
-        aff.append("HERITAGE\n");
+
 
         //On récupère la classe mère
         Class<?> superclass = classe.getSuperclass();
         if (superclass != null) {
             aff.append("extends ").append(superclass.getSimpleName()).append("\n");
         }
+        aff.append("HERITAGE\n");
 
-        aff.append("IMPLEMENTATION\n");
 
         //On parcours les interfaces
         for (Class<?> c : classe.getInterfaces()) {
             aff.append("implements ").append(c.getSimpleName()).append("\n");
         }
+        aff.append("IMPLEMENTATION\n");
 
-        aff.append("ATTRIBUTS\n");
 
         // On parcours les attributs de la classe
         for (Field f : classe.getDeclaredFields()){
@@ -68,8 +68,8 @@ public class FileFile extends FileComposite{
             aff.append(f.getName().replace("java.lang.", "")); // On récupère le nom de l'attribut
             aff.append("\n");
         }
+        aff.append("ATTRIBUTS\n");
 
-        aff.append("CONSTRUCTEURS\n");
 
         // On parcours les constructeurs de la classe
         for (Constructor<?> c : classe.getDeclaredConstructors()){
@@ -84,7 +84,6 @@ public class FileFile extends FileComposite{
             aff.append("\n");
         }
 
-        aff.append("METHODES\n");
         // On parcours les méthodes de la classe
         for (Method m : classe.getDeclaredMethods()){
             // On ajoute la méthode à l'affichage
@@ -98,7 +97,7 @@ public class FileFile extends FileComposite{
             aff.append(")");
             aff.append("\n");
         }
-
+        aff.append("METHODES\n");
         // On retourne l'affichage
         return aff.toString();
     }
