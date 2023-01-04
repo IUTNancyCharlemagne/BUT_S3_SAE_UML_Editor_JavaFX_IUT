@@ -21,7 +21,7 @@ public class FileFile extends FileComposite{
      * @return l'affichage console du fichier
      */
     public String list() {
-        String aff = ">"+ this.name;
+        String aff = "";
         try {
             aff += this.contenu(this.name);
         }catch (ClassNotFoundException e){
@@ -37,10 +37,13 @@ public class FileFile extends FileComposite{
      * @throws ClassNotFoundException si la classe n'existe pas
      */
     public String contenu(String className) throws ClassNotFoundException {
+
         // On récupère la classe
         Class<?> classe = Class.forName(className);
         //On crée un StringBuilder qui contiendra l'affichage de la classe
-        StringBuilder aff = new StringBuilder("\n");
+        StringBuilder aff = new StringBuilder("NOMCLASSE\n"+this.name+"\n");
+
+        aff.append("HERITAGE\n");
 
         //On récupère la classe mère
         Class<?> superclass = classe.getSuperclass();
@@ -48,10 +51,14 @@ public class FileFile extends FileComposite{
             aff.append("extends ").append(superclass.getSimpleName()).append("\n");
         }
 
+        aff.append("IMPLEMENTATION\n");
+
         //On parcours les interfaces
         for (Class<?> c : classe.getInterfaces()) {
             aff.append("implements ").append(c.getSimpleName()).append("\n");
         }
+
+        aff.append("ATTRIBUTS\n");
 
         // On parcours les attributs de la classe
         for (Field f : classe.getDeclaredFields()){
@@ -61,6 +68,8 @@ public class FileFile extends FileComposite{
             aff.append(f.getName().replace("java.lang.", "")); // On récupère le nom de l'attribut
             aff.append("\n");
         }
+
+        aff.append("CONSTRUCTEURS\n");
 
         // On parcours les constructeurs de la classe
         for (Constructor<?> c : classe.getDeclaredConstructors()){
@@ -75,6 +84,7 @@ public class FileFile extends FileComposite{
             aff.append("\n");
         }
 
+        aff.append("METHODES\n");
         // On parcours les méthodes de la classe
         for (Method m : classe.getDeclaredMethods()){
             // On ajoute la méthode à l'affichage
