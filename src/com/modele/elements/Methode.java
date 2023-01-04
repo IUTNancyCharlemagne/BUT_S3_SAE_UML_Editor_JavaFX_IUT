@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Methode
 {
-    private ClasseInterface classe;
     private String nom, type;
     private char visibilite;
     private List<Attribut> parametres;
@@ -46,13 +45,5 @@ public class Methode
 
     public void setParametres(List<Attribut> parametres) {
         this.parametres = parametres;
-    }
-
-    public ClasseInterface getClasse() {
-        return classe;
-    }
-
-    public void setClasse(ClasseInterface classe) {
-        this.classe = classe;
     }
 }
