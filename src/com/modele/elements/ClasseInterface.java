@@ -61,7 +61,7 @@ public class ClasseInterface implements Element
 
     public void ajouterAttribut(String attribut) {
         if (attribut.length() > 1) {
-            String accessibilite = attribut.split(" ")[0];
+            String accessibilite = this.determinerAccessibilite(attribut);
             String type = attribut.split(" ")[1];
             String nom = attribut.split(" ")[2];
             this.attributs.add(new Attribut(nom, type, accessibilite));
@@ -70,12 +70,24 @@ public class ClasseInterface implements Element
 
     public void ajouterMethode(String methode) {
         if (methode.length() > 1) {
-            String accessibilite = methode.split(" ")[0];
+            String accessibilite = this.determinerAccessibilite(methode);
             String type = methode.split(" ")[1];
             String nom = methode.split(" ")[2];
             List<Attribut> parametres = new ArrayList<>();
             String attributs = methode.split("\\(")[1].split("\\)")[0];
             this.methodes.add(new Methode(nom, type, accessibilite, parametres));
+        }
+    }
+
+    private String determinerAccessibilite(String element){
+        if (element.contains("public")){
+            return "public";
+        } else if (element.contains("private")){
+            return "private";
+        } else if (element.contains("protected")){
+            return "protected";
+        } else {
+            return "public";
         }
     }
 
