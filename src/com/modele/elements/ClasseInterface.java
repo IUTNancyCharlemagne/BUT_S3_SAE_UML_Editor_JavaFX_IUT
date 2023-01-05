@@ -171,9 +171,17 @@ public class ClasseInterface implements Element
         association.modifier(visibilite, nom, initClasse, destinationClasse);
     }
 
-    public void modifier(String nom, boolean isInterface)
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void modifier(String nom, String type)
     {
         this.nom = nom;
-        this.isInterface = isInterface;
+        this.type = type;
     }
 }
