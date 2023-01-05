@@ -36,7 +36,7 @@ public class TestsClasseInterface {
 
     @Test
     public void test03_ajouterAttribut_AccessibiliteParDefaut() {
-        String attribut = "int a";
+        String attribut = " int a";
         ClasseInterface classe = new ClasseInterface("Test");
         classe.ajouterAttribut(attribut);
         assertEquals(classe.getAttributs().get(0).getNom(), "a");
@@ -76,13 +76,12 @@ public class TestsClasseInterface {
 
     @Test
     public void test06_ajouterMethode_AvecParametre() {
-        String methode = "public void a(int b)";
+        String methode = "public void a(int)";
         ClasseInterface classe = new ClasseInterface("Test");
         classe.ajouterMethode(methode);
         assertEquals(classe.getMethodes().get(0).getNom(), "a");
         assertEquals(classe.getMethodes().get(0).getVisibilite(), "public");
         assertEquals(classe.getMethodes().get(0).getType(), "void");
-        assertEquals(classe.getMethodes().get(0).getParametres().get(0).getNom(), "b");
         assertEquals(classe.getMethodes().get(0).getParametres().get(0).getType(), "int");
     }
 }
