@@ -1,6 +1,7 @@
 package com.modele.elements;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ClasseInterface implements Element
@@ -61,22 +62,49 @@ public class ClasseInterface implements Element
     }
 
     public void ajouterAttribut(String attribut) {
-        if (attribut.length() > 1) {
-            String accessibilite = attribut.split(" ")[0];
-            String type = attribut.split(" ")[1];
-            String nom = attribut.split(" ")[2];
-            this.attributs.add(new Attribut(nom, type, accessibilite));
+        try{
+            if (attribut.length() > 1) {
+                String accessibilite = this.determinerAccessibilite(attribut);
+                String type = attribut.split(" ")[1];
+                String nom = attribut.split(" ")[2];
+                this.attributs.add(new Attribut(nom, type, accessibilite));
+            }
+        } catch (Exception e) {
+            System.out.println("Erreur lors de l'ajout de l'attribut " + attribut);
         }
     }
 
-    public void ajouterMethode(String methode) {
-        if (methode.length() > 1) {
-            String accessibilite = methode.split(" ")[0];
-            String type = methode.split(" ")[1];
-            String nom = methode.split(" ")[2];
-            List<Attribut> parametres = new ArrayList<>();
-            String attributs = methode.split("\\(")[1].split("\\)")[0];
-            this.methodes.add(new Methode(nom, type, accessibilite, parametres));
+    public void ajouterMethode(String methodes) {
+        try {
+            String[] methodesTab = methodes.split("\\n");
+            for (String methode : methodesTab) {
+                String[] methodeSplit = methode.split(" ");
+                String accessibilite = determinerAccessibilite(methode);
+                String type = methodeSplit[1];
+                methodeSplit = methodeSplit[2].split("\\(");
+                String nom = methodeSplit[0];
+                String[] parametres = methodeSplit[1].replace(")", "").split(",");
+                List<Attribut> parametresList = new ArrayList<>();
+                for (String parametre : parametres) {
+                    Attribut attribut = new Attribut("", parametre, "");
+                    parametresList.add(attribut);
+                }
+                this.methodes.add(new Methode(nom, type, accessibilite, parametresList));
+            }
+        } catch (Exception e) {
+            System.out.println("Erreur lors de l'ajout de la methode " + methodes);
+        }
+    }
+
+    private String determinerAccessibilite(String element){
+        if (element.contains("public")){
+            return "public";
+        } else if (element.contains("private")){
+            return "private";
+        } else if (element.contains("protected")){
+            return "protected";
+        } else {
+            return "public";
         }
     }
 

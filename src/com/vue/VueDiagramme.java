@@ -14,7 +14,7 @@ public class VueDiagramme extends StackPane implements Observateur {
         this.getChildren().clear();
         classesList = new ArrayList<>();
         List<ClasseInterface> classes = sujet.getClasses();
-
+        System.out.println("VueDiagramme: " + classes.size());
         for (ClasseInterface classe : classes) {
             FabriqueDeVue fabriqueDeVue = new FabriqueVueClasse();
             VueClasse vueElement = (VueClasse) fabriqueDeVue.creerVueElement();
@@ -22,13 +22,26 @@ public class VueDiagramme extends StackPane implements Observateur {
 
             for (Attribut attribut : classe.getAttributs()) {
                 fabriqueDeVue = new FabriqueVueAttribut();
+
                 VueElementClasse vueAttribut = (VueElementClasse) fabriqueDeVue.creerVueElement();
+
+                vueAttribut.setAccessibility(attribut.getVisibilite());
+                vueAttribut.setType(attribut.getType());
+                vueAttribut.setName(attribut.getNom());
+
                 vueElement.setAttribut(vueAttribut);
             }
             for (Methode methode : classe.getMethodes()) {
                 fabriqueDeVue = new FabriqueVueMethode();
-                VueElementClasse vueElementClasse = (VueElementClasse) fabriqueDeVue.creerVueElement();
-                vueElement.setMethode(vueElementClasse);
+
+                VueElementClasse vueMethode = (VueElementClasse) fabriqueDeVue.creerVueElement();
+
+                vueMethode.setAccessibility(methode.getVisibilite());
+                vueMethode.setType(methode.getType());
+                vueMethode.setName(methode.getNom());
+                vueMethode.setParameters(methode.getParametres());
+
+                vueElement.setMethode(vueMethode);
             }
             for (Association association : classe.getAssociations()) {
 
