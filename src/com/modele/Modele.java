@@ -48,17 +48,18 @@ public class Modele implements Sujet
 
     @Override
     public void enregistrerObservateur(Observateur obs) {
-
+        this.observateurs.add(obs);
     }
 
     @Override
     public void supprimerObservateur(Observateur obs) {
-
+        this.observateurs.remove(obs);
     }
 
     @Override
     public void notifierObservateurs() {
-
+        for (Observateur obs : this.observateurs)
+            obs.actualiser(this);
     }
 
     @Override

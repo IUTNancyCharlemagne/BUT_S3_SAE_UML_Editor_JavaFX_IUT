@@ -20,7 +20,6 @@ public class FileDirectory extends FileComposite{
                 aff += f.list();
             }
             else {
-
                 if (fichier.getName().endsWith(".java")) {
                     String name = fichier.getName().substring(0, fichier.getName().length() - 5);
                     String classPackage = this.getPackageName(fichier);

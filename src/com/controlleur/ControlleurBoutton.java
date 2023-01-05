@@ -18,6 +18,7 @@ public class ControlleurBoutton implements EventHandler<ActionEvent> {
                 case "btnOuvrir":
                     VueSelectionRepertoire vueDirectorySelector = new VueSelectionRepertoire(modele);
                     vueDirectorySelector.generer();
+                    modele.notifierObservateurs();
                     break;
                 default:
                     break;

@@ -1,11 +1,14 @@
 package com.vue;
 
+import com.modele.elements.Attribut;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.util.List;
 
 public class VueElementClasse extends HBox implements ElementDeVue {
 
@@ -16,7 +19,8 @@ public class VueElementClasse extends HBox implements ElementDeVue {
     private Label typeText;
     public VueElementClasse() {
         super();
-        this.setMinSize(150, 20);
+        this.setStyle("-fx-pref-width: 100%;-fx-pref-height: 100%");
+
         this.setAlignment(Pos.CENTER);
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
@@ -26,11 +30,11 @@ public class VueElementClasse extends HBox implements ElementDeVue {
         this.getChildren().add(nameText);
     }
 
-    public void setParameters(String[] parameters) {
-        this.parametersText = new Label[parameters.length];
+    public void setParameters(List<Attribut> parameters) {
+        this.parametersText = new Label[parameters.size()];
         int i = 0;
-        for (String parameter : parameters) {
-            this.parametersText[i] = new Label(parameter);
+        for (Attribut parameter : parameters) {
+            this.parametersText[i] = new Label(parameter.getType());
             this.getChildren().add(this.parametersText[i]);
             i++;
         }
