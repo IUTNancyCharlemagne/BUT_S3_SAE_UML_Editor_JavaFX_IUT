@@ -6,6 +6,8 @@ import java.util.List;
 public class ClasseInterface implements Element
 {
     private String nom;
+
+    private String type;
     private List<Attribut> attributs;
     private List<Methode> methodes;
     private List<Association> associations;
@@ -14,7 +16,15 @@ public class ClasseInterface implements Element
     private boolean selectionne, modification, isInterface;
 
     public ClasseInterface(String nom) {
-        this.nom = nom;
+        String[] nomSplit = nom.split("\\.");
+        this.nom = nomSplit[nomSplit.length-1];
+        if (nom.contains("abstract interface")) {
+            this.type = "interface";
+        } else if (nom.contains("abstract class")) {
+            this.type = "abstract class";
+        } else {
+            this.type = "classe";
+        }
         this.attributs = new ArrayList<>();
         this.methodes = new ArrayList<>();
         this.associations = new ArrayList<>();
