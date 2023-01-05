@@ -1,6 +1,7 @@
 package com.modele.elements;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ClasseInterface implements Element
@@ -72,18 +73,25 @@ public class ClasseInterface implements Element
         }
     }
 
-    public void ajouterMethode(String methode) {
+    public void ajouterMethode(String methodes) {
         try {
-            if (methode.length() > 1) {
-                String accessibilite = this.determinerAccessibilite(methode);
-                String type = methode.split(" ")[1];
-                String nom = methode.split(" ")[2];
-                List<Attribut> parametres = new ArrayList<>();
-                String attributs = methode.split("\\(")[1].split("\\)")[0];
-                this.methodes.add(new Methode(nom, type, accessibilite, parametres));
+            String[] methodesTab = methodes.split("\\n");
+            for (String methode : methodesTab) {
+                String[] methodeSplit = methode.split(" ");
+                String accessibilite = methodeSplit[0];
+                String type = methodeSplit[1];
+                methodeSplit = methodeSplit[2].split("\\(");
+                String nom = methodeSplit[0];
+                String[] parametres = methodeSplit[1].replace(")", "").split(",");
+                List<Attribut> parametresList = new ArrayList<>();
+                for (String parametre : parametres) {
+                    Attribut attribut = new Attribut("", parametre, "");
+                    parametresList.add(attribut);
+                }
+                this.methodes.add(new Methode(nom, type, accessibilite, parametresList));
             }
         } catch (Exception e) {
-            System.out.println("Erreur lors de l'ajout de la méthode " + methode);
+            System.out.println("Erreur lors de l'ajout de la methode " + methodes);
         }
     }
 
