@@ -85,7 +85,7 @@ public class Modele implements Sujet
                 String[] tabImplementations = tabHeritage[1].split("IMPLEMENTATION");
                 String[] tabAttributs = tabImplementations[1].split("ATTRIBUTS");
                 String[] tabConstructeurs = tabAttributs[1].split("CONSTRUCTEURS");
-                String[] tabMethodes = tabAttributs[1].split("METHODES");
+                String[] tabMethodes = tabConstructeurs[1].split("METHODES");
 
                 ClasseInterface classe = new ClasseInterface(tabNomClasse[0]);
                 classe.ajouterHeritage(tabHeritage[0]);
