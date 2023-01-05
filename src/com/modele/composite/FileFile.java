@@ -41,7 +41,7 @@ public class FileFile extends FileComposite{
         // On récupère la classe
         Class<?> classe = Class.forName(className);
         //On crée un StringBuilder qui contiendra l'affichage de la classe
-        StringBuilder aff = new StringBuilder(this.name+"\nNOMCLASSE\n");
+        StringBuilder aff = new StringBuilder(classe.toGenericString() +"\nNOMCLASSE\n");
 
 
 
