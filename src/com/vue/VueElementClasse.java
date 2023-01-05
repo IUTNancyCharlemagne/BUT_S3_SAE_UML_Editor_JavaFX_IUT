@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 import java.util.List;
@@ -20,7 +21,6 @@ public class VueElementClasse extends HBox implements ElementDeVue {
     public VueElementClasse() {
         super();
         this.setAlignment(Pos.CENTER);
-        this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
 
     public void setName(String name) {
@@ -31,11 +31,15 @@ public class VueElementClasse extends HBox implements ElementDeVue {
     public void setParameters(List<Attribut> parameters) {
         this.parametersText = new Label[parameters.size()];
         int i = 0;
+        Label parametersLabel = new Label("(");
+        Label parametersLabel2 = new Label(")");
+        this.getChildren().add(parametersLabel);
         for (Attribut parameter : parameters) {
             this.parametersText[i] = new Label(parameter.getType());
             this.getChildren().add(this.parametersText[i]);
             i++;
         }
+        this.getChildren().add(parametersLabel2);
     }
 
     public void setType(String type) {
@@ -55,4 +59,6 @@ public class VueElementClasse extends HBox implements ElementDeVue {
         }
         this.getChildren().add(accessibilityRect);
     }
+
+
 }
