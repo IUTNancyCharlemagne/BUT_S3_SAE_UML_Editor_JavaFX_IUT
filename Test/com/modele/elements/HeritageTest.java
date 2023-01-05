@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ImplementationTest
-{
-    Implementation i;
+class HeritageTest {
+
+    Heritage h;
     ClasseInterface depart, destination;
 
     @BeforeEach
@@ -15,15 +15,15 @@ class ImplementationTest
     {
         depart = new ClasseInterface("Classe1");
         destination = new ClasseInterface("Classe2");
-        i = new Implementation(depart, destination);
+        h = new Heritage(depart, destination);
     }
 
     @Test
     public void test_constructeur_ok()
     {
         //Test
-        assertEquals(i.getInitClasse(), depart, "doit etre la meme classe");
-        assertEquals(i.getDestinationClasse(), destination, "doit etre la meme classe");
+        assertEquals(h.getInitClasse(), depart, "doit etre la meme classe");
+        assertEquals(h.getDestinationClasse(), destination, "doit etre la meme classe");
     }
 
     @Test
