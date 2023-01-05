@@ -52,7 +52,7 @@ public class ClasseInterface implements Element
     public void ajouterAttribut(String attribut) {
         try {
             String accessibilite;
-            if (!attribut.contains("public") || !attribut.contains("private") || !attribut.contains("protected")) {
+            if (!attribut.contains("public") && !attribut.contains("private") && !attribut.contains("protected")) {
                 accessibilite = "public";
             }
             else {

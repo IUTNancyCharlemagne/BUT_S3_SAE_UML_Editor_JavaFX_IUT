@@ -19,8 +19,6 @@ public class VueElementClasse extends HBox implements ElementDeVue {
     private Label typeText;
     public VueElementClasse() {
         super();
-        this.setStyle("-fx-pref-width: 100%;-fx-pref-height: 100%");
-
         this.setAlignment(Pos.CENTER);
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
@@ -48,10 +46,12 @@ public class VueElementClasse extends HBox implements ElementDeVue {
 
     public void setAccessibility(String accessibility) {
         this.accessibilityRect = new Rectangle(10,10);
+        System.out.print(accessibility);
         switch (accessibility) {
             case "public" -> this.accessibilityRect.setFill(Color.GREEN);
             case "private" -> this.accessibilityRect.setFill(Color.RED);
             case "protected" -> this.accessibilityRect.setFill(Color.YELLOW);
+            default -> this.accessibilityRect.setFill(Color.WHITE);
         }
         this.getChildren().add(accessibilityRect);
     }

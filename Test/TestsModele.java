@@ -6,4 +6,6 @@ public class TestsModele {
         modele.ouvrirDossier("./src/com/modele/composite");
         modele.lireDossier();
     }
+
+
 }
