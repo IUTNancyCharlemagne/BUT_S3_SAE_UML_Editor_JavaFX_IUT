@@ -51,19 +51,23 @@ public class ClasseInterface implements Element
     }
 
     public void ajouterAttribut(String attribut) {
-        String accessibilite = attribut.split(" ")[0];
-        String type = attribut.split(" ")[1];
-        String nom = attribut.split(" ")[2];
-        this.attributs.add(new Attribut(nom, type, accessibilite));
+        if (attribut.length() > 1) {
+            String accessibilite = attribut.split(" ")[0];
+            String type = attribut.split(" ")[1];
+            String nom = attribut.split(" ")[2];
+            this.attributs.add(new Attribut(nom, type, accessibilite));
+        }
     }
 
     public void ajouterMethode(String methode) {
-        String accessibilite = methode.split(" ")[0];
-        String type = methode.split(" ")[1];
-        String nom = methode.split(" ")[2];
-        List<Attribut> parametres = new ArrayList<>();
-        String attributs = methode.split("\\(")[1].split("\\)")[0];
-        this.methodes.add(new Methode(nom, type, accessibilite,parametres));
+        if (methode.length() > 1) {
+            String accessibilite = methode.split(" ")[0];
+            String type = methode.split(" ")[1];
+            String nom = methode.split(" ")[2];
+            List<Attribut> parametres = new ArrayList<>();
+            String attributs = methode.split("\\(")[1].split("\\)")[0];
+            this.methodes.add(new Methode(nom, type, accessibilite, parametres));
+        }
     }
 
     public void ajouterAssociation(Association association) {
