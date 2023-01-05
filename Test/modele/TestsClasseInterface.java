@@ -1,3 +1,5 @@
+package modele;
+
 import com.modele.elements.ClasseInterface;
 import org.junit.jupiter.api.Test;
 
