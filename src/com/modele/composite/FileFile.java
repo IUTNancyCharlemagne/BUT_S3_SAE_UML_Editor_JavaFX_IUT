@@ -16,6 +16,11 @@ public class FileFile extends FileComposite{
     }
 
     @Override
+    public String arborescence() {
+        return "+"+this.name;
+    }
+
+    @Override
     /**
      * Méthode list qui permet d'afficher le fichier
      * @return l'affichage console du fichier

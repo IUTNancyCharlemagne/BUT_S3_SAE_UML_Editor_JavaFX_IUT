@@ -3,7 +3,7 @@ import com.modele.composite.FileDirectory;
 
 public class TestInstrospection {
     public static void main(String[] args) {
-        FileComposite root = new FileDirectory("","./src/com/modele/composite");
+        FileComposite root = new FileDirectory("","./src/test");
         System.out.println(root.list());
     }
 }

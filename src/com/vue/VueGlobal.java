@@ -20,6 +20,9 @@ public class VueGlobal extends BorderPane {
         modele.enregistrerObservateur(vueMenu);
         vueMenu.actualiser(modele);
         vueDiagramme.actualiser(modele);
+        VueArborescence vueSelectionRepertoire = new VueArborescence();
+        modele.enregistrerObservateur(vueSelectionRepertoire);
+        this.setLeft(vueSelectionRepertoire);
         this.setTop(vueMenu);
         this.setCenter(vueDiagramme);
     }

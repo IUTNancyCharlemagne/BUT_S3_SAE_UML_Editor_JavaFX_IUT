@@ -26,4 +26,10 @@ public abstract class FileComposite{
      */
     public abstract String list();
 
+    /**
+     * Methode qui permet de récuperer l'arborescence du dossier recursivement
+     * @return l'affichage de l'arborecence du dossier
+     */
+    public abstract String arborescence();
+
 }

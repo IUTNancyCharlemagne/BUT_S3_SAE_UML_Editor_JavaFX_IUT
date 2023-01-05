@@ -36,7 +36,7 @@ public class Modele implements Sujet
 
     public String getFichiers()
     {
-        return this.dossier.list();
+        return this.dossier.arborescence();
     }
 
 
@@ -71,8 +71,9 @@ public class Modele implements Sujet
      * Permet d'instancier un dossier à partir de son nom et de son chemin
      * @param path le chemin du dossier
      */
-    public void ouvrirDossier(String path){
-        this.dossier = new FileDirectory("", path);
+    public void ouvrirDossier(String name, String path){
+        this.dossier = new FileDirectory(name, path);
+        notifierObservateurs();
     }
 
     public void lireDossier(){
