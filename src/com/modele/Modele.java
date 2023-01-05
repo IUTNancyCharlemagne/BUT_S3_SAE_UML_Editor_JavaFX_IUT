@@ -91,7 +91,7 @@ public class Modele implements Sujet
                 classe.ajouterHeritage(tabHeritage[0]);
                 classe.ajouterImplementation(tabImplementations[0]);
                 classe.ajouterAttribut(tabAttributs[0]);
-                //classe.ajouterConstructeur(tabConstructeurs[0]);
+                classe.ajouterConstructeur(tabConstructeurs[0]);
                 classe.ajouterMethode(tabMethodes[0]);
                 this.elements.add(classe);
             }
