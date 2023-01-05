@@ -85,12 +85,6 @@ public class Modele implements Sujet
                 String[] tabAttributs = tabImplementations[1].split("ATTRIBUTS");
                 String[] tabMethodes = tabAttributs[1].split("METHODES");
 
-                System.out.println("Nom de la classe : " + tabNomClasse[0]);
-                System.out.println("Héritage : " + tabHeritage[0]);
-                System.out.println("Implémentation : " + tabImplementations[0]);
-                System.out.println("Attributs : " + tabAttributs[0]);
-                System.out.println("Méthodes : " + tabMethodes[0]);
-
                 ClasseInterface classe = new ClasseInterface(tabNomClasse[0]);
                 classe.ajouterHeritage(tabHeritage[0]);
                 classe.ajouterImplementation(tabImplementations[0]);
