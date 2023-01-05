@@ -31,6 +31,17 @@ class AssociationTest {
     }
 
     @Test
-    void modifier() {
+    void modifier()
+    {
+        //Methode
+        ClasseInterface newDepart = new ClasseInterface("Classe3");
+        ClasseInterface newDestination = new ClasseInterface("Classe4");
+        a.modifier("private", "toast", newDepart, newDestination);
+
+        //Test
+        assertEquals(newDepart, a.getInitClasse(), "doit etre la meme classe");
+        assertEquals(newDestination, a.getDestination(), "doit etre la meme classe");
+        assertEquals("toast", a.getNom(), "doit etre nomme test");
+        assertEquals("private", a.getVisibilite(), "doit etre de meme visibilite");
     }
 }

@@ -27,6 +27,18 @@ class HeritageTest {
     }
 
     @Test
-    void modifier() {
+    void test_modifier()
+    {
+        //init
+        ClasseInterface newDepart = new ClasseInterface("Classe3");
+        ClasseInterface newDestination = new ClasseInterface("Classe4");
+
+        //Methode
+        h.modifier(newDepart, newDestination);
+
+        //Test
+        assertEquals(newDepart, h.getInitClasse(), "doit etre la nouvelle classe");
+        assertEquals(newDestination, h.getDestinationClasse(), "doit etre la nouvelle classe");
+
     }
 }

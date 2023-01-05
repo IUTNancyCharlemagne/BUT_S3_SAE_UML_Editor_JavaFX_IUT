@@ -35,6 +35,18 @@ class MethodeTest
     @Test
     void test_modifier()
     {
+        //Init
+        Attribut param2 = new Attribut("yoyo", "double", null);
+        List<Attribut> params2 = new ArrayList<>();
+        params2.add(param2);
 
+        //Methode
+        m.modifier("private", "char", "top", params2);
+
+        //Test
+        assertEquals(m.getNom(), "top", "doit etre nomme test");
+        assertEquals(m.getType(), "char", "doit etre du meme type");
+        assertEquals(m.getVisibilite(), "private", "doit etre de meme visibilite");
+        assertEquals(m.getParametres(), params2, "doit avoir les memes parametres");
     }
 }

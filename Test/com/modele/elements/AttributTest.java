@@ -28,30 +28,14 @@ class AttributTest {
     }
 
     @Test
-    void getNom() {
-    }
+    void test_modifier()
+    {
+        //Methode
+        a.modifier("private", "char", "top");
 
-    @Test
-    void setNom() {
-    }
-
-    @Test
-    void getType() {
-    }
-
-    @Test
-    void setType() {
-    }
-
-    @Test
-    void getVisibilite() {
-    }
-
-    @Test
-    void setVisibilite() {
-    }
-
-    @Test
-    void modifier() {
+        //Test
+        assertEquals(a.getNom(), "top", "doit etre nomme test");
+        assertEquals(a.getType(), "char", "doit etre du meme type");
+        assertEquals(a.getVisibilite(), "private", "doit etre de meme visibilite");
     }
 }

@@ -129,7 +129,7 @@ public class ClasseInterfaceTest {
     }
 
     @Test
-    void modifier() {
+    void test_modifier() {
         //Methode
         classe.modifier("Teso", "interface");
 

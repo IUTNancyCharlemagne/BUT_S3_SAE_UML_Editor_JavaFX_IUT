@@ -27,6 +27,17 @@ class ImplementationTest
     }
 
     @Test
-    void modifier() {
+    void test_modifier()
+    {
+        //init
+        ClasseInterface newDepart = new ClasseInterface("Classe3");
+        ClasseInterface newDestination = new ClasseInterface("Classe4");
+
+        //Methode
+        i.modifier(newDepart, newDestination);
+
+        //Test
+        assertEquals(newDepart, i.getInitClasse(), "doit etre la nouvelle classe");
+        assertEquals(newDestination, i.getDestinationClasse(), "doit etre la nouvelle classe");
     }
 }
