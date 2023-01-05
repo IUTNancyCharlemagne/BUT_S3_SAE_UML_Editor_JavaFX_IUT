@@ -60,22 +60,30 @@ public class ClasseInterface implements Element
     }
 
     public void ajouterAttribut(String attribut) {
-        if (attribut.length() > 1) {
-            String accessibilite = this.determinerAccessibilite(attribut);
-            String type = attribut.split(" ")[1];
-            String nom = attribut.split(" ")[2];
-            this.attributs.add(new Attribut(nom, type, accessibilite));
+        try{
+            if (attribut.length() > 1) {
+                String accessibilite = this.determinerAccessibilite(attribut);
+                String type = attribut.split(" ")[1];
+                String nom = attribut.split(" ")[2];
+                this.attributs.add(new Attribut(nom, type, accessibilite));
+            }
+        } catch (Exception e) {
+            System.out.println("Erreur lors de l'ajout de l'attribut " + attribut);
         }
     }
 
     public void ajouterMethode(String methode) {
-        if (methode.length() > 1) {
-            String accessibilite = this.determinerAccessibilite(methode);
-            String type = methode.split(" ")[1];
-            String nom = methode.split(" ")[2];
-            List<Attribut> parametres = new ArrayList<>();
-            String attributs = methode.split("\\(")[1].split("\\)")[0];
-            this.methodes.add(new Methode(nom, type, accessibilite, parametres));
+        try {
+            if (methode.length() > 1) {
+                String accessibilite = this.determinerAccessibilite(methode);
+                String type = methode.split(" ")[1];
+                String nom = methode.split(" ")[2];
+                List<Attribut> parametres = new ArrayList<>();
+                String attributs = methode.split("\\(")[1].split("\\)")[0];
+                this.methodes.add(new Methode(nom, type, accessibilite, parametres));
+            }
+        } catch (Exception e) {
+            System.out.println("Erreur lors de l'ajout de la méthode " + methode);
         }
     }
 
