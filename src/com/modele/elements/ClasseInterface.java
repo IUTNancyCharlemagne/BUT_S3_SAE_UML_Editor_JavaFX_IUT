@@ -78,7 +78,7 @@ public class ClasseInterface implements Element
             String[] methodesTab = methodes.split("\\n");
             for (String methode : methodesTab) {
                 String[] methodeSplit = methode.split(" ");
-                String accessibilite = methodeSplit[0];
+                String accessibilite = determinerAccessibilite(methode);
                 String type = methodeSplit[1];
                 methodeSplit = methodeSplit[2].split("\\(");
                 String nom = methodeSplit[0];
