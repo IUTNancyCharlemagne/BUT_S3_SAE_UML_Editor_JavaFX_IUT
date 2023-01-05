@@ -1,11 +1,14 @@
 package com.vue;
 
+import com.modele.elements.Attribut;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.util.List;
 
 public class VueElementClasse extends HBox implements ElementDeVue {
 
@@ -16,7 +19,6 @@ public class VueElementClasse extends HBox implements ElementDeVue {
     private Label typeText;
     public VueElementClasse() {
         super();
-        this.setMinSize(150, 20);
         this.setAlignment(Pos.CENTER);
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
@@ -26,11 +28,11 @@ public class VueElementClasse extends HBox implements ElementDeVue {
         this.getChildren().add(nameText);
     }
 
-    public void setParameters(String[] parameters) {
-        this.parametersText = new Label[parameters.length];
+    public void setParameters(List<Attribut> parameters) {
+        this.parametersText = new Label[parameters.size()];
         int i = 0;
-        for (String parameter : parameters) {
-            this.parametersText[i] = new Label(parameter);
+        for (Attribut parameter : parameters) {
+            this.parametersText[i] = new Label(parameter.getType());
             this.getChildren().add(this.parametersText[i]);
             i++;
         }
@@ -44,10 +46,12 @@ public class VueElementClasse extends HBox implements ElementDeVue {
 
     public void setAccessibility(String accessibility) {
         this.accessibilityRect = new Rectangle(10,10);
+        System.out.print(accessibility);
         switch (accessibility) {
             case "public" -> this.accessibilityRect.setFill(Color.GREEN);
             case "private" -> this.accessibilityRect.setFill(Color.RED);
             case "protected" -> this.accessibilityRect.setFill(Color.YELLOW);
+            default -> this.accessibilityRect.setFill(Color.WHITE);
         }
         this.getChildren().add(accessibilityRect);
     }
