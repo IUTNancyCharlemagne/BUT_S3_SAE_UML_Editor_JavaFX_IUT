@@ -46,4 +46,13 @@ public class Methode
     public void setParametres(List<Attribut> parametres) {
         this.parametres = parametres;
     }
+
+
+    public void modifier(String visibilite, String type, String nom, List<Attribut> parametres)
+    {
+        this.visibilite = visibilite;
+        this.type = type;
+        this.nom = nom;
+        this.parametres = parametres;
+    }
 }

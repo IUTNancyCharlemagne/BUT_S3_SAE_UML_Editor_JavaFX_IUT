@@ -11,6 +11,7 @@ public class ClasseInterface implements Element
     private List<Association> associations;
     private Heritage heritage;
     private List<Implementation> implementation;
+    private boolean selectionne, modification, isInterface;
 
     public ClasseInterface(String nom) {
         this.nom = nom;
@@ -75,5 +76,33 @@ public class ClasseInterface implements Element
 
     public void ajouterHeritage(String heritage) {
         //this.heritage = heritage;
+    }
+
+    public boolean isInterface() {
+        return isInterface;
+    }
+
+    public void setInterface(boolean isInterface) {
+        this.isInterface = isInterface;
+    }
+
+    public void modifierAttribut(Attribut attribut, String visibilite, String type, String nom)
+    {
+        attribut.modifier(visibilite, type, nom);
+    }
+
+    public void modifierMethode(Methode methode, String visibilite, String type, String nom, List<Attribut> parametres)
+    {
+        methode.modifier(visibilite, type, nom, parametres);
+    }
+
+    public void modifierHeritage(Heritage heritage, ClasseInterface initClasse, ClasseInterface destinationClasse)
+    {
+        heritage.modifier(initClasse, destinationClasse);
+    }
+
+    public void modifierAssociation(Association association, String visibilite, String nom, ClasseInterface initClasse, ClasseInterface destinationClasse)
+    {
+        association.modifier(visibilite, nom, initClasse, destinationClasse);
     }
 }
