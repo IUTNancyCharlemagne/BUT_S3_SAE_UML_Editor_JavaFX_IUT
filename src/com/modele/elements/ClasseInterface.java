@@ -105,8 +105,19 @@ public class ClasseInterface implements Element
         heritage.modifier(initClasse, destinationClasse);
     }
 
+    public void modifierHeritage(Implementation implementation, ClasseInterface initClasse, ClasseInterface destinationClasse)
+    {
+        implementation.modifier(initClasse, destinationClasse);
+    }
+
     public void modifierAssociation(Association association, String visibilite, String nom, ClasseInterface initClasse, ClasseInterface destinationClasse)
     {
         association.modifier(visibilite, nom, initClasse, destinationClasse);
+    }
+
+    public void modifier(String nom, boolean isInterface)
+    {
+        this.nom = nom;
+        this.isInterface = isInterface;
     }
 }
