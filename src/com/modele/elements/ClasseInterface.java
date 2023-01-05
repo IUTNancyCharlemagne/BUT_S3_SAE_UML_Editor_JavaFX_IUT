@@ -78,22 +78,40 @@ public class ClasseInterface implements Element
         try {
             String[] methodesTab = methodes.split("\\n");
             for (String methode : methodesTab) {
-                String[] methodeSplit = methode.split(" ");
                 String accessibilite = determinerAccessibilite(methode);
-                String type = methodeSplit[1];
-                methodeSplit = methodeSplit[2].split("\\(");
-                String nom = methodeSplit[0];
-                String[] parametres = methodeSplit[1].replace(")", "").split(",");
-                List<Attribut> parametresList = new ArrayList<>();
-                for (String parametre : parametres) {
-                    Attribut attribut = new Attribut("", parametre, "");
-                    parametresList.add(attribut);
-                }
-                this.methodes.add(new Methode(nom, type, accessibilite, parametresList));
+                String type = methode.split(" ")[1];
+                String nom = methode.split(" ")[2].split("\\(")[0];
+                List<Attribut> attributs = determinerAttributs(methode);
+                this.methodes.add(new Methode(nom, type, accessibilite,attributs));
             }
         } catch (Exception e) {
             System.out.println("Erreur lors de l'ajout de la methode " + methodes);
         }
+    }
+
+    public void ajouterConstructeur(String methodes) {
+        try {
+            String[] methodesTab = methodes.split("\\n");
+            for (String methode : methodesTab) {
+                System.out.println(methode);
+                String accessibilite = determinerAccessibilite(methode);
+                String nom = methode.split(" ")[1].split("\\(")[0];
+                List<Attribut> attributs = determinerAttributs(methode);
+                this.methodes.add(new Methode(nom, "", accessibilite,attributs));
+            }
+        } catch (Exception e) {
+            System.out.println("Erreur lors de l'ajout du constructeur " + methodes);
+        }
+    }
+
+    private List<Attribut> determinerAttributs(String methode) {
+        String[] parametres = methode.split("\\(")[1].replace(")", "").split(",");
+        List<Attribut> parametresList = new ArrayList<>();
+        for (String parametre : parametres) {
+            Attribut attribut = new Attribut("", parametre, "");
+            parametresList.add(attribut);
+        }
+        return parametresList;
     }
 
     private String determinerAccessibilite(String element){

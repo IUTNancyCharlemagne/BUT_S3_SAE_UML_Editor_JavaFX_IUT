@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 
 import java.util.ArrayList;
 
@@ -52,6 +53,12 @@ public class VueClasse extends FlowPane implements ElementDeVue{
     public void setPos(float posX, float posY) {
         this.setLayoutX(posX);
         this.setLayoutY(posY);
+    }
+
+    public void ajouterSeparateur() {
+        Line line = new Line(0, 100, 100  , 100);
+
+        this.getChildren().add(line);
     }
 
 
