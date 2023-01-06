@@ -21,6 +21,7 @@ public class VueMenu extends HBox implements Observateur {
 
     @Override
     public void actualiser(Sujet sujet) {
+        this.getChildren().clear();
         ControlleurBoutton controlleurBoutton = new ControlleurBoutton(modele);
         // On crée un bouton pour chaque action
         // On crée un bouton pour ouvrir un repertoire

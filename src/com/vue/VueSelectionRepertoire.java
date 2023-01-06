@@ -38,7 +38,7 @@ public class VueSelectionRepertoire extends Application{
         if(selectedDirectory != null){
             name = selectedDirectory.getName();
             path = selectedDirectory.getPath();
-            modele.ouvrirDossier(path);
+            modele.ouvrirDossier(name, path);
             modele.lireDossier();
         }
     }

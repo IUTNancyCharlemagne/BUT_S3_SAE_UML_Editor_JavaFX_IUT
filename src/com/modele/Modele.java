@@ -36,7 +36,7 @@ public class Modele implements Sujet
 
     public String getFichiers()
     {
-        return this.dossier.list();
+        return this.dossier.arborescence();
     }
 
 
@@ -48,17 +48,18 @@ public class Modele implements Sujet
 
     @Override
     public void enregistrerObservateur(Observateur obs) {
-
+        this.observateurs.add(obs);
     }
 
     @Override
     public void supprimerObservateur(Observateur obs) {
-
+        this.observateurs.remove(obs);
     }
 
     @Override
     public void notifierObservateurs() {
-
+        for (Observateur obs : this.observateurs)
+            obs.actualiser(this);
     }
 
     @Override
@@ -70,8 +71,9 @@ public class Modele implements Sujet
      * Permet d'instancier un dossier à partir de son nom et de son chemin
      * @param path le chemin du dossier
      */
-    public void ouvrirDossier(String path){
-        this.dossier = new FileDirectory("", path);
+    public void ouvrirDossier(String name, String path){
+        this.dossier = new FileDirectory(name, path);
+        notifierObservateurs();
     }
 
     public void lireDossier(){
@@ -83,18 +85,14 @@ public class Modele implements Sujet
                 String[] tabHeritage = tabNomClasse[1].split("HERITAGE");
                 String[] tabImplementations = tabHeritage[1].split("IMPLEMENTATION");
                 String[] tabAttributs = tabImplementations[1].split("ATTRIBUTS");
-                String[] tabMethodes = tabAttributs[1].split("METHODES");
-
-                System.out.println("Nom de la classe : " + tabNomClasse[0]);
-                System.out.println("Héritage : " + tabHeritage[0]);
-                System.out.println("Implémentation : " + tabImplementations[0]);
-                System.out.println("Attributs : " + tabAttributs[0]);
-                System.out.println("Méthodes : " + tabMethodes[0]);
+                String[] tabConstructeurs = tabAttributs[1].split("CONSTRUCTEURS");
+                String[] tabMethodes = tabConstructeurs[1].split("METHODES");
 
                 ClasseInterface classe = new ClasseInterface(tabNomClasse[0]);
                 classe.ajouterHeritage(tabHeritage[0]);
                 classe.ajouterImplementation(tabImplementations[0]);
                 classe.ajouterAttribut(tabAttributs[0]);
+                classe.ajouterConstructeur(tabConstructeurs[0]);
                 classe.ajouterMethode(tabMethodes[0]);
                 this.elements.add(classe);
             }

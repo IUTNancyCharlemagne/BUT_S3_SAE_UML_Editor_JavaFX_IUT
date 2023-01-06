@@ -4,10 +4,11 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 
 import java.util.ArrayList;
 
-public class VueClasse extends StackPane implements ElementDeVue{
+public class VueClasse extends FlowPane implements ElementDeVue{
 
     private Label titleLabel;
     private VBox content;
@@ -23,7 +24,9 @@ public class VueClasse extends StackPane implements ElementDeVue{
         this.attributs = new ArrayList<>();
         this.methodes = new ArrayList<>();
         this.setStyle("-fx-background-color: #ffc75a");
-        this.setMaxSize(150, 200);
+        int nbAttributs = attributs.size();
+        int nbMethodes = methodes.size();
+        this.setMaxSize(200, 50 + 20 * (nbAttributs + nbMethodes));
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         this.setPadding(new Insets(10, 10, 10, 10));
 
@@ -50,6 +53,12 @@ public class VueClasse extends StackPane implements ElementDeVue{
     public void setPos(float posX, float posY) {
         this.setLayoutX(posX);
         this.setLayoutY(posY);
+    }
+
+    public void ajouterSeparateur() {
+        Line line = new Line(0, 100, 100  , 100);
+
+        this.getChildren().add(line);
     }
 
 

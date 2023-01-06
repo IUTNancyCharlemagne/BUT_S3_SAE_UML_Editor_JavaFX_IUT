@@ -16,6 +16,11 @@ public class FileFile extends FileComposite{
     }
 
     @Override
+    public String arborescence() {
+        return "+"+this.name;
+    }
+
+    @Override
     /**
      * Méthode list qui permet d'afficher le fichier
      * @return l'affichage console du fichier
@@ -68,7 +73,7 @@ public class FileFile extends FileComposite{
             aff.append(f.getName().replace("java.lang.", "")); // On récupère le nom de l'attribut
             aff.append("\n");
         }
-        aff.append("ATTRIBUTS\n");
+        aff.append("ATTRIBUTS");
 
 
         // On parcours les constructeurs de la classe
@@ -84,6 +89,8 @@ public class FileFile extends FileComposite{
             aff.append("\n");
         }
 
+        aff.append("CONSTRUCTEURS");
+
         // On parcours les méthodes de la classe
         for (Method m : classe.getDeclaredMethods()){
             // On ajoute la méthode à l'affichage
@@ -97,7 +104,7 @@ public class FileFile extends FileComposite{
             aff.append(")");
             aff.append("\n");
         }
-        aff.append("METHODES\n");
+        aff.append("METHODES");
         // On retourne l'affichage
         return aff.toString();
     }
