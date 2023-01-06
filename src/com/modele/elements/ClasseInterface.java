@@ -60,16 +60,19 @@ public class ClasseInterface implements Element
         return heritage;
     }
 
-    public void ajouterAttribut(String attribut) {
+    public void ajouterAttribut(String attributs) {
         try{
-            if (attribut.length() > 1) {
+            System.out.println("Attribut: " + attributs);
+            String[] attributSplit = attributs.split("\\n");
+            for (String attribut : attributSplit) {
+
                 String accessibilite = this.determinerAccessibilite(attribut);
                 String type = attribut.split(" ")[1];
                 String nom = attribut.split(" ")[2];
                 this.attributs.add(new Attribut(nom, type, accessibilite));
             }
         } catch (Exception e) {
-            System.out.println("Erreur lors de l'ajout de l'attribut " + attribut);
+            System.out.println("Erreur lors de l'ajout de l'attribut " + attributs);
         }
     }
 

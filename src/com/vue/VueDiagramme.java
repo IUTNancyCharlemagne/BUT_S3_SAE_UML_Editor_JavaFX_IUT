@@ -1,13 +1,21 @@
 package com.vue;
 
 import com.modele.elements.*;
+import javafx.scene.Group;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.skin.ScrollPaneSkin;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import com.modele.Sujet;
+import javafx.scene.shape.Line;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
-public class VueDiagramme extends StackPane implements Observateur {
+import static com.vue.VueClasse.INSETS;
+
+public class VueDiagramme extends ScrollPane implements Observateur {
 
     private ArrayList<VueClasse> classesList;
     public void actualiser(Sujet sujet) {
@@ -17,7 +25,9 @@ public class VueDiagramme extends StackPane implements Observateur {
         System.out.println("VueDiagramme: " + classes.size());
         for (ClasseInterface classe : classes) {
             FabriqueDeVue fabriqueDeVue = new FabriqueVueClasse();
+            Group classeVue = new Group();
             VueClasse vueElement = (VueClasse) fabriqueDeVue.creerVueElement();
+
             vueElement.setTitle(classe.getNom());
             vueElement.ajouterSeparateur();
 
@@ -32,6 +42,7 @@ public class VueDiagramme extends StackPane implements Observateur {
 
                 vueElement.setAttribut(vueAttribut);
             }
+            vueElement.ajouterSeparateur();
             for (Methode methode : classe.getMethodes()) {
                 fabriqueDeVue = new FabriqueVueMethode();
 
@@ -44,6 +55,7 @@ public class VueDiagramme extends StackPane implements Observateur {
 
                 vueElement.setMethode(vueMethode);
             }
+
             for (Association association : classe.getAssociations()) {
 
             }
@@ -51,16 +63,15 @@ public class VueDiagramme extends StackPane implements Observateur {
             for (Implementation implementation : classe.getImplementations()) {
 
             }
-
+            classeVue.getChildren().add(vueElement);
             classesList.add(vueElement);
-            this.getChildren().add(vueElement);
+            this.getChildren().add(classeVue);
         }
     }
 
 
     public VueDiagramme() {
         super();
-        this.setPrefSize(800, 600);
         this.setStyle("-fx-background-color: #FFFFFF");
     }
 }

@@ -50,14 +50,14 @@ public class FileFile extends FileComposite{
         if (superclass != null) {
             aff.append("extends ").append(superclass.getSimpleName()).append("\n");
         }
-        aff.append("HERITAGE\n");
+        aff.append("HERITAGE");
 
 
         //On parcours les interfaces
         for (Class<?> c : classe.getInterfaces()) {
             aff.append("implements ").append(c.getSimpleName()).append("\n");
         }
-        aff.append("IMPLEMENTATION\n");
+        aff.append("IMPLEMENTATION");
 
 
         // On parcours les attributs de la classe
