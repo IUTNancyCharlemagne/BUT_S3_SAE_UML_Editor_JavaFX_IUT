@@ -1,6 +1,7 @@
 package com.vue;
 
 import com.modele.elements.*;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.skin.ScrollPaneSkin;
@@ -11,6 +12,7 @@ import javafx.scene.shape.Line;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Stack;
 
 import static com.vue.VueClasse.INSETS;
@@ -22,11 +24,23 @@ public class VueDiagramme extends ScrollPane implements Observateur {
         this.getChildren().clear();
         classesList = new ArrayList<>();
         List<ClasseInterface> classes = sujet.getClasses();
-        System.out.println("VueDiagramme: " + classes.size());
         for (ClasseInterface classe : classes) {
             FabriqueDeVue fabriqueDeVue = new FabriqueVueClasse();
             Group classeVue = new Group();
             VueClasse vueElement = (VueClasse) fabriqueDeVue.creerVueElement();
+
+            Platform.runLater(() -> {
+                for (VueClasse vue : classesList) {
+                    vue.setTaille(vue.getWidth(), vue.getHeight());
+                    for (int i = 1; i < classesList.size(); i++) {
+                        VueClasse v = classesList.get(i-1);
+                        Random random = new Random();
+                        int x = random.nextInt(100);
+                        int y = random.nextInt(100);
+                        classesList.get(i).setPos(v.getPosX() + v.getLargeur()+x, v.getPosY()+y);
+                    }
+                }
+            });
 
             vueElement.setTitle(classe.getNom());
             vueElement.ajouterSeparateur();

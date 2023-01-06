@@ -1,5 +1,6 @@
 package com.vue;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
@@ -18,7 +19,9 @@ public class VueClasse extends FlowPane implements ElementDeVue{
     private ArrayList<VueElementClasse> attributs;
     private ArrayList<VueElementClasse> methodes;
 
-    private float posX, posY;
+    private double posX, posY;
+
+    private double width, height;
 
     public VueClasse() {
         super();
@@ -29,9 +32,15 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         this.setStyle("-fx-background-color: #ffc75a");
         int nbAttributs = attributs.size();
         int nbMethodes = methodes.size();
+        width = 0;
+        height = 0;
+        posY = 0;
+        posX = 0;
 
         this.setMaxSize(200, 50 + 20 * (nbAttributs + nbMethodes));
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+
 
         this.getChildren().add(content);
     }
@@ -53,9 +62,11 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         content.getChildren().add(vueElementClasse);
     }
 
-    public void setPos(float posX, float posY) {
+    public void setPos(double posX, double posY) {
         this.setLayoutX(posX);
         this.setLayoutY(posY);
+        this.posY = posY;
+        this.posX = posX;
     }
 
     public void ajouterSeparateur() {
@@ -64,5 +75,24 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         content.getChildren().add(separator);
     }
 
+    public void setTaille(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
 
+    public double getLargeur() {
+        return this.width;
+    }
+
+    public double getHauteur() {
+        return this.height;
+    }
+
+    public double getPosX() {
+        return posX;
+    }
+
+    public double getPosY() {
+        return posY;
+    }
 }
