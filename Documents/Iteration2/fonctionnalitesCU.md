@@ -1,8 +1,0 @@
-Lors de cette itération nous allons afficher les classes d'un dossier de manière graphique.
-Nous allons également commencer l'affichage des relations entre les classes.
-
-Répartition des tâches :
- - Raphaël MANGIN : Adaptation du composite et récupération de manière à créer les objets graphiques
- - Nicolas KUENEMANN : Mise en place du DirectoryChooser
- - Hugo COLLIN : Affichage des relations entre les classes
- - Valentin MALAVASI : Absent
