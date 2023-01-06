@@ -24,4 +24,9 @@ public class Heritage
     public void setDestinationClasse(ClasseInterface destinationClasse) {
         this.destinationClasse = destinationClasse;
     }
+
+    public void modifier(ClasseInterface initClasse, ClasseInterface destinationClasse) {
+        this.initClasse = initClasse;
+        this.destinationClasse = destinationClasse;
+    }
 }

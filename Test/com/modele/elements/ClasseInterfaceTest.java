@@ -1,13 +1,33 @@
-import com.modele.elements.ClasseInterface;
+package com.modele.elements;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestsClasseInterface {
+public class ClasseInterfaceTest {
+
+    ClasseInterface classe;
+
+    @BeforeEach
+    public void setUp ()
+    {
+        classe = new ClasseInterface("Test");
+    }
+
+    @Test
+    public void test00_constructeur_ok()
+    {
+        //Methode
+        ClasseInterface c = new ClasseInterface("TestClasse");
+
+        //Test
+        assertEquals("TestClasse", c.getNom(), "le nom doit etre identique");
+    }
+
     @Test
     public void test01_ajouterAttribut_Unique() {
         String attribut = "public int a";
-        ClasseInterface classe = new ClasseInterface("Test");
         classe.ajouterAttribut(attribut);
         assertEquals(classe.getAttributs().get(0).getNom(), "a");
         assertEquals(classe.getAttributs().get(0).getType(), "int");
@@ -19,7 +39,6 @@ public class TestsClasseInterface {
         String attribut = "public int a";
         String attribut2 = "private String b";
         String attribut3 = "protected float c";
-        ClasseInterface classe = new ClasseInterface("Test");
         classe.ajouterAttribut(attribut);
         classe.ajouterAttribut(attribut2);
         classe.ajouterAttribut(attribut3);
@@ -37,7 +56,6 @@ public class TestsClasseInterface {
     @Test
     public void test03_ajouterAttribut_AccessibiliteParDefaut() {
         String attribut = " int a";
-        ClasseInterface classe = new ClasseInterface("Test");
         classe.ajouterAttribut(attribut);
         assertEquals(classe.getAttributs().get(0).getNom(), "a");
         assertEquals(classe.getAttributs().get(0).getType(), "int");
@@ -47,7 +65,6 @@ public class TestsClasseInterface {
     @Test
     public void test04_ajouterMethode_Unique() {
         String methode = "public void a()";
-        ClasseInterface classe = new ClasseInterface("Test");
         classe.ajouterMethode(methode);
         assertEquals(classe.getMethodes().get(0).getNom(), "a");
         assertEquals(classe.getMethodes().get(0).getVisibilite(), "public");
@@ -59,7 +76,6 @@ public class TestsClasseInterface {
         String methode = "public void a()";
         String methode2 = "private String b()";
         String methode3 = "protected float c()";
-        ClasseInterface classe = new ClasseInterface("Test");
         classe.ajouterMethode(methode);
         classe.ajouterMethode(methode2);
         classe.ajouterMethode(methode3);
@@ -77,11 +93,48 @@ public class TestsClasseInterface {
     @Test
     public void test06_ajouterMethode_AvecParametre() {
         String methode = "public void a(int)";
-        ClasseInterface classe = new ClasseInterface("Test");
         classe.ajouterMethode(methode);
         assertEquals(classe.getMethodes().get(0).getNom(), "a");
         assertEquals(classe.getMethodes().get(0).getVisibilite(), "public");
         assertEquals(classe.getMethodes().get(0).getType(), "void");
         assertEquals(classe.getMethodes().get(0).getParametres().get(0).getType(), "int");
+    }
+
+    @Test
+    void ajouterAssociation() {
+    }
+
+    @Test
+    void ajouterImplementation() {
+    }
+
+    @Test
+    void ajouterHeritage() {
+    }
+
+    @Test
+    void modifierAttribut() {
+    }
+
+    @Test
+    void modifierMethode() {
+    }
+
+    @Test
+    void modifierHeritage() {
+    }
+
+    @Test
+    void modifierAssociation() {
+    }
+
+    @Test
+    void test_modifier() {
+        //Methode
+        classe.modifier("Teso", "interface");
+
+        //Test
+        assertEquals("Teso", classe.getNom(), "le nom doit etre modifie");
+        assertEquals("interface", classe.getType(),"le type doit etre modifie");
     }
 }

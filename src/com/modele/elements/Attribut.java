@@ -33,4 +33,10 @@ public class Attribut implements Element
     public void setVisibilite(String visibilite) {
         this.visibilite = visibilite;
     }
+
+    public void modifier(String visibilite, String type, String nom) {
+        this.visibilite = visibilite;
+        this.type = type;
+        this.nom = nom;
+    }
 }
