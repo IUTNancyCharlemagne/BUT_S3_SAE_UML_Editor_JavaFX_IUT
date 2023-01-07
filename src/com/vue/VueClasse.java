@@ -1,7 +1,11 @@
 package com.vue;
 
+import javafx.application.Platform;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -10,12 +14,15 @@ import java.util.ArrayList;
 
 public class VueClasse extends FlowPane implements ElementDeVue{
 
+    public static final int INSETS = 10;
     private Label titleLabel;
     private VBox content;
     private ArrayList<VueElementClasse> attributs;
     private ArrayList<VueElementClasse> methodes;
 
-    private float posX, posY;
+    private double posX, posY;
+
+    private double width, height;
 
     public VueClasse() {
         super();
@@ -26,9 +33,14 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         this.setStyle("-fx-background-color: #ffc75a");
         int nbAttributs = attributs.size();
         int nbMethodes = methodes.size();
+        width = 0;
+        height = 0;
+        posY = 0;
+        posX = 0;
         this.setMaxSize(200, 50 + 20 * (nbAttributs + nbMethodes));
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        this.setPadding(new Insets(10, 10, 10, 10));
+
+
 
         this.getChildren().add(content);
     }
@@ -50,16 +62,41 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         content.getChildren().add(vueElementClasse);
     }
 
-    public void setPos(float posX, float posY) {
+    public void setPos(double posX, double posY) {
         this.setLayoutX(posX);
         this.setLayoutY(posY);
+        this.posY = posY;
+        this.posX = posX;
     }
 
     public void ajouterSeparateur() {
-        Line line = new Line(0, 100, 100  , 100);
-
-        this.getChildren().add(line);
+        Separator separator = new Separator(Orientation.HORIZONTAL);
+        separator.setHalignment(HPos.CENTER);
+        Platform.runLater(() -> {
+            separator.setPrefWidth(this.getWidth());
+        });
+        separator.setStyle("-fx-background-color: #000000");
+        content.getChildren().add(separator);
     }
 
+    public void setTaille(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
 
+    public double getLargeur() {
+        return this.width;
+    }
+
+    public double getHauteur() {
+        return this.height;
+    }
+
+    public double getPosX() {
+        return posX;
+    }
+
+    public double getPosY() {
+        return posY;
+    }
 }

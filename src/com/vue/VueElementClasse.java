@@ -20,7 +20,7 @@ public class VueElementClasse extends HBox implements ElementDeVue {
     private Label typeText;
     public VueElementClasse() {
         super();
-        this.setAlignment(Pos.CENTER);
+        this.setAlignment(Pos.BASELINE_LEFT);
     }
 
     public void setName(String name) {

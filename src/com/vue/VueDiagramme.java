@@ -1,66 +1,36 @@
 package com.vue;
 
 import com.modele.elements.*;
-import javafx.scene.layout.StackPane;
+import javafx.application.Platform;
+import javafx.scene.Group;
+
 import com.modele.Sujet;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class VueDiagramme extends StackPane implements Observateur {
+public class VueDiagramme extends Pane implements Observateur {
 
-    private ArrayList<VueClasse> classesList;
     public void actualiser(Sujet sujet) {
+        ScrollPane scrollPane = new ScrollPane();
         this.getChildren().clear();
-        classesList = new ArrayList<>();
-        List<ClasseInterface> classes = sujet.getClasses();
-        System.out.println("VueDiagramme: " + classes.size());
-        for (ClasseInterface classe : classes) {
-            FabriqueDeVue fabriqueDeVue = new FabriqueVueClasse();
-            VueClasse vueElement = (VueClasse) fabriqueDeVue.creerVueElement();
-            vueElement.setTitle(classe.getNom());
-            vueElement.ajouterSeparateur();
-
-            for (Attribut attribut : classe.getAttributs()) {
-                fabriqueDeVue = new FabriqueVueAttribut();
-
-                VueElementClasse vueAttribut = (VueElementClasse) fabriqueDeVue.creerVueElement();
-
-                vueAttribut.setAccessibility(attribut.getVisibilite());
-                vueAttribut.setType(attribut.getType());
-                vueAttribut.setName(attribut.getNom());
-
-                vueElement.setAttribut(vueAttribut);
-            }
-            for (Methode methode : classe.getMethodes()) {
-                fabriqueDeVue = new FabriqueVueMethode();
-
-                VueElementClasse vueMethode = (VueElementClasse) fabriqueDeVue.creerVueElement();
-
-                vueMethode.setAccessibility(methode.getVisibilite());
-                vueMethode.setType(methode.getType());
-                vueMethode.setName(methode.getNom());
-                vueMethode.setParameters(methode.getParametres());
-
-                vueElement.setMethode(vueMethode);
-            }
-            for (Association association : classe.getAssociations()) {
-
-            }
-
-            for (Implementation implementation : classe.getImplementations()) {
-
-            }
-
-            classesList.add(vueElement);
-            this.getChildren().add(vueElement);
-        }
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        VueFrabriqueClasses vueFrabriqueClasses = new VueFrabriqueClasses();
+        vueFrabriqueClasses.generer(sujet);
+        scrollPane.setContent(vueFrabriqueClasses);
+        this.getChildren().add(scrollPane);
     }
 
 
     public VueDiagramme() {
         super();
-        this.setPrefSize(800, 600);
-        this.setStyle("-fx-background-color: #FFFFFF");
+        this.setStyle("-fx-background-color: #ffffff");
     }
 }

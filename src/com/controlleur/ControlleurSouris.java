@@ -4,16 +4,18 @@ import com.vue.VueSelectionRepertoire;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
-public class ControlleurBoutton implements EventHandler<ActionEvent> {
+public class ControlleurSouris implements EventHandler<MouseEvent> {
 
     private final Modele modele;
-    public ControlleurBoutton(Modele modele) {
+    public ControlleurSouris(Modele modele) {
         this.modele = modele;
     }
     @Override
-    public void handle(ActionEvent event) {
-        if (event.getSource() instanceof Button b) {
+    public void handle(MouseEvent event) {
+        if (event.getSource() instanceof Label b) {
             switch (b.getId()) {
                 case "btnOuvrir":
                     VueSelectionRepertoire vueDirectorySelector = new VueSelectionRepertoire(modele);
