@@ -3,45 +3,38 @@ package com.vue;
 import com.modele.elements.*;
 import javafx.application.Platform;
 import javafx.scene.Group;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.skin.ScrollPaneSkin;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
+
 import com.modele.Sujet;
-import javafx.scene.shape.Line;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Stack;
 
-import static com.vue.VueClasse.INSETS;
-
-public class VueDiagramme extends ScrollPane implements Observateur {
+public class VueDiagramme extends Pane implements Observateur {
 
     private ArrayList<VueClasse> classesList;
     public void actualiser(Sujet sujet) {
+        //this.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+        //this.setHbarPolicy(ScrollBarPolicy.ALWAYS);
         this.getChildren().clear();
         classesList = new ArrayList<>();
         List<ClasseInterface> classes = sujet.getClasses();
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        FlowPane pane = new FlowPane();
+        pane.setPrefSize(800,600);
         for (ClasseInterface classe : classes) {
             FabriqueDeVue fabriqueDeVue = new FabriqueVueClasse();
             Group classeVue = new Group();
             VueClasse vueElement = (VueClasse) fabriqueDeVue.creerVueElement();
 
-            Platform.runLater(() -> {
-                for (VueClasse vue : classesList) {
-                    vue.setTaille(vue.getWidth(), vue.getHeight());
-                    for (int i = 1; i < classesList.size(); i++) {
-                        VueClasse v = classesList.get(i-1);
-                        Random random = new Random();
-                        int x = random.nextInt(100);
-                        int y = random.nextInt(100);
-                        classesList.get(i).setPos(v.getPosX() + v.getLargeur()+x, v.getPosY()+y);
-                    }
-                }
-            });
-
+            vueElement.setPrefSize(200, 200);
             vueElement.setTitle(classe.getNom());
             vueElement.ajouterSeparateur();
 
@@ -79,8 +72,10 @@ public class VueDiagramme extends ScrollPane implements Observateur {
             }
             classeVue.getChildren().add(vueElement);
             classesList.add(vueElement);
-            this.getChildren().add(classeVue);
+            pane.getChildren().add(classeVue);
         }
+        scrollPane.setContent(pane);
+        this.getChildren().add(scrollPane);
     }
 
 
