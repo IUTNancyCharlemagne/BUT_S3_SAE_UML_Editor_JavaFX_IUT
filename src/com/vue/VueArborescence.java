@@ -18,24 +18,37 @@ public class VueArborescence extends TreeView<String> implements Observateur {
         Modele modele = (Modele) sujet;
         String arborescence = modele.getFichiers();
         String[] dossiers = arborescence.split("\\t");
-        System.out.println(Arrays.toString(dossiers));
-        TreeItem<String> root = new TreeItem<>(dossiers[0]);
-        for (int i = 1; i < dossiers.length; i++) {
-            String[] fichiers = dossiers[i].split("\\+");
-            TreeItem<String> treeItem;
-            if (fichiers.length == 0){
-               treeItem = new TreeItem<>(dossiers[i]);
-            }
-            else {
-                treeItem = new TreeItem<>(fichiers[0]);
-                for (int j = 1; j < fichiers.length; j++) {
-                    TreeItem<String> treeItem1 = new TreeItem<>(fichiers[j]);
-                    treeItem.getChildren().add(treeItem1);
+        TreeItem<String> root;
+        if (dossiers.length > 1) {
+            root = new TreeItem<>(dossiers[0]);
+            this.setRoot(root);
+            for (int i = 1; i < dossiers.length; i++) {
+                String[] fichiers = dossiers[i].split("\\+");
+                System.out.println(Arrays.toString(fichiers));
+                TreeItem<String> treeItem;
+                if (fichiers.length == 1) {
+                    treeItem = new TreeItem<>(dossiers[i]);
+                    root.getChildren().add(treeItem);
+                    root = treeItem;
+                } else {
+                    treeItem = new TreeItem<>(fichiers[0]);
+                    recupererFichiers(treeItem, fichiers);
+                    root.getChildren().add(treeItem);
                 }
             }
-            root.getChildren().add(treeItem);
+        }else {
+            String[] fichiers = dossiers[0].split("\\+");
+            root = new TreeItem<>(fichiers[0]);
+            this.setRoot(root);
+            recupererFichiers(root, fichiers);
         }
-        this.setRoot(root);
     }
 
+
+    private void recupererFichiers(TreeItem<String> ti, String[] fichiers) {
+        for (int j = 1; j < fichiers.length; j++) {
+            TreeItem<String> treeItem1 = new TreeItem<>(fichiers[j]);
+            ti.getChildren().add(treeItem1);
+        }
+    }
 }

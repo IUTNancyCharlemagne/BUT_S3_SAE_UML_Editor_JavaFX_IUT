@@ -50,7 +50,6 @@ public class VueElementClasse extends HBox implements ElementDeVue {
 
     public void setAccessibility(String accessibility) {
         this.accessibilityRect = new Rectangle(10,10);
-        System.out.print(accessibility);
         switch (accessibility) {
             case "public" -> this.accessibilityRect.setFill(Color.GREEN);
             case "private" -> this.accessibilityRect.setFill(Color.RED);
