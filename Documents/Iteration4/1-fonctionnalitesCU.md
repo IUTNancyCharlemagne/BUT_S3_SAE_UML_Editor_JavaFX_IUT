@@ -1,4 +1,4 @@
-# Itération 3 - Fonctionnalités
+# Itération 4 - Fonctionnalités
 ## Description globale
 Il s'agit maintenant d'afficher correctement le diagramme et de pouvoir 
 l'exporter en image, ainsi que déplacer les classes, et leur ajouter un élément
