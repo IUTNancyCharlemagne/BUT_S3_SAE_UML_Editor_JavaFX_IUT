@@ -1,6 +1,7 @@
 package com.vue;
 
 import javafx.application.Platform;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
@@ -36,7 +37,6 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         height = 0;
         posY = 0;
         posX = 0;
-
         this.setMaxSize(200, 50 + 20 * (nbAttributs + nbMethodes));
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
@@ -71,6 +71,10 @@ public class VueClasse extends FlowPane implements ElementDeVue{
 
     public void ajouterSeparateur() {
         Separator separator = new Separator(Orientation.HORIZONTAL);
+        separator.setHalignment(HPos.CENTER);
+        Platform.runLater(() -> {
+            separator.setPrefWidth(this.getWidth());
+        });
         separator.setStyle("-fx-background-color: #000000");
         content.getChildren().add(separator);
     }
