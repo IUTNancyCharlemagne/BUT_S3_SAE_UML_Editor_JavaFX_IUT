@@ -79,11 +79,12 @@ public class FileDirectory extends FileComposite{
                 FileComposite f;
                 if (element.isDirectory()){
                     f = new FileDirectory("\t"+element.getName() ,element.getPath());
+                    aff += f.arborescence() + "SEPARATEUR";
                 }
                 else {
                     f = new FileFile(element.getName(), element.getPath());
+                    aff += f.arborescence();
                 }
-                aff += f.arborescence();
             }
         }
         return aff;
