@@ -4,9 +4,9 @@ public class Association implements Element
 {
     private ClasseInterface initClasse, destinationClasse;
     private String nom;
-    private char visibilite;
+    private String visibilite;
 
-    public Association(ClasseInterface i, ClasseInterface t, String n, char v)
+    public Association(ClasseInterface i, ClasseInterface t, String n, String v)
     {
         this.initClasse = i;
         this.destinationClasse = t;
@@ -38,11 +38,18 @@ public class Association implements Element
         this.nom = nom;
     }
 
-    public char getVisibilite() {
+    public String getVisibilite() {
         return visibilite;
     }
 
-    public void setVisibilite(char visibilite) {
+    public void setVisibilite(String visibilite) {
+        this.visibilite = visibilite;
+    }
+
+    public void modifier(String visibilite, String nom, ClasseInterface initClasse, ClasseInterface destinationClasse) {
+        this.initClasse = initClasse;
+        this.destinationClasse = destinationClasse;
+        this.nom = nom;
         this.visibilite = visibilite;
     }
 }

@@ -4,5 +4,5 @@ Nous allons également commencer l'affichage des relations entre les classes.
 Répartition des tâches :
  - Raphaël MANGIN : Adaptation du composite et récupération de manière à créer les objets graphiques
  - Nicolas KUENEMANN : Mise en place du DirectoryChooser
- - Hugo COLLIN : Affichage des relations entre les classes
+ - Hugo COLLIN : Modélisation des éléments des classes
  - Valentin MALAVASI : Absent

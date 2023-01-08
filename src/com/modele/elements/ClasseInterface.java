@@ -14,6 +14,7 @@ public class ClasseInterface implements Element
     private List<Association> associations;
     private Heritage heritage;
     private List<Implementation> implementation;
+    private boolean selectionne, modification, isInterface;
 
     public ClasseInterface(String nom) {
         String[] nomSplit = nom.split("\\.");
@@ -138,5 +139,52 @@ public class ClasseInterface implements Element
 
     public void ajouterHeritage(String heritage) {
         //this.heritage = heritage;
+    }
+
+    public boolean isInterface() {
+        return isInterface;
+    }
+
+    public void setInterface(boolean isInterface) {
+        this.isInterface = isInterface;
+    }
+
+    public void modifierAttribut(Attribut attribut, String visibilite, String type, String nom)
+    {
+        attribut.modifier(visibilite, type, nom);
+    }
+
+    public void modifierMethode(Methode methode, String visibilite, String type, String nom, List<Attribut> parametres)
+    {
+        methode.modifier(visibilite, type, nom, parametres);
+    }
+
+    public void modifierHeritage(Heritage heritage, ClasseInterface initClasse, ClasseInterface destinationClasse)
+    {
+        heritage.modifier(initClasse, destinationClasse);
+    }
+
+    public void modifierHeritage(Implementation implementation, ClasseInterface initClasse, ClasseInterface destinationClasse)
+    {
+        implementation.modifier(initClasse, destinationClasse);
+    }
+
+    public void modifierAssociation(Association association, String visibilite, String nom, ClasseInterface initClasse, ClasseInterface destinationClasse)
+    {
+        association.modifier(visibilite, nom, initClasse, destinationClasse);
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void modifier(String nom, String type)
+    {
+        this.nom = nom;
+        this.type = type;
     }
 }
