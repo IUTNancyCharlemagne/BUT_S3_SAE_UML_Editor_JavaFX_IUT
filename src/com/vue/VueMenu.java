@@ -33,6 +33,7 @@ public class VueMenu extends MenuBar implements Observateur {
         Label ouvrirLabel = new Label("Ouvrir");
         ouvrirLabel.setId("btnOuvrir");
         ouvrirLabel.setOnMouseClicked(controlleurSouris);
+        ouvrir.setGraphic(ouvrirLabel);
 
         // on crée un bouton pour ajouter une classe
         Menu menuAjouter = new Menu("Ajouter");
