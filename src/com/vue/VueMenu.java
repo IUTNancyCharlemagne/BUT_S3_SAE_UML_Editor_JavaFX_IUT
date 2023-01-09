@@ -4,10 +4,7 @@ import com.controlleur.ControlleurMenu;
 import com.controlleur.ControlleurSouris;
 import com.modele.Modele;
 import com.modele.Sujet;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -29,6 +26,8 @@ public class VueMenu extends MenuBar implements Observateur {
         this.getMenus().clear();
         ControlleurSouris controlleurSouris = new ControlleurSouris(modele);
         ControlleurMenu controlleurMenu = new ControlleurMenu(modele, vue);
+
+        SeparatorMenuItem sep = new SeparatorMenuItem();
         // On crée un bouton pour chaque action
         // On crée un bouton pour ouvrir un repertoire
         Menu ouvrir = new Menu();
@@ -46,7 +45,7 @@ public class VueMenu extends MenuBar implements Observateur {
         itemAjouterClasse.setId("ajouterClasseJava");
         itemAjouterClasse.setOnAction(controlleurMenu);
 
-        menuAjouter.getItems().add(itemAjouterClasse);
+        menuAjouter.getItems().addAll(itemAjouterClasse, sep);
 
         // on crée un bouton pour lister les classes existantes
         Menu btnListerClasses = new Menu("Classes");
@@ -68,29 +67,12 @@ public class VueMenu extends MenuBar implements Observateur {
         Menu btnListerAssociation = new Menu("Association");
         btnListerAssociation.setId("btnListerAssociation");
 
-        /*
-        //-----
-        // on crée un bouton pour exporter le diagramme
-        Menu btnListerExporter = new Menu("Exporter");
-        btnListerExporter.setId("btnExporter");
 
-        // > On crée un bouton pour exporter en image
-        Label btnExpImg = new Label("Image (.png)");
-        btnExpImg.setTextFill(Color.web("#0076a3"));
-        MenuItem expImg = new MenuItem("Image (.png)");
-        expImg.setGraphic(btnExpImg);
-        btnExpImg.setId("btnExpImg");
-        //expImg.setOnMouseClicked(controlleurBoutton);
-
-        btnListerExporter.getItems().add(expImg);
-
-        //---
-*/
         // on crée un menu pour exporter
         Menu menuExporter = new Menu("Exporter");
         menuExporter.setId("btnExporter");
 
-        // > on crée des items pour ajouter des elements
+        // > On crée un bouton pour exporter en image
         MenuItem itemExporterPng = new MenuItem("Image (.png)");
         itemExporterPng.setId("btnExpImg");
         itemExporterPng.setOnAction(controlleurMenu);

@@ -33,12 +33,6 @@ public class ControlleurSouris implements EventHandler<MouseEvent> {
                 vueDirectorySelector.generer();
                 modele.notifierObservateurs();
             }
-            /*else if (l.getId().equals("btnExpImg"))
-            {
-                VueExporter vueExporter = new VueExporter(modele, vueGlobal.getVueFabriqueClasse());
-                vueExporter.generer();
-                modele.notifierObservateurs();
-            }*/
         }
     }
 }
