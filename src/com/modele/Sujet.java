@@ -15,4 +15,10 @@ public interface Sujet
     public void notifierObservateurs();
 
     List<ClasseInterface> getClasses();
+
+    void ouvrirDossier(String name, String path);
+
+    void lireDossier();
+
+    void ajouterClasse(String classeJava);
 }

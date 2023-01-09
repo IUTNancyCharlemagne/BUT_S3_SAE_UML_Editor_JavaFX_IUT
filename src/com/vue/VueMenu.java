@@ -1,11 +1,13 @@
 package com.vue;
 
+import com.controlleur.ControlleurMenu;
 import com.controlleur.ControlleurSouris;
 import com.modele.Modele;
 import com.modele.Sujet;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -23,18 +25,25 @@ public class VueMenu extends MenuBar implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         this.getMenus().clear();
-        ControlleurSouris controlleurBoutton = new ControlleurSouris(modele);
+        ControlleurMenu controlleurMenu = new ControlleurMenu(modele);
+        ControlleurSouris controlleurSouris = new ControlleurSouris(modele);
         // On crée un bouton pour chaque action
         // On crée un bouton pour ouvrir un repertoire
-        Label btnOuvrir = new Label("Ouvrir");
         Menu ouvrir = new Menu();
-        ouvrir.setGraphic(btnOuvrir);
-        btnOuvrir.setId("btnOuvrir");
-        btnOuvrir.setOnMouseClicked(controlleurBoutton);
+        Label ouvrirLabel = new Label("Ouvrir");
+        ouvrirLabel.setId("btnOuvrir");
+        ouvrirLabel.setOnMouseClicked(controlleurSouris);
 
         // on crée un bouton pour ajouter une classe
-        Menu btnAjouterClasse = new Menu("Ajouter");
-        btnAjouterClasse.setId("btnAjouterClasse");
+        Menu menuAjouter = new Menu("Ajouter");
+        menuAjouter.setId("btnAjouter");
+
+        // on crée des items pour ajouter des elements
+        MenuItem itemAjouterClasse = new MenuItem("Ajouter classe");
+        itemAjouterClasse.setId("ajouterClasseJava");
+        itemAjouterClasse.setOnAction(controlleurMenu);
+
+        menuAjouter.getItems().add(itemAjouterClasse);
 
         // on crée un bouton pour lister les classes existantes
         Menu btnListerClasses = new Menu("Classes");
@@ -65,6 +74,6 @@ public class VueMenu extends MenuBar implements Observateur {
         btnEnregistrer.setId("btnEnregistrer");
 
         // On ajoute les boutons à la vue
-        this.getMenus().addAll(ouvrir, btnAjouterClasse, btnListerClasses, btnListerAttributs, btnListerMethodes, btnListerHeritage, btnListerAssociation, btnListerDependance, btnEnregistrer);
+        this.getMenus().addAll(ouvrir, menuAjouter, btnListerClasses, btnListerAttributs, btnListerMethodes, btnListerHeritage, btnListerAssociation, btnListerDependance, btnEnregistrer);
     }
 }

@@ -11,11 +11,11 @@ import java.io.File;
 
 public class VueSelectionRepertoire extends Application{
 
-    private Modele modele;
+    private final Sujet modele;
     private String path;
     private String name;
 
-    public VueSelectionRepertoire(Modele modele) {
+    public VueSelectionRepertoire(Sujet modele) {
         this.modele = modele;
     }
     public void generer() {

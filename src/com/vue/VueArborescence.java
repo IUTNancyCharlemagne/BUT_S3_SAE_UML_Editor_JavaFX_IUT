@@ -11,6 +11,7 @@ import java.util.Arrays;
 public class VueArborescence extends TreeView<String> implements Observateur {
     public VueArborescence() {
         super();
+        this.setPrefWidth(200);
     }
 
     @Override

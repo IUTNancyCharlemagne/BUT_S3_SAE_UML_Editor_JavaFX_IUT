@@ -105,4 +105,14 @@ public class Modele implements Sujet
             System.out.println("La classe n'existe pas");
         }
     }
+
+    @Override
+    public void ajouterClasse(String classeJava) {
+
+    }
+
+    public void ajouterClasse() {
+        this.elements.add(null);
+        notifierObservateurs();
+    }
 }

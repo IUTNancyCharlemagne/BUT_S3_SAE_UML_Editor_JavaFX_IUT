@@ -1,15 +1,20 @@
 package com.vue;
 
+import com.controlleur.ControlleurSouris;
 import com.modele.Sujet;
 import com.modele.elements.*;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.scene.Group;
+import javafx.scene.input.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VueFrabriqueClasses extends FlowPane {
+public class VueFrabriqueClasses extends AnchorPane {
 
     private ArrayList<VueClasse> classesList;
 
@@ -17,11 +22,26 @@ public class VueFrabriqueClasses extends FlowPane {
         classesList = new ArrayList<>();
         List<ClasseInterface> classes = sujet.getClasses();
         this.getChildren().clear();
+
         this.setPrefSize(800,600);
         for (ClasseInterface classe : classes) {
             FabriqueDeVue fabriqueDeVue = new FabriqueVueClasse();
             Group classeVue = new Group();
             VueClasse vueElement = (VueClasse) fabriqueDeVue.creerVueElement();
+            AnchorPane.setTopAnchor(vueElement,0.0);
+            vueElement.MoveRandom();
+            vueElement.setId(classe.getNom());
+            vueElement.setOnMouseClicked(new ControlleurSouris(sujet));
+            vueElement.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    // update the node's coordinates based on the mouse event
+                    vueElement.setLayoutX(event.getSceneX() - 200);
+                    vueElement.setLayoutY(event.getSceneY() - 50);
+                    System.out.println("X: " + event.getX() + " Y: " + event.getY());
+                    event.consume();
+                }
+            });
 
             vueElement.setPrefSize(200, 200);
             vueElement.setTitle(classe.getNom());
@@ -64,4 +84,6 @@ public class VueFrabriqueClasses extends FlowPane {
             this.getChildren().add(classeVue);
         }
     }
+
+
 }
