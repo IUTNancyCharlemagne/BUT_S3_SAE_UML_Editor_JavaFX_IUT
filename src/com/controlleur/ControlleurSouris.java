@@ -16,11 +16,9 @@ import javafx.scene.input.MouseEvent;
 public class ControlleurSouris implements EventHandler<MouseEvent> {
 
     private final Sujet modele;
-    private final VueGlobal vueGlobal;
 
-    public ControlleurSouris(Sujet modele, VueGlobal vue) {
+    public ControlleurSouris(Sujet modele) {
         this.modele = modele;
-        this.vueGlobal = vue;
     }
     @Override
     public void handle(MouseEvent event) {
@@ -35,12 +33,12 @@ public class ControlleurSouris implements EventHandler<MouseEvent> {
                 vueDirectorySelector.generer();
                 modele.notifierObservateurs();
             }
-            else if (l.getId().equals("btnExpImg"))
+            /*else if (l.getId().equals("btnExpImg"))
             {
                 VueExporter vueExporter = new VueExporter(modele, vueGlobal.getVueFabriqueClasse());
                 vueExporter.generer();
                 modele.notifierObservateurs();
-            }
+            }*/
         }
     }
 }

@@ -27,8 +27,8 @@ public class VueMenu extends MenuBar implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         this.getMenus().clear();
-        ControlleurSouris controlleurBoutton = new ControlleurSouris(modele, vue);
-        ControlleurMenu controlleurMenu = new ControlleurMenu(modele);
+        ControlleurSouris controlleurSouris = new ControlleurSouris(modele);
+        ControlleurMenu controlleurMenu = new ControlleurMenu(modele, vue);
         // On crée un bouton pour chaque action
         // On crée un bouton pour ouvrir un repertoire
         Menu ouvrir = new Menu();
@@ -41,7 +41,7 @@ public class VueMenu extends MenuBar implements Observateur {
         Menu menuAjouter = new Menu("Ajouter");
         menuAjouter.setId("btnAjouter");
 
-        // on crée des items pour ajouter des elements
+        // > on crée des items pour ajouter des elements
         MenuItem itemAjouterClasse = new MenuItem("Ajouter classe");
         itemAjouterClasse.setId("ajouterClasseJava");
         itemAjouterClasse.setOnAction(controlleurMenu);
@@ -68,6 +68,8 @@ public class VueMenu extends MenuBar implements Observateur {
         Menu btnListerAssociation = new Menu("Association");
         btnListerAssociation.setId("btnListerAssociation");
 
+        /*
+        //-----
         // on crée un bouton pour exporter le diagramme
         Menu btnListerExporter = new Menu("Exporter");
         btnListerExporter.setId("btnExporter");
@@ -82,11 +84,26 @@ public class VueMenu extends MenuBar implements Observateur {
 
         btnListerExporter.getItems().add(expImg);
 
+        //---
+*/
+        // on crée un menu pour exporter
+        Menu menuExporter = new Menu("Exporter");
+        menuExporter.setId("btnExporter");
+
+        // > on crée des items pour ajouter des elements
+        MenuItem itemExporterPng = new MenuItem("Image (.png)");
+        itemExporterPng.setId("btnExpImg");
+        itemExporterPng.setOnAction(controlleurMenu);
+
+        menuExporter.getItems().add(itemExporterPng);
+
+
+
         // on crée un bouton pour enregistrer le diagramme
         Menu btnEnregistrer = new Menu("Enregistrer");
         btnEnregistrer.setId("btnEnregistrer");
 
         // On ajoute les boutons à la vue
-        this.getMenus().addAll(ouvrir, menuAjouter, btnListerClasses, btnListerAttributs, btnListerMethodes, btnListerHeritage, btnListerAssociation, btnListerExporter, btnEnregistrer);
+        this.getMenus().addAll(ouvrir, menuAjouter, btnListerClasses, btnListerAttributs, btnListerMethodes, btnListerHeritage, btnListerAssociation, menuExporter, btnEnregistrer);
     }
 }
