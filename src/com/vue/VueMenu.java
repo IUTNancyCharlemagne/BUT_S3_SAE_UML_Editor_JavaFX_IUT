@@ -23,14 +23,13 @@ public class VueMenu extends MenuBar implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         this.getMenus().clear();
-        ControlleurSouris controlleurBoutton = new ControlleurSouris(modele);
         // On crée un bouton pour chaque action
         // On crée un bouton pour ouvrir un repertoire
         Label btnOuvrir = new Label("Ouvrir");
         Menu ouvrir = new Menu();
         ouvrir.setGraphic(btnOuvrir);
         btnOuvrir.setId("btnOuvrir");
-        btnOuvrir.setOnMouseClicked(controlleurBoutton);
+        btnOuvrir.setOnMouseClicked(com.Main.controlleurSouris);
 
         // on crée un bouton pour ajouter une classe
         Menu btnAjouterClasse = new Menu("Ajouter");

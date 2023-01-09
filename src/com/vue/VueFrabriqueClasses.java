@@ -7,13 +7,14 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VueFrabriqueClasses extends FlowPane {
+public class VueFrabriqueClasses extends AnchorPane {
 
     private ArrayList<VueClasse> classesList;
 

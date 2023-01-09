@@ -1,5 +1,6 @@
 package com.vue;
 
+import com.Main;
 import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -21,6 +22,8 @@ public class VueClasse extends FlowPane implements ElementDeVue{
 
     public VueClasse() {
         super();
+        this.setOnMousePressed(Main.controlleurGlisserDeposer);
+        this.setOnMouseDragged(Main.controlleurGlisserDeposer);
         content = new VBox();
         titleLabel = new Label();
         this.attributs = new ArrayList<>();

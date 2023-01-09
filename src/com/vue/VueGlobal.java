@@ -1,5 +1,6 @@
 package com.vue;
 
+import com.controlleur.ControlleurSouris;
 import com.modele.Modele;
 import javafx.scene.layout.BorderPane;
 
@@ -7,6 +8,7 @@ public class VueGlobal extends BorderPane {
     private VueMenu vueMenu;
     private VueDiagramme vueDiagramme;
     private Modele modele;
+
 
     public VueGlobal(Modele modele) {
         this.modele = modele;
