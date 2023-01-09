@@ -4,7 +4,11 @@ import com.modele.Sujet;
 import com.modele.elements.*;
 import javafx.application.Platform;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +21,7 @@ public class VueFrabriqueClasses extends FlowPane {
         classesList = new ArrayList<>();
         List<ClasseInterface> classes = sujet.getClasses();
         this.getChildren().clear();
-        this.setPrefSize(800,600);
+        this.setPrefSize(1000, 1000);
         for (ClasseInterface classe : classes) {
             FabriqueDeVue fabriqueDeVue = new FabriqueVueClasse();
             Group classeVue = new Group();
