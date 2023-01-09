@@ -1,6 +1,5 @@
 package com.vue;
 
-import com.controlleur.ControlleurSouris;
 import com.modele.Modele;
 import javafx.scene.layout.BorderPane;
 
@@ -16,7 +15,7 @@ public class VueGlobal extends BorderPane {
     }
 
     public void initBorderPane() {
-        vueMenu = new VueMenu(modele);
+        vueMenu = new VueMenu(modele, this);
         vueDiagramme = new VueDiagramme();
         modele.enregistrerObservateur(vueDiagramme);
         modele.enregistrerObservateur(vueMenu);
@@ -27,5 +26,10 @@ public class VueGlobal extends BorderPane {
         this.setLeft(vueSelectionRepertoire);
         this.setTop(vueMenu);
         this.setCenter(vueDiagramme);
+    }
+
+    public VueFabriqueClasses getVueFabriqueClasse()
+    {
+        return this.vueDiagramme.getVueFabriqueClasses();
     }
 }

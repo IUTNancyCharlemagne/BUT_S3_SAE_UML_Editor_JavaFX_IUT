@@ -3,18 +3,14 @@ package com.vue;
 import com.modele.Sujet;
 import com.modele.elements.*;
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.WritableImage;
+import javafx.scene.transform.Transform;
 import java.util.ArrayList;
 import java.util.List;
-
-public class VueFrabriqueClasses extends AnchorPane {
-
+public class VueFabriqueClasses extends AnchorPane {
     private ArrayList<VueClasse> classesList;
 
     public void generer(Sujet sujet, List<ClasseInterface> classes) {
@@ -73,10 +69,18 @@ public class VueFrabriqueClasses extends AnchorPane {
             classesList.add(vueElement);
             this.getChildren().add(classeVue);
         }
+
     }
 
     public ArrayList<VueClasse> getClassesList() {
         return classesList;
+    }
+
+
+    public WritableImage exportImage() {
+        SnapshotParameters spa = new SnapshotParameters();
+        spa.setTransform(Transform.scale(3, 3));
+        return this.snapshot(spa, null);
     }
 
 }

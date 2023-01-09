@@ -126,7 +126,7 @@ public class VueContenuAjouterClasse extends ScrollPane {
             vueClasse.setTitle("Nom de la classe");
         }
         ControlleurAjouterClasse controlleurAjouterClasse = new ControlleurAjouterClasse(modele,this);
-        VueFrabriqueClasses fabriqueClasses = new VueFrabriqueClasses();
+        VueFabriqueClasses fabriqueClasses = new VueFabriqueClasses();
         fabriqueClasses.generer(modele, Collections.singletonList(classeCourante));
         if (classeCourante != null) {
             vueClasse = fabriqueClasses.getClassesList().get(0);

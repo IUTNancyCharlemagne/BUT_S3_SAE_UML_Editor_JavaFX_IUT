@@ -24,8 +24,6 @@ public class VueClasse extends FlowPane implements ElementDeVue{
     private final ArrayList<VueElementClasse> attributs;
     private final ArrayList<VueElementClasse> methodes;
     public static final int INSETS = 10;
-    private ArrayList<VueElementClasse> attributs;
-    private ArrayList<VueElementClasse> methodes;
     private List<ImageView> imageViews;
 
     public VueClasse() {
@@ -99,22 +97,6 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         }
         separator.setPadding(new Insets(10, 0, 10, 0));
         content.getChildren().add(separator);
-    }
-
-    public void selectionner() {
-        if (!deplacable) {
-            DropShadow shadow = new DropShadow();
-            shadow.setColor(Color.BLACK);
-            shadow.setBlurType(BlurType.GAUSSIAN);
-            shadow.setRadius(10);
-            shadow.setOffsetX(5);
-            this.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
-            this.setEffect(shadow);
-        }else {
-            this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
-            this.setEffect(null);
-        }
-        this.deplacable = !deplacable;
     }
 
     public void deplacer(double posX, double posY) {
