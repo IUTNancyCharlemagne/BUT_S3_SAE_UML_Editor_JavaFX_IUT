@@ -7,7 +7,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 public class VueAjouterClasse extends Application {
+
+    private final Sujet modele;
     public VueAjouterClasse(Sujet modele) {
+        this.modele = modele;
     }
 
     public void generer() throws Exception {
@@ -16,14 +19,14 @@ public class VueAjouterClasse extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        VueContenuAjouterClasse vueContenuAjouterClasse = new VueContenuAjouterClasse();
+        VueContenuAjouterClasse vueContenuAjouterClasse = new VueContenuAjouterClasse(modele);
+        vueContenuAjouterClasse.genererPrev();
         vueContenuAjouterClasse.generer();
         FlowPane flowPane = new FlowPane();
-        flowPane.setPrefWidth(200);
-        flowPane.setPrefHeight(200);
-        flowPane.setStyle("-fx-background-color: #9b9b9b;");
+        flowPane.setPrefWidth(500);
+        flowPane.setPrefHeight(300);
         flowPane.getChildren().add(vueContenuAjouterClasse);
-        primaryStage.setScene(new Scene(flowPane, 200, 200));
+        primaryStage.setScene(new Scene(flowPane, 500, 300));
         primaryStage.show();
     }
 }

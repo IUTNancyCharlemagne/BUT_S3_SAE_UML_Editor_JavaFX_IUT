@@ -18,14 +18,13 @@ public class ControlleurMenu implements EventHandler<ActionEvent> {
     }
     @Override
     public void handle(ActionEvent event) {
-        System.out.println("ok");
         if (event.getSource() instanceof MenuItem m) {
             if (m.getId().equals("ajouterClasseJava")) {
                 VueAjouterClasse vueAjouterClasse = new VueAjouterClasse(modele);
                 try {
                     vueAjouterClasse.generer();
                 } catch (Exception e) {
-                    System.out.println("Error: " + e.getMessage());
+                    throw new RuntimeException(e);
                 }
             }
         }
