@@ -27,7 +27,7 @@ public class VueMenu extends MenuBar implements Observateur {
         ControlleurSouris controlleurSouris = new ControlleurSouris(modele);
         ControlleurMenu controlleurMenu = new ControlleurMenu(modele, vue);
 
-        SeparatorMenuItem sep = new SeparatorMenuItem();
+        //SeparatorMenuItem sep = new SeparatorMenuItem();
         // On crée un bouton pour chaque action
         // On crée un bouton pour ouvrir un repertoire
         Menu ouvrir = new Menu();
@@ -36,24 +36,27 @@ public class VueMenu extends MenuBar implements Observateur {
         ouvrirLabel.setOnMouseClicked(controlleurSouris);
         ouvrir.setGraphic(ouvrirLabel);
 
-        // on crée un bouton pour ajouter une classe
-        Menu menuAjouter = new Menu("Ajouter");
-        menuAjouter.setId("btnAjouter");
-
-        // > on crée des items pour ajouter des elements
-        MenuItem itemAjouterClasse = new MenuItem("Ajouter classe");
+        // on crée un menu classes
+        Menu menuClasses = new Menu("Classes");
+        menuClasses.setId("btnClasses");
+        // > on crée des items pour ajouter une classe et lister les existantes
+        MenuItem itemAjouterClasse = new MenuItem("+ Ajouter une classe");
         itemAjouterClasse.setId("ajouterClasseJava");
         itemAjouterClasse.setOnAction(controlleurMenu);
 
-        menuAjouter.getItems().addAll(itemAjouterClasse, sep);
+        menuClasses.getItems().addAll(itemAjouterClasse, new SeparatorMenuItem());
 
-        // on crée un bouton pour lister les classes existantes
-        Menu btnListerClasses = new Menu("Classes");
-        btnListerClasses.setId("btnListerClasses");
 
-        // on crée un bouton pour lister les attributs d'une classe
-        Menu btnListerAttributs = new Menu("Attributs");
-        btnListerAttributs.setId("btnListerAttributs");
+        // on crée un menu classes
+        Menu menuAttributs = new Menu("Attributs");
+        menuClasses.setId("btnAttributs");
+        // > on crée des items pour ajouter un attributs et lister les existantes
+        MenuItem itemAjouterAttribut = new MenuItem("+ Ajouter un attribut");
+        itemAjouterAttribut.setId("ajouterAttribut");
+        itemAjouterAttribut.setOnAction(controlleurMenu);
+
+        menuAttributs.getItems().addAll(itemAjouterAttribut, new SeparatorMenuItem());
+
 
         // on crée un bouton pour lister les methodes d'une classe
         Menu btnListerMethodes = new Menu("Méthodes");
@@ -69,7 +72,7 @@ public class VueMenu extends MenuBar implements Observateur {
 
 
         // on crée un menu pour exporter
-        Menu menuExporter = new Menu("Exporter");
+        Menu menuExporter = new Menu("\u2913 Exporter");
         menuExporter.setId("btnExporter");
 
         // > On crée un bouton pour exporter en image
@@ -86,6 +89,6 @@ public class VueMenu extends MenuBar implements Observateur {
         btnEnregistrer.setId("btnEnregistrer");
 
         // On ajoute les boutons à la vue
-        this.getMenus().addAll(ouvrir, menuAjouter, btnListerClasses, btnListerAttributs, btnListerMethodes, btnListerHeritage, btnListerAssociation, menuExporter, btnEnregistrer);
+        this.getMenus().addAll(ouvrir, btnEnregistrer, new Menu("|"), menuClasses, menuAttributs, btnListerMethodes, btnListerHeritage, btnListerAssociation, new Menu("|"), menuExporter);
     }
 }
