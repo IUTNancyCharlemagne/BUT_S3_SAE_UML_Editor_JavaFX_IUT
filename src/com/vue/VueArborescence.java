@@ -28,7 +28,7 @@ public class VueArborescence extends TreeView<String> implements Observateur {
                 String[] fichiers1 = fichiers0[0].split("\\+");
                 TreeItem<String> treeItem;
                 if (fichiers1.length == 1) {
-                    treeItem = new TreeItem<>(dossiers[i]);
+                    treeItem = new TreeItem<>(fichiers1[0]);
                     root.getChildren().add(treeItem);
                     root = treeItem;
                 } else {
