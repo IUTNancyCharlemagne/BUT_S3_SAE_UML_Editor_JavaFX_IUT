@@ -47,10 +47,10 @@ public class VueMenu extends MenuBar implements Observateur {
         menuClasses.getItems().addAll(itemAjouterClasse, new SeparatorMenuItem());
 
 
-        // on crée un menu classes
+        // on crée un menu attributs
         Menu menuAttributs = new Menu("Attributs");
-        menuClasses.setId("btnAttributs");
-        // > on crée des items pour ajouter un attributs et lister les existantes
+        menuAttributs.setId("btnAttributs");
+        // > on crée des items pour ajouter un attribut et lister les existantes
         MenuItem itemAjouterAttribut = new MenuItem("+ Ajouter un attribut");
         itemAjouterAttribut.setId("ajouterAttribut");
         itemAjouterAttribut.setOnAction(controlleurMenu);
@@ -58,9 +58,16 @@ public class VueMenu extends MenuBar implements Observateur {
         menuAttributs.getItems().addAll(itemAjouterAttribut, new SeparatorMenuItem());
 
 
-        // on crée un bouton pour lister les methodes d'une classe
-        Menu btnListerMethodes = new Menu("Méthodes");
-        btnListerMethodes.setId("btnListerMethodes");
+        // on crée un menu methodes
+        Menu menuMethodes = new Menu("Méthodes");
+        menuMethodes.setId("btnMethodes");
+        // > on crée des items pour ajouter une methode et lister les existantes
+        MenuItem itemAjouterMethode = new MenuItem("+ Ajouter une méthode");
+        itemAjouterMethode.setId("ajouterMethode");
+        itemAjouterMethode.setOnAction(controlleurMenu);
+
+        menuMethodes.getItems().addAll(itemAjouterMethode, new SeparatorMenuItem());
+
 
         // on crée un bouton pour lister les héritages et implementations d'une classe
         Menu btnListerHeritage = new Menu("Héritage");
@@ -89,6 +96,6 @@ public class VueMenu extends MenuBar implements Observateur {
         btnEnregistrer.setId("btnEnregistrer");
 
         // On ajoute les boutons à la vue
-        this.getMenus().addAll(ouvrir, btnEnregistrer, new Menu("|"), menuClasses, menuAttributs, btnListerMethodes, btnListerHeritage, btnListerAssociation, new Menu("|"), menuExporter);
+        this.getMenus().addAll(ouvrir, btnEnregistrer, new Menu("|"), menuClasses, menuAttributs, menuMethodes, btnListerHeritage, btnListerAssociation, new Menu("|"), menuExporter);
     }
 }
