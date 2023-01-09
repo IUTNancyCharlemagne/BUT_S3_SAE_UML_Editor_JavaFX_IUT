@@ -25,8 +25,6 @@ public class VueMenu extends MenuBar implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         this.getMenus().clear();
-        ControlleurMenu controlleurMenu = new ControlleurMenu(modele);
-        ControlleurSouris controlleurSouris = new ControlleurSouris(modele);
         // On crée un bouton pour chaque action
         // On crée un bouton pour ouvrir un repertoire
         Menu ouvrir = new Menu();

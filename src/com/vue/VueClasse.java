@@ -1,5 +1,6 @@
 package com.vue;
 
+import com.Main;
 import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -18,21 +19,19 @@ import java.util.List;
 
 public class VueClasse extends FlowPane implements ElementDeVue{
 
+    private final Label titleLabel;
+    private final VBox content;
+    private final ArrayList<VueElementClasse> attributs;
+    private final ArrayList<VueElementClasse> methodes;
     public static final int INSETS = 10;
-    private Label titleLabel;
-    private VBox content;
     private ArrayList<VueElementClasse> attributs;
     private ArrayList<VueElementClasse> methodes;
     private List<ImageView> imageViews;
 
-    private boolean deplacable = false;
-
-    private double posX, posY;
-
-    private double width, height;
-
     public VueClasse() {
         super();
+        this.setOnMousePressed(Main.controlleurGlisserDeposer);
+        this.setOnMouseDragged(Main.controlleurGlisserDeposer);
         content = new VBox();
         titleLabel = new Label();
         this.attributs = new ArrayList<>();
@@ -40,13 +39,12 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         this.setStyle("-fx-background-color: #ffc75a");
         int nbAttributs = attributs.size();
         int nbMethodes = methodes.size();
+        this.setMaxSize(50 + 20 * (nbAttributs + nbMethodes), 50 + 20 * (nbAttributs + nbMethodes));
+        this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+
         imageViews = new ArrayList<>();
-        width = 0;
-        height = 0;
-        posY = 0;
-        posX = 0;
         this.setAlignment(Pos.CENTER);
-        this.setMaxSize(200, 50 + 20 * (nbAttributs + nbMethodes));
         this.setStyle("-fx-border-color: black;" +
                 "-fx-border-radius: 5px;" +
                 "-fx-background-radius: 5px;" +
@@ -80,9 +78,15 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         content.getChildren().add(vueElementClasse);
     }
 
+    public void setPos(double posX, double posY) {
+        this.setLayoutX(posX);
+        this.setLayoutY(posY);
+    }
+
     public void ajouterSeparateur() {
         Separator separator = new Separator(Orientation.HORIZONTAL);
         separator.setHalignment(HPos.CENTER);
+        separator.getStylesheets().add("separator.css");
         // Quand on modifie une classe la taille du conteneur est défini alors on peut directement faire le getWidth
 
         // Quand on génére un diagramme entier la taille du conteneur n'est pas défini alors on fais runLater
@@ -95,27 +99,6 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         }
         separator.setPadding(new Insets(10, 0, 10, 0));
         content.getChildren().add(separator);
-    }
-
-    public void setTaille(double width, double height) {
-        this.width = width;
-        this.height = height;
-    }
-
-    public double getLargeur() {
-        return this.width;
-    }
-
-    public double getHauteur() {
-        return this.height;
-    }
-
-    public double getPosX() {
-        return posX;
-    }
-
-    public double getPosY() {
-        return posY;
     }
 
     public void selectionner() {

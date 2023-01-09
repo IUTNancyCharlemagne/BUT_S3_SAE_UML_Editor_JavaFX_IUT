@@ -3,7 +3,12 @@ package com.vue;
 import com.modele.Sujet;
 import com.modele.elements.*;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +27,6 @@ public class VueFrabriqueClasses extends AnchorPane {
             Group classeVue = new Group();
             VueClasse vueElement = (VueClasse) fabriqueDeVue.creerVueElement();
 
-            vueElement.setPrefSize(200, 200);
             vueElement.setTitle(classe.getNom());
             vueElement.ajouterSeparateur();
             if (sujet.getClasseCourante() != null) {
