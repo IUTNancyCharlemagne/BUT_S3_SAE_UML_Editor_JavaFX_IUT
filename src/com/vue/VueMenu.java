@@ -6,6 +6,7 @@ import com.modele.Sujet;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -59,21 +60,24 @@ public class VueMenu extends MenuBar implements Observateur {
         btnListerAssociation.setId("btnListerAssociation");
 
         // on crée un bouton pour exporter le diagramme
-        Menu btnListerDependance = new Menu("Exporter");
-        btnListerDependance.setId("btnExporter");
+        Menu btnListerExporter = new Menu("Exporter");
+        btnListerExporter.setId("btnExporter");
 
-        // On crée un bouton pour exporter en image
-        Label btnExpImg = new Label("Export image");
-        Menu expImg = new Menu();
+        // > On crée un bouton pour exporter en image
+        Label btnExpImg = new Label("Image (.png)");
+        btnExpImg.setTextFill(Color.web("#0076a3"));
+        MenuItem expImg = new MenuItem("Image (.png)");
         expImg.setGraphic(btnExpImg);
         btnExpImg.setId("btnExpImg");
-        btnExpImg.setOnMouseClicked(controlleurBoutton);
+        //expImg.setOnMouseClicked(controlleurBoutton);
+
+        btnListerExporter.getItems().add(expImg);
 
         // on crée un bouton pour enregistrer le diagramme
         Menu btnEnregistrer = new Menu("Enregistrer");
         btnEnregistrer.setId("btnEnregistrer");
 
         // On ajoute les boutons à la vue
-        this.getMenus().addAll(ouvrir, btnAjouterClasse, btnListerClasses, btnListerAttributs, btnListerMethodes, btnListerHeritage, btnListerAssociation, btnListerDependance, expImg, btnEnregistrer);
+        this.getMenus().addAll(ouvrir, btnAjouterClasse, btnListerClasses, btnListerAttributs, btnListerMethodes, btnListerHeritage, btnListerAssociation, btnListerExporter, btnEnregistrer);
     }
 }
