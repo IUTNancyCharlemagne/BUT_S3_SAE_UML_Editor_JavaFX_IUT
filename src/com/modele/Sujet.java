@@ -21,4 +21,6 @@ public interface Sujet
     void lireDossier();
 
     void ajouterClasse(String classeJava);
+
+    ClasseInterface getClasseCourante();
 }
