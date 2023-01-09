@@ -28,7 +28,6 @@ public class VueFrabriqueClasses extends AnchorPane {
             Group classeVue = new Group();
             VueClasse vueElement = (VueClasse) fabriqueDeVue.creerVueElement();
 
-            vueElement.setPrefSize(200, 200);
             vueElement.setTitle(classe.getNom());
             vueElement.ajouterSeparateur();
 
