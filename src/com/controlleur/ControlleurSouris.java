@@ -23,7 +23,6 @@ public class ControlleurSouris implements EventHandler<MouseEvent> {
         if (event.getSource() instanceof Label b) {
             switch (b.getId()) {
                 case "btnOuvrir" -> {
-                    System.out.println("bli");
                     VueSelectionRepertoire vueDirectorySelector = new VueSelectionRepertoire(modele);
                     vueDirectorySelector.generer();
                     modele.notifierObservateurs();

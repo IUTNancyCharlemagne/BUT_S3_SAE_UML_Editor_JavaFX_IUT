@@ -62,7 +62,7 @@ public class VueMenu extends MenuBar implements Observateur {
         Menu btnListerDependance = new Menu("Exporter");
         btnListerDependance.setId("btnExporter");
 
-        // On crée un bouton pour ouvrir un repertoire
+        // On crée un bouton pour exporter en image
         Label btnExpImg = new Label("Export image");
         Menu expImg = new Menu();
         expImg.setGraphic(btnExpImg);

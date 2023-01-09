@@ -17,12 +17,6 @@ public class Main extends Application {
         Modele modele = new Modele();
         VueGlobal vueGlobal = new VueGlobal(modele);
 
-        //test
-        ImageFormat format = (ImageFormat) ImageFormat.getInstance();
-        VueDiagramme d = new VueDiagramme();
-        format.saveImageFile(d.exportImage(), primaryStage);
-
-
         primaryStage.setTitle("Diagramme de classe");
         primaryStage.setScene(new Scene(vueGlobal, 800, 600));
         primaryStage.show();

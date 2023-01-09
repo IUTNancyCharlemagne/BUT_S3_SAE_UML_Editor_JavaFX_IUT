@@ -2,14 +2,16 @@ package com.vue;
 
 import com.modele.Sujet;
 import com.modele.elements.*;
-import javafx.application.Platform;
 import javafx.scene.Group;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.transform.Transform;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VueFrabriqueClasses extends FlowPane {
+public class VueFabriqueClasses extends FlowPane {
 
     private ArrayList<VueClasse> classesList;
 
@@ -63,5 +65,15 @@ public class VueFrabriqueClasses extends FlowPane {
             classesList.add(vueElement);
             this.getChildren().add(classeVue);
         }
+
     }
+
+
+    public WritableImage exportImage()
+    {
+        SnapshotParameters spa = new SnapshotParameters();
+        spa.setTransform(Transform.scale(3, 3));
+        return this.snapshot(spa, null);
+    }
+
 }

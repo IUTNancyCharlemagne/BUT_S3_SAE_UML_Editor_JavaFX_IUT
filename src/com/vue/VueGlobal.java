@@ -27,8 +27,8 @@ public class VueGlobal extends BorderPane {
         this.setCenter(vueDiagramme);
     }
 
-    public VueDiagramme getVueDiagramme()
+    public VueFabriqueClasses getVueDiagramme()
     {
-        return this.vueDiagramme;
+        return this.vueDiagramme.getVueFabriqueClasses();
     }
 }
