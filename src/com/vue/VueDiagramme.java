@@ -5,11 +5,15 @@ import javafx.application.Platform;
 import javafx.scene.Group;
 
 import com.modele.Sujet;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.transform.Transform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,4 +37,17 @@ public class VueDiagramme extends Pane implements Observateur {
         super();
         this.setStyle("-fx-background-color: #ffffff");
     }
+
+    public WritableImage exportImage()
+    {
+        return this.snapshot(new SnapshotParameters(), null);
+    }
+
+    public void export()
+    {
+        WritableImage img = this.snapshot(new SnapshotParameters(), null);
+    }
+
+
+
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class CompiledPlantUMLFormat implements Format
 {
-    CompiledPlantUMLFormat instance;
+    private static CompiledPlantUMLFormat instance;
 
     private CompiledPlantUMLFormat()
     {
@@ -19,10 +19,9 @@ public class CompiledPlantUMLFormat implements Format
 
     }
 
-    @Override
     public Format getInstance() {
-        if (this.instance == null)
-            this.instance = new CompiledPlantUMLFormat();
-        return this.instance;
+        if (instance == null)
+            instance = new CompiledPlantUMLFormat();
+        return instance;
     }
 }

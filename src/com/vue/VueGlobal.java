@@ -14,7 +14,7 @@ public class VueGlobal extends BorderPane {
     }
 
     public void initBorderPane() {
-        vueMenu = new VueMenu(modele);
+        vueMenu = new VueMenu(modele, this);
         vueDiagramme = new VueDiagramme();
         modele.enregistrerObservateur(vueDiagramme);
         modele.enregistrerObservateur(vueMenu);
@@ -25,5 +25,10 @@ public class VueGlobal extends BorderPane {
         this.setLeft(vueSelectionRepertoire);
         this.setTop(vueMenu);
         this.setCenter(vueDiagramme);
+    }
+
+    public VueDiagramme getVueDiagramme()
+    {
+        return this.vueDiagramme;
     }
 }

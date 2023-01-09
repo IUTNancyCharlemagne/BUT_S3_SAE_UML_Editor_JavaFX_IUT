@@ -12,10 +12,12 @@ import javafx.scene.paint.Color;
 public class VueMenu extends MenuBar implements Observateur {
 
     private Modele modele;
+    private VueGlobal vue;
 
-    public VueMenu(Modele modele) {
+    public VueMenu(Modele modele, VueGlobal vue) {
         super();
         this.modele = modele;
+        this.vue = vue;
         this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
     }
@@ -23,7 +25,7 @@ public class VueMenu extends MenuBar implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         this.getMenus().clear();
-        ControlleurSouris controlleurBoutton = new ControlleurSouris(modele);
+        ControlleurSouris controlleurBoutton = new ControlleurSouris(modele, vue);
         // On crée un bouton pour chaque action
         // On crée un bouton pour ouvrir un repertoire
         Label btnOuvrir = new Label("Ouvrir");
@@ -60,11 +62,18 @@ public class VueMenu extends MenuBar implements Observateur {
         Menu btnListerDependance = new Menu("Exporter");
         btnListerDependance.setId("btnExporter");
 
+        // On crée un bouton pour ouvrir un repertoire
+        Label btnExpImg = new Label("Export image");
+        Menu expImg = new Menu();
+        expImg.setGraphic(btnExpImg);
+        btnExpImg.setId("btnExpImg");
+        btnExpImg.setOnMouseClicked(controlleurBoutton);
+
         // on crée un bouton pour enregistrer le diagramme
         Menu btnEnregistrer = new Menu("Enregistrer");
         btnEnregistrer.setId("btnEnregistrer");
 
         // On ajoute les boutons à la vue
-        this.getMenus().addAll(ouvrir, btnAjouterClasse, btnListerClasses, btnListerAttributs, btnListerMethodes, btnListerHeritage, btnListerAssociation, btnListerDependance, btnEnregistrer);
+        this.getMenus().addAll(ouvrir, btnAjouterClasse, btnListerClasses, btnListerAttributs, btnListerMethodes, btnListerHeritage, btnListerAssociation, btnListerDependance, expImg, btnEnregistrer);
     }
 }
