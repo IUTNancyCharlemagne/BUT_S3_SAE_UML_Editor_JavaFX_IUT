@@ -1,6 +1,7 @@
 package com.vue;
 
 import com.Main;
+import com.controlleur.ControlleurAjouterClasse;
 import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -8,8 +9,7 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -17,14 +17,21 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.Main.controlleurAjouterClasse;
+
 public class VueClasse extends FlowPane implements ElementDeVue{
 
-    private final Label titleLabel;
-    private final VBox content;
-    private final ArrayList<VueElementClasse> attributs;
-    private final ArrayList<VueElementClasse> methodes;
-    public static final int INSETS = 10;
-    private List<ImageView> imageViews;
+    protected final Label titleLabel;
+    protected static VBox content;
+    protected final ArrayList<VueElementClasse> attributs;
+    protected final ArrayList<VueElementClasse> methodes;
+    protected final List<ImageView> imageViews;
+    protected StackPane titlePane;
+
+    private TextField saisiTitre = new TextField();
+    private TextField saisiAccessibilite = new TextField();
+    private TextField saisiType = new TextField();
+    private Boolean etreMethode = false;
 
     public VueClasse() {
         super();
@@ -89,12 +96,8 @@ public class VueClasse extends FlowPane implements ElementDeVue{
 
         // Quand on génére un diagramme entier la taille du conteneur n'est pas défini alors on fais runLater
         Platform.runLater(() -> {
-            System.out.println("width 1 : " + this.getWidth());
             separator.setPrefWidth(this.getWidth());
         });
-        if (separator.getPrefWidth() == 0) {
-            separator.setPrefWidth(this.getWidth());
-        }
         separator.setPadding(new Insets(10, 0, 10, 0));
         content.getChildren().add(separator);
     }
@@ -119,4 +122,94 @@ public class VueClasse extends FlowPane implements ElementDeVue{
     public List<ImageView> getImageView() {
         return imageViews;
     }
+
+    public void ajouterAttribut(String nom) {
+        // Ajout des attributs
+        HBox hbox = new HBox();
+        hbox.getChildren().clear();
+        saisiTitre = new TextField("");
+        saisiAccessibilite = new TextField("");
+        saisiType = new TextField("");
+        etreMethode = false;
+        saisiAccessibilite = textfield("Accessibilité");
+        saisiType = textfield("Type");
+        hbox.getChildren().addAll(saisiAccessibilite, saisiType);
+        int placement = 3;
+        if (nom.equals("Methode")) {
+            placement += attributs.size()+2;
+        }
+        content.getChildren().add(placement,hbox);
+        addNom(hbox,nom);
+        hbox.setAlignment(Pos.CENTER);
+    }
+
+    public void ajouterMethode() {
+        etreMethode = true;
+        ajouterAttribut("Methode");
+    }
+
+    private TextField textfield(String nom) {
+        TextField textField = new TextField();
+        textField.setFocusTraversable(false);
+        textField.setPrefWidth(150);
+        textField.setStyle("-fx-font-size: 15px;" +
+                "-fx-border-radius: 5px;" +
+                "-fx-background-radius: 5px;" +
+                "-fx-label-padding: 0 0 10 0;" +
+                "-fx-padding: 2 0 2 10;");
+        textField.setPromptText(nom);
+        return textField;
+    }
+
+    private ImageView image(String path) {
+        // Ajout du bouton de validation avec une image personnalisée
+        ImageView imageView = new ImageView(path);
+        imageView.setFitHeight(50);
+        imageView.setFitWidth(50);
+        imageView.setStyle("-fx-translate-x: -10");
+        imageView.setId("validerTitre");
+        return imageView;
+    }
+
+    public Boolean getEtreMethode() {
+        if (etreMethode) {
+            etreMethode = false;
+            return true;
+        }
+        return false;
+    }
+
+    public TextField getSaisiTitre() {
+        return saisiTitre;
+    }
+
+    public TextField getSaisiType() {
+        return saisiType;
+    }
+
+    public TextField getSaisiAccessibilite() {
+        return saisiAccessibilite;
+    }
+
+    private void addNom(HBox hBox,String nom) {
+        // Ajout du titre
+        hBox.setAlignment(Pos.CENTER);
+
+        saisiTitre = textfield(nom);
+
+        ImageView imageView = image("check.png");
+        imageView.setId("check");
+        imageView.setOnMouseClicked(controlleurAjouterClasse);
+
+
+        // On ajoute tous les éléments aux la vue
+        hBox.getChildren().addAll(saisiTitre,imageView);
+    }
+
+    public void ajouterTitre() {
+        HBox box = new HBox();
+        addNom(box,"Nom de la classe");
+        content.getChildren().add(box);
+    }
+
 }

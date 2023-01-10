@@ -16,7 +16,6 @@ public class ControlleurSouris implements EventHandler<MouseEvent> {
     private final Sujet modele;
     private final VueGlobal vueGlobal;
 
-
     public ControlleurSouris(Sujet modele, VueGlobal vue) {
         this.modele = modele;
         this.vueGlobal = vue;
