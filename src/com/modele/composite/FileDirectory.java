@@ -2,11 +2,24 @@ package com.modele.composite;
 
 import java.io.*;
 
+/**
+ *
+ */
 public class FileDirectory extends FileComposite{
 
+    /**
+     * Constructeur de FileDirectory qui prend en paramètre un nom et le chemin du fichier
+     * @param name
+     * @param path
+     */
     public FileDirectory(String name, String path){
         super(name, path);
     }
+
+    /**
+     * Méthode list qui permet d'afficher sous forme de liste les éléments d'un dossier.
+     * @return
+     */
     @Override
     public String list() {
         String aff = "";
@@ -42,6 +55,11 @@ public class FileDirectory extends FileComposite{
         return aff;
     }
 
+    /**
+     * Méthode getPackageName qui prend en paramètre un fichier et permet de lire le flux d'entrée de caractère contenu dans le fichier
+     * @param fichier
+     * @return
+     */
     private String getPackageName(File fichier) {
         BufferedReader br;
         try {
@@ -69,6 +87,10 @@ public class FileDirectory extends FileComposite{
         return name;
     }
 
+    /**
+     * Méthode arborescence qui permet d'afficher l'arborescence du contenu d'un dossier
+     * @return
+     */
     @Override
     public String arborescence(){
         String aff = this.name;
