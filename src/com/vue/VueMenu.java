@@ -79,19 +79,20 @@ public class VueMenu extends MenuBar implements Observateur {
         menuHeritageImplem.getItems().addAll(itemAjouterHeritageImplem, new SeparatorMenuItem());
 
 
-        // on crée un bouton pour lister les héritages et implementations d'une classe
-        Menu btnListerHeritage = new Menu("Héritage");
-        btnListerHeritage.setId("btnListerHeritage");
+        // on crée un menu associations
+        Menu menuAssos = new Menu("Associations");
+        menuAssos.setId("btnAssos");
+        // > on crée des items pour ajouter une methode et lister les existantes
+        MenuItem itemAjouterAsso = new MenuItem("+ Ajouter une association");
+        itemAjouterAsso.setId("ajouterAssos");
+        itemAjouterAsso.setOnAction(controlleurMenu);
 
-        // on crée un bouton pour lister les associations d'une classe
-        Menu btnListerAssociation = new Menu("Association");
-        btnListerAssociation.setId("btnListerAssociation");
+        menuAssos.getItems().addAll(itemAjouterAsso, new SeparatorMenuItem());
 
 
         // on crée un menu pour exporter
         Menu menuExporter = new Menu("\u2913 Exporter");
         menuExporter.setId("btnExporter");
-
         // > On crée un bouton pour exporter en image
         MenuItem itemExporterPng = new MenuItem("Image (.png)");
         itemExporterPng.setId("btnExpImg");
@@ -100,12 +101,11 @@ public class VueMenu extends MenuBar implements Observateur {
         menuExporter.getItems().add(itemExporterPng);
 
 
-
         // on crée un bouton pour enregistrer le diagramme
         Menu btnEnregistrer = new Menu("Enregistrer");
         btnEnregistrer.setId("btnEnregistrer");
 
         // On ajoute les boutons à la vue
-        this.getMenus().addAll(ouvrir, btnEnregistrer, new Menu("|"), menuClasses, menuAttributs, menuMethodes, menuHeritageImplem, btnListerAssociation, new Menu("|"), menuExporter);
+        this.getMenus().addAll(ouvrir, btnEnregistrer, new Menu("|"), menuClasses, menuAttributs, menuMethodes, menuHeritageImplem, menuAssos, new Menu("|"), menuExporter);
     }
 }
