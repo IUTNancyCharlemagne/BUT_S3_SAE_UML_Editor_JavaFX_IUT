@@ -74,9 +74,8 @@ public class FileDirectory extends FileComposite{
     public String arborescence(){
         String aff = this.name;
         File monDossier = new File(this.path);
-        List<File> contenuDossier = new ArrayList<>(Arrays.stream(Objects.requireNonNull(monDossier.listFiles())).toList());
-        contenuDossier.sort(Comparator.comparing(File::getName));
-        for (File element : contenuDossier) {
+        File[] contenuDossier = monDossier.listFiles();
+        for (File element : contenuDossier != null ? contenuDossier : new File[0]) {
             FileComposite f;
             if (element.isDirectory()) {
                 f = new FileDirectory("\t" + element.getName(), element.getPath());
