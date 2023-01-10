@@ -17,13 +17,12 @@ public class ControlleurAjouterClasse implements EventHandler<MouseEvent> {
     }
     @Override
     public void handle(MouseEvent event) {
-        //VueClasse vueClasse = vueAjouterClasse.getVueClasse();
+        // Teste si ce qui est cliqué est une image
         if (event.getSource() instanceof ImageView img) {
+            // Teste si l'image est celle de l'ajout de classe
             if (img.getId().equals("AjouterAttribut")) {
-                //ajouterAttribut
                 vueClasse.ajouterAttribut("Attribut");
             } else if (img.getId().equals("AjouterMethode")) {
-                // ajouterMethode
                 vueClasse.ajouterMethode();
             } else if (img.getId().equals("check")) {
                 String titre = vueClasse.getSaisiTitre().getText();

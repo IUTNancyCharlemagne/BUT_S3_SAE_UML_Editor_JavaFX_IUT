@@ -54,6 +54,7 @@ public class VueAjouterClasse extends Application {
                 img.setOnMouseClicked(controlleurAjouterClasse);
             }
         }
+        controlleurAjouterClasse.setVueClasse(demonstration);
         flowPane.getChildren().add(demonstration);
     }
 }
