@@ -1,11 +1,14 @@
 package com.modele.composite;
 
+import java.io.File;
 import java.lang.reflect.*;
 import java.lang.reflect.Constructor;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 public class FileFile extends FileComposite{
 
-    //Constructeur
     /**
      * Constructeur de FileFile qui prend en paramètre le nom et le chemin du fichier
      * @param name le nom de la classe
@@ -28,9 +31,11 @@ public class FileFile extends FileComposite{
     public String list() {
         String aff = "";
         try {
-            aff += this.contenu(this.name);
+            aff += this.contenu(this.path);
         }catch (ClassNotFoundException e){
             aff = ("La classe n'existe pas\n");
+        }catch (MalformedURLException e) {
+            aff = ("L'url n'est pas valide\n");
         }
         return aff;
     }
@@ -41,14 +46,12 @@ public class FileFile extends FileComposite{
      * @return l'affichage console du contenu du fichier .class
      * @throws ClassNotFoundException si la classe n'existe pas
      */
-    public String contenu(String className) throws ClassNotFoundException {
-
+    public String contenu(String className) throws ClassNotFoundException, MalformedURLException {
+        URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{new File(className).toURI().toURL()});
         // On récupère la classe
-        Class<?> classe = Class.forName(className);
+        Class<?> classe = classLoader.loadClass(this.name);
         //On crée un StringBuilder qui contiendra l'affichage de la classe
         StringBuilder aff = new StringBuilder(classe.toGenericString() +"\nNOMCLASSE\n");
-
-
 
         //On récupère la classe mère
         Class<?> superclass = classe.getSuperclass();
@@ -110,7 +113,7 @@ public class FileFile extends FileComposite{
     }
 
     private String affichageParametres(Parameter[] params){
-        StringBuilder aff = new StringBuilder("");
+        StringBuilder aff = new StringBuilder();
         // On récupère le premier paramère du tableau
         aff.append(params[0].getType().getSimpleName()); // On récupère le type du paramètre
         int i = 1;

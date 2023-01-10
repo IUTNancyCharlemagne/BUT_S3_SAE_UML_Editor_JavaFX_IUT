@@ -114,6 +114,7 @@ public class VueClasse extends FlowPane implements ElementDeVue{
     }
 
     public void imageAdd(String id) {
+        // Creation d'un stackPane pour
         StackPane stackPaneImageView = new StackPane();
         ImageView imageView = new ImageView("add.png");
         imageView.setFitHeight(20);
@@ -132,19 +133,27 @@ public class VueClasse extends FlowPane implements ElementDeVue{
     public void ajouterAttribut(String nom) {
         // Ajout des attributs
         HBox hbox = new HBox();
+        // On clear tout les éléments de la hbox pour éviter les doublons
         hbox.getChildren().clear();
-        saisiTitre = new TextField("");
-        saisiAccessibilite = new TextField("");
-        saisiType = new TextField("");
+        // On crée un label pour l'accessibilité
         saisiAccessibilite = textfield("Accessibilité");
+        // On crée un label pour le type
         saisiType = textfield("Type");
+        // On ajoute les éléments dans la hbox
         hbox.getChildren().addAll(saisiAccessibilite, saisiType);
+        // Positionnement des textfiels dans le HBox existant
+        // On get le nombre d'attributs pour les ajouter en dessous
         int placement = attributs.size() + 3;
-        if (nom.equals("Methode")) {
+        // On teste si c'est une méthode
+        if (etreMethode) {
+            // Si oui on on get le nombre de méthodes et on ajoute 2 pour le séparateur et l'icon d'ajout
             placement += methodes.size() + 2;
         }
-        content.getChildren().add(placement,hbox);
+        // On ajoute à l'index specifié la hbox
+        content.getChildren().add(placement, hbox);
+        // On ajoute l'image d'ajout et un textfield pour le nom de l'attribut/méthode
         addNom(hbox,nom);
+        // On met la hbox au centre
         hbox.setAlignment(Pos.CENTER);
     }
 
@@ -154,8 +163,10 @@ public class VueClasse extends FlowPane implements ElementDeVue{
     }
 
     private TextField textfield(String nom) {
+        // Creation d'un textfield pour l'ajouter dans la vue
         TextField textField = new TextField();
         textField.setFocusTraversable(false);
+
         textField.setPrefWidth(150);
         textField.setStyle("-fx-font-size: 15px;" +
                 "-fx-border-radius: 5px;" +

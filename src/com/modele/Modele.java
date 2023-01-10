@@ -2,7 +2,6 @@ package com.modele;
 
 import com.modele.composite.FileDirectory;
 import com.modele.elements.ClasseInterface;
-import com.modele.elements.Element;
 import com.vue.Observateur;
 import com.modele.composite.FileComposite;
 import com.modele.export.Format;
