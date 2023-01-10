@@ -33,7 +33,7 @@ public class Modele implements Sujet
 
     }
 
-    public HashMap<String, ArrayList<String>> getFichiers()
+    public String getFichiers()
     {
         return this.dossier.arborescence();
     }

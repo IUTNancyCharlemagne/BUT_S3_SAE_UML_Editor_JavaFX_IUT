@@ -34,6 +34,5 @@ public abstract class FileComposite{
      *
      * @return l'affichage de l'arborecence du dossier
      */
-    public abstract HashMap<String, ArrayList<String>> arborescence();
 
 }

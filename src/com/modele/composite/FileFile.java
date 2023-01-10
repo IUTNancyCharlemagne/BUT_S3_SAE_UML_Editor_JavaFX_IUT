@@ -19,13 +19,6 @@ public class FileFile extends FileComposite{
     }
 
     @Override
-    public HashMap<String, ArrayList<String>> arborescence() {
-        HashMap<String, ArrayList<String>>aff = new HashMap<>();
-        aff.put(this.name, new ArrayList<>());
-        return aff;
-    }
-
-    @Override
     /**
      * Méthode list qui permet d'afficher le fichier
      * @return l'affichage console du fichier

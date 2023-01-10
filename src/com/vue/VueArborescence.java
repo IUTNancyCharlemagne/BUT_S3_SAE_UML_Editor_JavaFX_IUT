@@ -20,14 +20,8 @@ public class VueArborescence extends TreeView<String> implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         Modele modele = (Modele) sujet;
-        HashMap<String, ArrayList<String>> arborescence = modele.getFichiers();
-        TreeItem<String> root = new TreeItem<>(arborescence.keySet().toArray()[0].toString());
-        System.out.println(arborescence.values());
-        for (String s : arborescence.keySet()) {
-            TreeItem<String> item = new TreeItem<>(s);
-            root.getChildren().add(item);
-        }
-        this.setRoot(root);
+        String arborescence = modele.getFichiers();
+        System.out.println(arborescence);
         /**String[] dossiers = arborescence.split("\\t");
         TreeItem<String> root;
         if (dossiers.length > 1) {

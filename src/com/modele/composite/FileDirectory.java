@@ -69,27 +69,29 @@ public class FileDirectory extends FileComposite{
         return name;
     }
 
-    @Override
-    public HashMap<String, ArrayList<String>> arborescence(){
-        HashMap<String, ArrayList<String>> aff = new HashMap<>();
-        aff.put(this.name, new ArrayList<>());
-        File monDossier = new File(this.path);
-        File[] contenuDossier = monDossier.listFiles();
-        if (contenuDossier != null) {
-            for (File element : contenuDossier) {
-                FileComposite f;
-                if (element.isDirectory()) {
-                    f = new FileDirectory("\t" + element.getName(), element.getPath());
-                    aff.get(this.name).add(f.arborescence().keySet().toArray()[0].toString());
-                    for (String key : f.arborescence().keySet()) {
-                        aff.put(key, f.arborescence().get(key));
-                    }
-                } else {
-                    f = new FileFile(element.getName(), element.getPath());
-                    aff.get(this.name).add(f.arborescence().keySet().toArray()[0].toString());
+
+    public String arborescence(){
+        String path = this.path;
+        String str = "";
+        File file = new File(path);
+        str += file.getName()+"{";
+        File[] fichiers = file.listFiles();
+        for (File f: Objects.requireNonNull(fichiers)) {
+            if (f.isDirectory()) {
+                this.path = f.getPath();
+                str += arborescence();
+                if (str.endsWith(",")) {
+                    str += str.substring(str.length() - 1);
+                }
+                str += "}\n";
+                str += f.getName();
+            } else if (f.isFile()) {
+                if (f.getName().endsWith(".java")) {
+
+                    str += f.getName() + ",";
                 }
             }
         }
-        return aff;
+        return str;
     }
 }
