@@ -4,17 +4,25 @@ import com.controlleur.ControlleurMenu;
 import com.controlleur.ControlleurSouris;
 import com.modele.Modele;
 import com.modele.Sujet;
+import com.modele.elements.*;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+
 import static com.Main.controlleurMenu;
-import static com.Main.controlleurSouris;
 
 public class VueMenu extends MenuBar implements Observateur {
 
     private Modele modele;
     private VueGlobal vue;
+
+    private ArrayList<VueClasse> classesList;
+
 
     public VueMenu(Modele modele, VueGlobal vue) {
         super();
@@ -30,35 +38,18 @@ public class VueMenu extends MenuBar implements Observateur {
         ControlleurSouris controlleurSouris = new ControlleurSouris(modele);
         ControlleurMenu controlleurMenu = new ControlleurMenu(modele, vue);
 
-        //SeparatorMenuItem sep = new SeparatorMenuItem();
+
         // On crée un bouton pour chaque action
         // On crée un bouton pour ouvrir un repertoire
         Menu ouvrir = new Menu();
         Label ouvrirLabel = new Label("Ouvrir");
         ouvrirLabel.setId("btnOuvrir");
         ouvrirLabel.setOnMouseClicked(controlleurSouris);
+        ouvrir.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
         ouvrir.setGraphic(ouvrirLabel);
 
-        // on crée un menu classes
-        Menu menuClasses = new Menu("Classes");
-        menuClasses.setId("btnClasses");
-        // > on crée des items pour ajouter une classe et lister les existantes
-        MenuItem itemAjouterClasse = new MenuItem("+ Ajouter une classe");
-        itemAjouterClasse.setId("ajouterClasseJava");
-        itemAjouterClasse.setOnAction(controlleurMenu);
-
-        menuClasses.getItems().addAll(itemAjouterClasse, new SeparatorMenuItem());
-
-
-        // on crée un menu attributs
-        Menu menuAttributs = new Menu("Attributs");
-        menuAttributs.setId("btnAttributs");
-        // > on crée des items pour ajouter un attribut et lister les existantes
-        MenuItem itemAjouterAttribut = new MenuItem("+ Ajouter un attribut");
-        itemAjouterAttribut.setId("ajouterAttribut");
-        itemAjouterAttribut.setOnAction(controlleurMenu);
-
-        menuAttributs.getItems().addAll(itemAjouterAttribut, new SeparatorMenuItem());
+        Menu menuClasses = genererMenuClasses();
+        Menu menuAttributs = genererMenuAttributs();
 
 
         // on crée un menu methodes
@@ -98,6 +89,7 @@ public class VueMenu extends MenuBar implements Observateur {
         menuExporter.setId("btnExporter");
         // > On crée un bouton pour exporter en image
         MenuItem itemExporterPng = new MenuItem("Image (.png)");
+        itemExporterPng.setAccelerator(new KeyCodeCombination(KeyCode.I, KeyCombination.CONTROL_DOWN));
         itemExporterPng.setId("btnExpImg");
         itemExporterPng.setOnAction(controlleurMenu);
 
@@ -110,5 +102,63 @@ public class VueMenu extends MenuBar implements Observateur {
 
         // On ajoute les boutons à la vue
         this.getMenus().addAll(ouvrir, btnEnregistrer, new Menu("|"), menuClasses, menuAttributs, menuMethodes, menuHeritageImplem, menuAssos, new Menu("|"), menuExporter);
+    }
+
+    /**
+     * Genere le menu classe
+     * @return Menu
+     */
+    private Menu genererMenuClasses() {
+        Menu menuClasses = new Menu("Classes");
+        menuClasses.setId("btnClasses");
+
+        // > on crée des items pour ajouter une classe et lister les existantes
+        MenuItem itemAjouterClasse = new MenuItem("+ Ajouter une classe");
+        itemAjouterClasse.setId("ajouterClasseJava");
+        itemAjouterClasse.setOnAction(controlleurMenu);
+        itemAjouterClasse.setAccelerator(new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN));
+
+        menuClasses.getItems().add(itemAjouterClasse);
+        //menuClasses.setStyle("-fx-height: 1px;");
+
+        //Liste les noms des classes
+        if (!modele.getClasses().isEmpty())
+            menuClasses.getItems().add(new SeparatorMenuItem());
+
+        for (ClasseInterface classe : modele.getClasses()) {
+            if (classe == null) continue;
+            MenuItem item = new MenuItem(classe.getNom());
+            menuClasses.getItems().add(item);
+        }
+        return menuClasses;
+    }
+
+    /**
+     * Genere le menu classe
+     * @return Menu
+     */
+    private Menu genererMenuAttributs() {
+        Menu menuAttributs = new Menu("Attributs");
+        menuAttributs.setId("btnAttributs");
+        // > on crée des items pour ajouter un attribut et lister les existantes
+        MenuItem itemAjouterAttribut = new MenuItem("+ Ajouter un attribut");
+        itemAjouterAttribut.setId("ajouterAttribut");
+        itemAjouterAttribut.setOnAction(controlleurMenu);
+
+        menuAttributs.getItems().add(itemAjouterAttribut);
+
+        //Liste les noms des classes
+        if (!modele.getClasses().isEmpty()) menuAttributs.getItems().add(new SeparatorMenuItem());
+        for (ClasseInterface classe : modele.getClasses()) {
+            if (classe == null) continue;
+            MenuItem item = new MenuItem("---" + classe.getNom() + "---");
+            menuAttributs.getItems().add(item);
+            /*for (Attribut attribut : modele.getClasseCourante().getAttributs()) {
+                if (attribut == null) continue;
+                MenuItem subitem = new MenuItem(attribut.getNom());
+                menuAttributs.getItems().add(subitem);
+            }*/
+        }
+        return menuAttributs;
     }
 }
