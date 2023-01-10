@@ -8,6 +8,7 @@ public class VueGlobal extends BorderPane {
     private VueDiagramme vueDiagramme;
     private Modele modele;
 
+
     public VueGlobal(Modele modele) {
         this.modele = modele;
         initBorderPane();

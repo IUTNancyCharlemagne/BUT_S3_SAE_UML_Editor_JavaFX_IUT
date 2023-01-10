@@ -1,10 +1,8 @@
 package com.vue;
 
-import com.modele.Modele;
-import com.modele.export.ImageFormat;
+import com.modele.Sujet;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -13,10 +11,10 @@ import java.io.File;
 
 public class VueExporter extends Application{
 
-    private Modele modele;
+    private Sujet modele;
     private VueFabriqueClasses vueFabriqueClasses;
 
-    public VueExporter(Modele modele, VueFabriqueClasses vue) {
+    public VueExporter(Sujet modele, VueFabriqueClasses vue) {
         this.modele = modele;
         this.vueFabriqueClasses = vue;
     }

@@ -3,6 +3,8 @@ package com.vue;
 import com.modele.Sujet;
 import com.modele.elements.*;
 import javafx.scene.Group;
+
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.*;
@@ -14,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VueFabriqueClasses extends AnchorPane {
-
     private ArrayList<VueClasse> classesList;
 
     public void generer(Sujet sujet, List<ClasseInterface> classes) {
@@ -27,7 +28,6 @@ public class VueFabriqueClasses extends AnchorPane {
             Group classeVue = new Group();
             VueClasse vueElement = (VueClasse) fabriqueDeVue.creerVueElement();
 
-            vueElement.setPrefSize(200, 200);
             vueElement.setTitle(classe.getNom());
             vueElement.ajouterSeparateur();
             if (sujet.getClasseCourante() != null) {

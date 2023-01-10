@@ -8,6 +8,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
+import static com.Main.controlleurMenu;
+import static com.Main.controlleurSouris;
+
 public class VueMenu extends MenuBar implements Observateur {
 
     private Modele modele;

@@ -5,6 +5,8 @@ import com.vue.VueClasse;
 import com.modele.Modele;
 import com.vue.VueExporter;
 import com.vue.VueGlobal;
+import com.vue.VueExporter;
+import com.vue.VueGlobal;
 import com.vue.VueSelectionRepertoire;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -36,6 +38,4 @@ public class ControlleurSouris implements EventHandler<MouseEvent> {
             }
         }
     }
-
-
 }
