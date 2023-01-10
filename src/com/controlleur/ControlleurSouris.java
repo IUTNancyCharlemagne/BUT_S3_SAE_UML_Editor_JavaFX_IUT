@@ -26,7 +26,7 @@ public class ControlleurSouris implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent event) {
         if (event.getSource() instanceof VueClasse vueClasse) {
-            vueClasse.selectionner();
+            //vueClasse.selectionner();
         }
         else if (event.getSource() instanceof Label l)
         {

@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.scene.Group;
 
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
@@ -44,7 +45,6 @@ public class VueFabriqueClasses extends AnchorPane {
             double randY = random.nextDouble(y.doubleValue());
             int i = 0;
             while (i < classeVue.getChildren().size()) {
-                System.out.println("huh");
                 Node vueClasse = classeVue.getChildren().get(i);
                 if (vueClasse instanceof VueClasse) {
                     if (randX >= vueClasse.getLayoutX() && randX <= vueClasse.getBoundsInParent().getWidth()

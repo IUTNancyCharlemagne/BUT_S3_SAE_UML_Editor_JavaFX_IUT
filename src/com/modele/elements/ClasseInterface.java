@@ -26,7 +26,7 @@ public class ClasseInterface implements Element
         } else {
             this.type = "classe";
         }
-        this.nom = "";
+        //this.nom = nom;
         this.attributs = new ArrayList<>();
         this.methodes = new ArrayList<>();
         this.associations = new ArrayList<>();
