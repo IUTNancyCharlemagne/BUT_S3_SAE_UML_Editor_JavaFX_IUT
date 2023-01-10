@@ -1,21 +1,32 @@
 package com;
 
+import com.controlleur.ControlleurAjouterClasse;
+import com.controlleur.ControlleurGlisserDeposer;
+import com.controlleur.ControlleurMenu;
+import com.controlleur.ControlleurSouris;
 import com.modele.Modele;
-import com.modele.export.Format;
-import com.modele.export.ImageFormat;
 import com.vue.VueGlobal;
-import com.vue.VueSelectionRepertoire;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import com.vue.VueDiagramme;
 
 public class Main extends Application {
+    public static ControlleurSouris controlleurSouris;
+    public static EventHandler<MouseEvent> controlleurGlisserDeposer;
+    public static EventHandler<ActionEvent> controlleurMenu;
+    public static ControlleurAjouterClasse controlleurAjouterClasse;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Modele modele = new Modele();
         VueGlobal vueGlobal = new VueGlobal(modele);
+        controlleurGlisserDeposer = new ControlleurGlisserDeposer();
+        controlleurMenu = new ControlleurMenu(modele, vueGlobal);
+        controlleurSouris = new ControlleurSouris(modele);
+        controlleurAjouterClasse = new ControlleurAjouterClasse(modele);
 
         primaryStage.setTitle("Diagramme de classe");
         primaryStage.setScene(new Scene(vueGlobal, 800, 600));

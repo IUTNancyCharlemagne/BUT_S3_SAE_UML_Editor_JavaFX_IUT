@@ -26,6 +26,7 @@ public class ClasseInterface implements Element
         } else {
             this.type = "classe";
         }
+        //this.nom = nom;
         this.attributs = new ArrayList<>();
         this.methodes = new ArrayList<>();
         this.associations = new ArrayList<>();
@@ -63,7 +64,6 @@ public class ClasseInterface implements Element
 
     public void ajouterAttribut(String attributs) {
         try{
-            System.out.println("Attribut: " + attributs);
             String[] attributSplit = attributs.split("\\n");
             for (String attribut : attributSplit) {
 
@@ -96,7 +96,6 @@ public class ClasseInterface implements Element
         try {
             String[] methodesTab = methodes.split("\\n");
             for (String methode : methodesTab) {
-                System.out.println(methode);
                 String accessibilite = determinerAccessibilite(methode);
                 String nom = methode.split(" ")[1].split("\\(")[0];
                 List<Attribut> attributs = determinerAttributs(methode);

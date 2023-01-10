@@ -1,13 +1,15 @@
 package com.vue;
 
+import com.controlleur.ControlleurMenu;
 import com.controlleur.ControlleurSouris;
 import com.modele.Modele;
 import com.modele.Sujet;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+
+import static com.Main.controlleurMenu;
+import static com.Main.controlleurSouris;
 
 public class VueMenu extends MenuBar implements Observateur {
 
@@ -25,55 +27,88 @@ public class VueMenu extends MenuBar implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         this.getMenus().clear();
-        ControlleurSouris controlleurBoutton = new ControlleurSouris(modele, vue);
+        ControlleurSouris controlleurSouris = new ControlleurSouris(modele);
+        ControlleurMenu controlleurMenu = new ControlleurMenu(modele, vue);
+
+        //SeparatorMenuItem sep = new SeparatorMenuItem();
         // On crée un bouton pour chaque action
         // On crée un bouton pour ouvrir un repertoire
-        Label btnOuvrir = new Label("Ouvrir");
         Menu ouvrir = new Menu();
-        ouvrir.setGraphic(btnOuvrir);
-        btnOuvrir.setId("btnOuvrir");
-        btnOuvrir.setOnMouseClicked(controlleurBoutton);
+        Label ouvrirLabel = new Label("Ouvrir");
+        ouvrirLabel.setId("btnOuvrir");
+        ouvrirLabel.setOnMouseClicked(controlleurSouris);
+        ouvrir.setGraphic(ouvrirLabel);
 
-        // on crée un bouton pour ajouter une classe
-        Menu btnAjouterClasse = new Menu("Ajouter");
-        btnAjouterClasse.setId("btnAjouterClasse");
+        // on crée un menu classes
+        Menu menuClasses = new Menu("Classes");
+        menuClasses.setId("btnClasses");
+        // > on crée des items pour ajouter une classe et lister les existantes
+        MenuItem itemAjouterClasse = new MenuItem("+ Ajouter une classe");
+        itemAjouterClasse.setId("ajouterClasseJava");
+        itemAjouterClasse.setOnAction(controlleurMenu);
 
-        // on crée un bouton pour lister les classes existantes
-        Menu btnListerClasses = new Menu("Classes");
-        btnListerClasses.setId("btnListerClasses");
+        menuClasses.getItems().addAll(itemAjouterClasse, new SeparatorMenuItem());
 
-        // on crée un bouton pour lister les attributs d'une classe
-        Menu btnListerAttributs = new Menu("Attributs");
-        btnListerAttributs.setId("btnListerAttributs");
 
-        // on crée un bouton pour lister les methodes d'une classe
-        Menu btnListerMethodes = new Menu("Méthodes");
-        btnListerMethodes.setId("btnListerMethodes");
+        // on crée un menu attributs
+        Menu menuAttributs = new Menu("Attributs");
+        menuAttributs.setId("btnAttributs");
+        // > on crée des items pour ajouter un attribut et lister les existantes
+        MenuItem itemAjouterAttribut = new MenuItem("+ Ajouter un attribut");
+        itemAjouterAttribut.setId("ajouterAttribut");
+        itemAjouterAttribut.setOnAction(controlleurMenu);
 
-        // on crée un bouton pour lister les héritages et implementations d'une classe
-        Menu btnListerHeritage = new Menu("Héritage");
-        btnListerHeritage.setId("btnListerHeritage");
+        menuAttributs.getItems().addAll(itemAjouterAttribut, new SeparatorMenuItem());
 
-        // on crée un bouton pour lister les associations d'une classe
-        Menu btnListerAssociation = new Menu("Association");
-        btnListerAssociation.setId("btnListerAssociation");
 
-        // on crée un bouton pour exporter le diagramme
-        Menu btnListerDependance = new Menu("Exporter");
-        btnListerDependance.setId("btnExporter");
+        // on crée un menu methodes
+        Menu menuMethodes = new Menu("Méthodes");
+        menuMethodes.setId("btnMethodes");
+        // > on crée des items pour ajouter une methode et lister les existantes
+        MenuItem itemAjouterMethode = new MenuItem("+ Ajouter une méthode");
+        itemAjouterMethode.setId("ajouterMethode");
+        itemAjouterMethode.setOnAction(controlleurMenu);
 
-        // On crée un bouton pour exporter en image
-        Label btnExpImg = new Label("Export image");
-        Menu expImg = new Menu();
-        expImg.setGraphic(btnExpImg);
-        btnExpImg.setId("btnExpImg");
-        btnExpImg.setOnMouseClicked(controlleurBoutton);
+        menuMethodes.getItems().addAll(itemAjouterMethode, new SeparatorMenuItem());
+
+        // on crée un menu héritage/implementation
+        Menu menuHeritageImplem = new Menu("Héritages/Implémentations");
+        menuHeritageImplem.setId("btnHeritageImplem");
+        // > on crée des items pour ajouter une methode et lister les existantes
+        MenuItem itemAjouterHeritageImplem = new MenuItem("+ Ajouter un héritage/implémentation");
+        itemAjouterHeritageImplem.setId("ajouterHeritageImplem");
+        itemAjouterHeritageImplem.setOnAction(controlleurMenu);
+
+        menuHeritageImplem.getItems().addAll(itemAjouterHeritageImplem, new SeparatorMenuItem());
+
+
+        // on crée un menu associations
+        Menu menuAssos = new Menu("Associations");
+        menuAssos.setId("btnAssos");
+        // > on crée des items pour ajouter une methode et lister les existantes
+        MenuItem itemAjouterAsso = new MenuItem("+ Ajouter une association");
+        itemAjouterAsso.setId("ajouterAssos");
+        itemAjouterAsso.setOnAction(controlleurMenu);
+
+        menuAssos.getItems().addAll(itemAjouterAsso, new SeparatorMenuItem());
+
+
+        // on crée un menu pour exporter
+        Menu menuExporter = new Menu("\u2913 Exporter");
+        menuExporter.setId("btnExporter");
+        // > On crée un bouton pour exporter en image
+        MenuItem itemExporterPng = new MenuItem("Image (.png)");
+        itemExporterPng.setId("btnExpImg");
+        itemExporterPng.setOnAction(controlleurMenu);
+
+        menuExporter.getItems().add(itemExporterPng);
+
 
         // on crée un bouton pour enregistrer le diagramme
         Menu btnEnregistrer = new Menu("Enregistrer");
         btnEnregistrer.setId("btnEnregistrer");
 
         // On ajoute les boutons à la vue
-        this.getMenus().addAll(ouvrir, btnAjouterClasse, btnListerClasses, btnListerAttributs, btnListerMethodes, btnListerHeritage, btnListerAssociation, btnListerDependance, expImg, btnEnregistrer);
+        this.getMenus().addAll(ouvrir, btnEnregistrer, new Menu("|"), menuClasses, menuAttributs, menuMethodes, menuHeritageImplem, menuAssos, new Menu("|"), menuExporter);
     }
 }

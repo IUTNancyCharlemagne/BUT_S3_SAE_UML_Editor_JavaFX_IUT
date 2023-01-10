@@ -2,32 +2,63 @@ package com.vue;
 
 import com.modele.Sujet;
 import com.modele.elements.*;
+import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.scene.Group;
+
+import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.transform.Transform;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class VueFabriqueClasses extends FlowPane {
-
+public class VueFabriqueClasses extends AnchorPane {
     private ArrayList<VueClasse> classesList;
 
-    public void generer(Sujet sujet) {
+    public void generer(Sujet sujet, List<ClasseInterface> classes) {
         classesList = new ArrayList<>();
-        List<ClasseInterface> classes = sujet.getClasses();
         this.getChildren().clear();
-        this.setPrefSize(800,600);
+        this.setPrefSize(1000, 1000);
+        Group classeVue = new Group();
         for (ClasseInterface classe : classes) {
+            if (classe == null) continue;
             FabriqueDeVue fabriqueDeVue = new FabriqueVueClasse();
-            Group classeVue = new Group();
             VueClasse vueElement = (VueClasse) fabriqueDeVue.creerVueElement();
 
-            vueElement.setPrefSize(200, 200);
             vueElement.setTitle(classe.getNom());
             vueElement.ajouterSeparateur();
+            if (sujet.getClasseCourante() != null) {
+                vueElement.imageAdd("AjouterAttribut");
+            }
+
+            Random random = new Random();
+            ReadOnlyDoubleProperty x = this.prefWidthProperty();
+            ReadOnlyDoubleProperty y = this.prefHeightProperty();
+            double randX = random.nextDouble(x.doubleValue());
+            double randY = random.nextDouble(y.doubleValue());
+            int i = 0;
+            while (i < classeVue.getChildren().size()) {
+                Node vueClasse = classeVue.getChildren().get(i);
+                if (vueClasse instanceof VueClasse) {
+                    if (randX >= vueClasse.getLayoutX() && randX <= vueClasse.getBoundsInParent().getWidth()
+                    && randY >= vueClasse.getLayoutY() && randY <= vueClasse.getBoundsInParent().getHeight()) {
+                        randX = random.nextDouble();
+                        randY = random.nextDouble();
+                        i = 0;
+                    }else {
+                        i++;
+                    }
+                }
+            }
+            vueElement.setLayoutX(randX);
+            vueElement.setLayoutY(randY);
 
             for (Attribut attribut : classe.getAttributs()) {
                 fabriqueDeVue = new FabriqueVueAttribut();
@@ -40,7 +71,12 @@ public class VueFabriqueClasses extends FlowPane {
 
                 vueElement.setAttribut(vueAttribut);
             }
+
             vueElement.ajouterSeparateur();
+            if (sujet.getClasseCourante() != null) {
+                vueElement.imageAdd("AjouterMethode");
+            }
+
             for (Methode methode : classe.getMethodes()) {
                 fabriqueDeVue = new FabriqueVueMethode();
 
@@ -63,11 +99,13 @@ public class VueFabriqueClasses extends FlowPane {
             }
             classeVue.getChildren().add(vueElement);
             classesList.add(vueElement);
-            this.getChildren().add(classeVue);
         }
-
+        this.getChildren().add(classeVue);
     }
 
+    public ArrayList<VueClasse> getClassesList() {
+        return classesList;
+    }
 
     public WritableImage exportImage()
     {
@@ -75,5 +113,4 @@ public class VueFabriqueClasses extends FlowPane {
         spa.setTransform(Transform.scale(3, 3));
         return this.snapshot(spa, null);
     }
-
 }

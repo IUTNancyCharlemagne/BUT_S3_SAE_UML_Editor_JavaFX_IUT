@@ -13,11 +13,12 @@ public class VueDiagramme extends Pane implements Observateur {
     public void actualiser(Sujet sujet) {
         ScrollPane scrollPane = new ScrollPane();
         this.getChildren().clear();
-        scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
-        vueFabriqueClasses = new VueFabriqueClasses();
-        vueFabriqueClasses.generer(sujet);
+        scrollPane.minWidthProperty().bind(this.widthProperty());
+        scrollPane.minHeightProperty().bind(this.heightProperty());
+        VueFabriqueClasses vueFabriqueClasses = new VueFabriqueClasses();
+        vueFabriqueClasses.generer(sujet, sujet.getClasses());
         scrollPane.setContent(vueFabriqueClasses);
+        vueFabriqueClasses.generer(sujet, sujet.getClasses());
         this.getChildren().add(scrollPane);
     }
 

@@ -15,12 +15,14 @@ public class Modele implements Sujet
 {
     private List<Observateur> observateurs;
     private List<ClasseInterface> elements;
+    private List<ClasseInterface> classesUtilisateurs;
+    private ClasseInterface classeCourante;
     private FileDirectory dossier;
     private Format format;
 
     public Modele()
     {
-        this.observateurs = new ArrayList<Observateur>();
+        this.observateurs = new ArrayList<>();
         this.elements = new ArrayList<>();
     }
 
@@ -104,5 +106,16 @@ public class Modele implements Sujet
         } catch (Exception e) {
             System.out.println("La classe n'existe pas");
         }
+    }
+
+    @Override
+    public void ajouterClasse(String classeJava) {
+        this.classeCourante = new ClasseInterface("");
+        this.classeCourante.setNom(classeJava);
+    }
+
+    @Override
+    public ClasseInterface getClasseCourante() {
+        return classeCourante;
     }
 }

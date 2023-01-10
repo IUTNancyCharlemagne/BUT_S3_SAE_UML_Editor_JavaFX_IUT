@@ -1,6 +1,7 @@
 package com.modele.composite;
 
 import java.io.*;
+import java.util.*;
 
 public class FileDirectory extends FileComposite{
 
@@ -74,15 +75,13 @@ public class FileDirectory extends FileComposite{
         String aff = this.name;
         File monDossier = new File(this.path);
         File[] contenuDossier = monDossier.listFiles();
-        if (contenuDossier != null) {
-            for (File element : contenuDossier) {
-                FileComposite f;
-                if (element.isDirectory()){
-                    f = new FileDirectory("\t"+element.getName() ,element.getPath());
-                }
-                else {
-                    f = new FileFile(element.getName(), element.getPath());
-                }
+        for (File element : contenuDossier != null ? contenuDossier : new File[0]) {
+            FileComposite f;
+            if (element.isDirectory()) {
+                f = new FileDirectory("\t" + element.getName(), element.getPath());
+                aff += f.arborescence() + "SEPARATEUR";
+            } else {
+                f = new FileFile(element.getName(), element.getPath());
                 aff += f.arborescence();
             }
         }
