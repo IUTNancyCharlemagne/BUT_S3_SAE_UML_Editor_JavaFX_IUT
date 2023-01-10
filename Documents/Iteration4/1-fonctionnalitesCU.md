@@ -5,6 +5,6 @@ l'exporter en image, ainsi que déplacer les classes, et leur ajouter un éléme
 
 ## Répartition des tâches
 - Raphaël MANGIN : Pouvoir déplacer les classes + Arborescence
-- Nicolas KUENEMANN : Affichage correct des classes (positionnement) + Ajouter/Modifier un élément
+- Nicolas KUENEMANN : Affichage correct des classes (positionnement) + Ajouter et modifier une classe
 - Hugo COLLIN : Export du diagramme en image + Modification du menu et des controleurs associés
 - Valentin MALAVASI : Javadoc
