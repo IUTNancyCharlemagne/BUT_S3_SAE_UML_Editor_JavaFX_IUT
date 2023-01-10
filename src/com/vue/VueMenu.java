@@ -68,6 +68,16 @@ public class VueMenu extends MenuBar implements Observateur {
 
         menuMethodes.getItems().addAll(itemAjouterMethode, new SeparatorMenuItem());
 
+        // on crée un menu héritage/implementation
+        Menu menuHeritageImplem = new Menu("Héritages/Implémentations");
+        menuHeritageImplem.setId("btnHeritageImplem");
+        // > on crée des items pour ajouter une methode et lister les existantes
+        MenuItem itemAjouterHeritageImplem = new MenuItem("+ Ajouter un héritage/implémentation");
+        itemAjouterHeritageImplem.setId("ajouterHeritageImplem");
+        itemAjouterHeritageImplem.setOnAction(controlleurMenu);
+
+        menuHeritageImplem.getItems().addAll(itemAjouterHeritageImplem, new SeparatorMenuItem());
+
 
         // on crée un bouton pour lister les héritages et implementations d'une classe
         Menu btnListerHeritage = new Menu("Héritage");
@@ -96,6 +106,6 @@ public class VueMenu extends MenuBar implements Observateur {
         btnEnregistrer.setId("btnEnregistrer");
 
         // On ajoute les boutons à la vue
-        this.getMenus().addAll(ouvrir, btnEnregistrer, new Menu("|"), menuClasses, menuAttributs, menuMethodes, btnListerHeritage, btnListerAssociation, new Menu("|"), menuExporter);
+        this.getMenus().addAll(ouvrir, btnEnregistrer, new Menu("|"), menuClasses, menuAttributs, menuMethodes, menuHeritageImplem, btnListerAssociation, new Menu("|"), menuExporter);
     }
 }
