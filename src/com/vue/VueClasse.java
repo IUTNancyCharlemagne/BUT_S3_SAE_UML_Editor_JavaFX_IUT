@@ -4,7 +4,6 @@ import com.Main;
 import com.controlleur.ControlleurAjouterClasse;
 import javafx.application.Platform;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -91,15 +90,22 @@ public class VueClasse extends FlowPane implements ElementDeVue{
     public void ajouterSeparateur() {
         Separator separator = new Separator(Orientation.HORIZONTAL);
         separator.setHalignment(HPos.CENTER);
+        Platform.runLater(() -> separator.setPrefWidth(this.getWidth()));
         separator.getStylesheets().add("separator.css");
-        // Quand on modifie une classe la taille du conteneur est défini alors on peut directement faire le getWidth
-
-        // Quand on génére un diagramme entier la taille du conteneur n'est pas défini alors on fais runLater
-        Platform.runLater(() -> {
-            separator.setPrefWidth(this.getWidth());
-        });
-        separator.setPadding(new Insets(10, 0, 10, 0));
+        separator.setPadding(new javafx.geometry.Insets(1.5, 0, 1.5, 0));
         content.getChildren().add(separator);
+    }
+
+    public double getLargeur() {
+        double[] largeur = new double[1];
+        Platform.runLater(() -> largeur[0] = this.getWidth());
+        return largeur[0];
+    }
+
+    public double getHauteur(){
+        double[] hauteur = new double[1];
+        Platform.runLater(() -> hauteur[0] = this.getHeight());
+        return hauteur[0];
     }
 
     public void deplacer(double posX, double posY) {
