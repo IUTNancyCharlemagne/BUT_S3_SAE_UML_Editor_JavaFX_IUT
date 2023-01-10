@@ -6,7 +6,10 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.TreeMap;
 
 public class VueArborescence extends TreeView<String> implements Observateur {
     public VueArborescence() {
@@ -17,8 +20,15 @@ public class VueArborescence extends TreeView<String> implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         Modele modele = (Modele) sujet;
-        String arborescence = modele.getFichiers();
-        String[] dossiers = arborescence.split("\\t");
+        HashMap<String, ArrayList<String>> arborescence = modele.getFichiers();
+        TreeItem<String> root = new TreeItem<>(arborescence.keySet().toArray()[0].toString());
+        System.out.println(arborescence.values());
+        for (String s : arborescence.keySet()) {
+            TreeItem<String> item = new TreeItem<>(s);
+            root.getChildren().add(item);
+        }
+        this.setRoot(root);
+        /**String[] dossiers = arborescence.split("\\t");
         TreeItem<String> root;
         if (dossiers.length > 1) {
             root = new TreeItem<>(dossiers[0]);
@@ -79,6 +89,6 @@ public class VueArborescence extends TreeView<String> implements Observateur {
         for (int j = 1; j < fichiers.length; j++) {
             TreeItem<String> treeItem1 = new TreeItem<>(fichiers[j]);
             ti.getChildren().add(treeItem1);
-        }
+        }*/
     }
 }

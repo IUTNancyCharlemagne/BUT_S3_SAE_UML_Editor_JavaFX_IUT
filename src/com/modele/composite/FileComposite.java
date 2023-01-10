@@ -1,5 +1,8 @@
 package com.modele.composite;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public abstract class FileComposite{
 
     // Attributs
@@ -28,8 +31,9 @@ public abstract class FileComposite{
 
     /**
      * Methode qui permet de récuperer l'arborescence du dossier recursivement
+     *
      * @return l'affichage de l'arborecence du dossier
      */
-    public abstract String arborescence();
+    public abstract HashMap<String, ArrayList<String>> arborescence();
 
 }

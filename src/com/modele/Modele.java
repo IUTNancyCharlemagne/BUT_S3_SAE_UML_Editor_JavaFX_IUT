@@ -2,14 +2,11 @@ package com.modele;
 
 import com.modele.composite.FileDirectory;
 import com.modele.elements.ClasseInterface;
-import com.modele.elements.Element;
 import com.vue.Observateur;
 import com.modele.composite.FileComposite;
 import com.modele.export.Format;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Modele implements Sujet
 {
@@ -36,7 +33,7 @@ public class Modele implements Sujet
 
     }
 
-    public String getFichiers()
+    public HashMap<String, ArrayList<String>> getFichiers()
     {
         return this.dossier.arborescence();
     }

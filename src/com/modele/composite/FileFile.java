@@ -2,6 +2,9 @@ package com.modele.composite;
 
 import java.lang.reflect.*;
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.TreeMap;
 
 public class FileFile extends FileComposite{
 
@@ -16,8 +19,10 @@ public class FileFile extends FileComposite{
     }
 
     @Override
-    public String arborescence() {
-        return "+"+this.name;
+    public HashMap<String, ArrayList<String>> arborescence() {
+        HashMap<String, ArrayList<String>>aff = new HashMap<>();
+        aff.put(this.name, new ArrayList<>());
+        return aff;
     }
 
     @Override
