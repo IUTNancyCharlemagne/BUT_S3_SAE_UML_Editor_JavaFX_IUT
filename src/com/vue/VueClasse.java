@@ -26,7 +26,6 @@ public class VueClasse extends FlowPane implements ElementDeVue{
     protected final ArrayList<VueElementClasse> attributs;
     protected final ArrayList<VueElementClasse> methodes;
     protected final List<ImageView> imageViews;
-    protected StackPane titlePane;
 
     private TextField saisiTitre = new TextField();
     private TextField saisiAccessibilite = new TextField();
@@ -44,6 +43,7 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         this.setStyle("-fx-background-color: #ffc75a");
         int nbAttributs = attributs.size();
         int nbMethodes = methodes.size();
+        etreMethode = false;
         this.setMaxSize(50 + 20 * (nbAttributs + nbMethodes), 50 + 20 * (nbAttributs + nbMethodes));
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
@@ -130,13 +130,12 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         saisiTitre = new TextField("");
         saisiAccessibilite = new TextField("");
         saisiType = new TextField("");
-        etreMethode = false;
         saisiAccessibilite = textfield("Accessibilité");
         saisiType = textfield("Type");
         hbox.getChildren().addAll(saisiAccessibilite, saisiType);
-        int placement = 3;
+        int placement = attributs.size() + 3;
         if (nom.equals("Methode")) {
-            placement += attributs.size()+2;
+            placement += methodes.size() + 2;
         }
         content.getChildren().add(placement,hbox);
         addNom(hbox,nom);
