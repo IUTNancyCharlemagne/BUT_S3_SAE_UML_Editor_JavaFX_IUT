@@ -1,22 +1,21 @@
 package com.vue;
 
 import com.modele.Sujet;
+import com.modele.export.ImageFormat;
 import javafx.application.Application;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import javax.imageio.ImageIO;
-import java.io.File;
 
 public class VueExporter extends Application{
 
     private Sujet modele;
     private VueFabriqueClasses vueFabriqueClasses;
 
-    public VueExporter(Sujet modele, VueFabriqueClasses vue) {
+    private String typeExport;
+
+    public VueExporter(Sujet modele, VueFabriqueClasses vue, String type) {
         this.modele = modele;
         this.vueFabriqueClasses = vue;
+        this.typeExport = type;
     }
     public void generer() {
         try {
@@ -31,25 +30,7 @@ public class VueExporter extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //ImageFormat format = (ImageFormat) ImageFormat.getInstance();
-        //format.saveImageFile(vueFabriqueClasses.exportImage(), primaryStage);
-        FileChooser fileChooser = new FileChooser();
-
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-                "image files (*.png)", "*.png");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        File file = fileChooser.showSaveDialog(primaryStage);
-
-        if (file != null) {
-            String fileName = file.getName();
-
-            if (!fileName.toUpperCase().endsWith(".PNG")) {
-                file = new File(file.getAbsolutePath() + ".png");
-            }
-
-            ImageIO.write(SwingFXUtils.fromFXImage(vueFabriqueClasses.exportImage(), null),
-                    "png", file);
-        }
+        ImageFormat format = (ImageFormat) ImageFormat.getInstance();
+        format.exporter(vueFabriqueClasses.exportImage(), primaryStage);
     }
 }

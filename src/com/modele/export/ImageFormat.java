@@ -20,15 +20,36 @@ public class ImageFormat implements Format
 
     }
 
-    @Override
-    public void exporter(List<FileComposite> fichiers)
-    {
-
-    }
-
     public static Format getInstance() {
         if (instance == null)
             instance = new ImageFormat();
         return instance;
+    }
+
+    @Override
+    public void exporter(List<FileComposite> fichiers) {
+
+    }
+
+    public void exporter(WritableImage writableImage,
+                         Stage stage) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                "image files (*.png)", "*.png");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null) {
+            String fileName = file.getName();
+
+            if (!fileName.toUpperCase().endsWith(".PNG")) {
+                file = new File(file.getAbsolutePath() + ".png");
+            }
+
+            ImageIO.write(SwingFXUtils.fromFXImage(writableImage, null),
+                    "png", file);
+        }
     }
 }

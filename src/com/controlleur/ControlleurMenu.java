@@ -35,7 +35,7 @@ public class ControlleurMenu implements EventHandler<ActionEvent> {
             }
             else if (m.getId().equals("btnExpImg"))
             {
-                VueExporter vueExporter = new VueExporter((Modele) modele, vueGlobal.getVueFabriqueClasse());
+                VueExporter vueExporter = new VueExporter((Modele) modele, vueGlobal.getVueFabriqueClasse(), "img");
                 vueExporter.generer();
                 modele.notifierObservateurs();
             }
