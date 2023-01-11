@@ -4,7 +4,10 @@ import com.controlleur.ControlleurAjouterClasse;
 import com.modele.Sujet;
 import com.modele.elements.ClasseInterface;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
@@ -22,7 +25,7 @@ public class VueAjouterClasse extends Application {
 
     public VueAjouterClasse(Sujet sujet) {
         modele = sujet;
-        demonstration =  new VueClasse();
+        demonstration = new VueClasse();
         controlleurAjouterClasse.setVueClasse(demonstration);
     }
 
@@ -33,28 +36,38 @@ public class VueAjouterClasse extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         flowPane = new FlowPane();
-        flowPane.setPrefWidth(500);
-        flowPane.setPrefHeight(300);
+        flowPane.setAlignment(Pos.CENTER);
         controlleurAjouterClasse.setVueClasse(demonstration);
+        Button btnAjouter = new Button("Ajouter la classe au diagramme");
+        btnAjouter.setId("ajouterClasseDiag");
+        Button cancel = new Button("Cancel");
+        cancel.setId("cancel");
+        btnAjouter.setOnMouseClicked(controlleurAjouterClasse);
+        cancel.setOnMouseClicked(controlleurAjouterClasse);
+        flowPane.getChildren().addAll(btnAjouter,cancel);
         genererPrev();
-        demonstration.ajouterTitre();
-        primaryStage.setScene(new Scene(flowPane, 500, 300));
+        primaryStage.setScene(new Scene(flowPane, 550, 300));
+        primaryStage.setTitle("Ajouter une classe");
         primaryStage.show();
     }
 
     public static void genererPrev() {
         flowPane.getChildren().remove(demonstration);
         ClasseInterface classeCourante = modele.getClasseCourante();
-
+        if (classeCourante == null) {
+            demonstration = new VueClasse();
+            demonstration.ajouterTitre();
+        }
         VueFabriqueClasses fabriqueClasses = new VueFabriqueClasses();
         fabriqueClasses.generer(modele, Collections.singletonList(classeCourante));
         if (classeCourante != null) {
             demonstration = fabriqueClasses.getClassesList().get(0);
-            for (ImageView img : fabriqueClasses.getClassesList().get(0).getImageView()) {
-                img.setOnMouseClicked(controlleurAjouterClasse);
-            }
         }
         controlleurAjouterClasse.setVueClasse(demonstration);
         flowPane.getChildren().add(demonstration);
+    }
+
+    public static void exit() {
+        Platform.exit();
     }
 }

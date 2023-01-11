@@ -2,6 +2,9 @@ package com.modele.composite;
 
 import java.lang.reflect.*;
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.TreeMap;
 
 public class FileFile extends FileComposite{
 
@@ -13,11 +16,6 @@ public class FileFile extends FileComposite{
      */
     public FileFile(String name, String path){
         super(name, path);
-    }
-
-    @Override
-    public String arborescence() {
-        return "+"+this.name;
     }
 
     @Override
@@ -47,8 +45,6 @@ public class FileFile extends FileComposite{
         Class<?> classe = Class.forName(className);
         //On crée un StringBuilder qui contiendra l'affichage de la classe
         StringBuilder aff = new StringBuilder(classe.toGenericString() +"\nNOMCLASSE\n");
-
-
 
         //On récupère la classe mère
         Class<?> superclass = classe.getSuperclass();

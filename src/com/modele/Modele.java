@@ -1,15 +1,13 @@
 package com.modele;
 
+import com.modele.composite.ArborescenceDossier;
 import com.modele.composite.FileDirectory;
 import com.modele.elements.ClasseInterface;
-import com.modele.elements.Element;
 import com.vue.Observateur;
 import com.modele.composite.FileComposite;
 import com.modele.export.Format;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Modele implements Sujet
 {
@@ -24,6 +22,7 @@ public class Modele implements Sujet
     {
         this.observateurs = new ArrayList<>();
         this.elements = new ArrayList<>();
+        this.classesUtilisateurs = new ArrayList<>();
     }
 
     public void ajouterFichiers()
@@ -36,9 +35,11 @@ public class Modele implements Sujet
 
     }
 
-    public String getFichiers()
+    public ArborescenceDossier getFichiers()
     {
-        return this.dossier.arborescence();
+        ArborescenceDossier arborescence = this.dossier.arborescence();
+        this.dossier.setPath(this.dossier.getFinalPath());
+        return arborescence;
     }
 
 
@@ -73,8 +74,8 @@ public class Modele implements Sujet
      * Permet d'instancier un dossier à partir de son nom et de son chemin
      * @param path le chemin du dossier
      */
-    public void ouvrirDossier(String name, String path){
-        this.dossier = new FileDirectory(name, path);
+    public void ouvrirDossier(String name, String path,String finalPath){
+        this.dossier = new FileDirectory(name, path,finalPath);
         notifierObservateurs();
     }
 
@@ -114,8 +115,21 @@ public class Modele implements Sujet
         this.classeCourante.setNom(classeJava);
     }
 
+    public void ajouterClasseDiagramme() {
+        this.classesUtilisateurs.add(this.classeCourante);
+        this.classeCourante = null;
+    }
+
     @Override
     public ClasseInterface getClasseCourante() {
         return classeCourante;
+    }
+
+    public List<ClasseInterface> getClassesUtilisateurs() {
+        return classesUtilisateurs;
+    }
+
+    public void retirerClasseCourante(){
+        this.classeCourante = null;
     }
 }
