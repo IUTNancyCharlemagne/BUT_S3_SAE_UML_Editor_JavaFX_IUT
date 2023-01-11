@@ -22,6 +22,7 @@ public class Modele implements Sujet
     {
         this.observateurs = new ArrayList<>();
         this.elements = new ArrayList<>();
+        this.classesUtilisateurs = new ArrayList<>();
     }
 
     public void ajouterFichiers()
@@ -114,8 +115,21 @@ public class Modele implements Sujet
         this.classeCourante.setNom(classeJava);
     }
 
+    public void ajouterClasseDiagramme() {
+        this.classesUtilisateurs.add(this.classeCourante);
+        this.classeCourante = null;
+    }
+
     @Override
     public ClasseInterface getClasseCourante() {
         return classeCourante;
+    }
+
+    public List<ClasseInterface> getClassesUtilisateurs() {
+        return classesUtilisateurs;
+    }
+
+    public void retirerClasseCourante(){
+        this.classeCourante = null;
     }
 }

@@ -23,7 +23,7 @@ public class ClasseInterface implements Element
             this.type = "interface";
         } else if (nom.contains("abstract class")) {
             this.type = "abstract class";
-        } else {
+        } else if (nom.contains("class")) {
             this.type = "classe";
         }
         //this.nom = nom;
@@ -97,7 +97,7 @@ public class ClasseInterface implements Element
             String[] methodesTab = methodes.split("\\n");
             for (String methode : methodesTab) {
                 String accessibilite = determinerAccessibilite(methode);
-                String nom = methode.split(" ")[1].split("\\(")[0];
+                String nom = methode.split(" ")[1].split("\\(")[0].replace("  ","");
                 List<Attribut> attributs = determinerAttributs(methode);
                 this.methodes.add(new Methode(nom, "", accessibilite,attributs));
             }

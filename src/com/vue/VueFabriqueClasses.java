@@ -24,19 +24,17 @@ public class VueFabriqueClasses extends AnchorPane {
 
     public void generer(Sujet sujet, List<ClasseInterface> classes) {
         classesList = new ArrayList<>();
-        this.getChildren().clear();
         this.setPrefSize(1000, 1000);
         Group classeVue = new Group();
         for (ClasseInterface classe : classes) {
             if (classe == null) continue;
             FabriqueDeVue fabriqueDeVue = new FabriqueVueClasse();
             VueClasse vueElement = (VueClasse) fabriqueDeVue.creerVueElement();
-
+            vueElement.setType(classe.getType());
             vueElement.setTitle(classe.getNom());
             vueElement.ajouterSeparateur();
-            if (sujet.getClasseCourante() != null) {
-                vueElement.imageAdd("AjouterAttribut");
-            }
+
+            vueElement.imageAdd("AjouterAttribut");
 
             Random random = new Random();
             ReadOnlyDoubleProperty x = this.prefWidthProperty();
@@ -73,9 +71,7 @@ public class VueFabriqueClasses extends AnchorPane {
             }
 
             vueElement.ajouterSeparateur();
-            if (sujet.getClasseCourante() != null) {
-                vueElement.imageAdd("AjouterMethode");
-            }
+            vueElement.imageAdd("AjouterMethode");
 
             for (Methode methode : classe.getMethodes()) {
                 fabriqueDeVue = new FabriqueVueMethode();
@@ -112,5 +108,9 @@ public class VueFabriqueClasses extends AnchorPane {
         SnapshotParameters spa = new SnapshotParameters();
         spa.setTransform(Transform.scale(3, 3));
         return this.snapshot(spa, null);
+    }
+
+    public void clear() {
+        this.getChildren().clear();
     }
 }

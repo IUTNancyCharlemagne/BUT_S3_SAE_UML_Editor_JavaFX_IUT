@@ -46,8 +46,6 @@ public class FileFile extends FileComposite{
         //On crée un StringBuilder qui contiendra l'affichage de la classe
         StringBuilder aff = new StringBuilder(classe.toGenericString() +"\nNOMCLASSE\n");
 
-
-
         //On récupère la classe mère
         Class<?> superclass = classe.getSuperclass();
         if (superclass != null) {

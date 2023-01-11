@@ -22,5 +22,11 @@ public interface  Sujet
 
     void ajouterClasse(String classeJava);
 
+    void ajouterClasseDiagramme();
+
     ClasseInterface getClasseCourante();
+
+    List<ClasseInterface> getClassesUtilisateurs();
+
+    void retirerClasseCourante();
 }

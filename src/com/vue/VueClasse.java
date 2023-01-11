@@ -9,9 +9,15 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +26,12 @@ import static com.Main.controlleurAjouterClasse;
 
 public class VueClasse extends FlowPane implements ElementDeVue{
 
-    protected final Label titleLabel;
-    protected static VBox content;
-    protected final ArrayList<VueElementClasse> attributs;
-    protected final ArrayList<VueElementClasse> methodes;
-    protected final List<ImageView> imageViews;
+    private final Label titleLabel;
+    private static VBox content;
+    private final ArrayList<VueElementClasse> attributs;
+    private final ArrayList<VueElementClasse> methodes;
+    private final List<ImageView> imageViews;
+    private String type;
 
     private TextField saisiTitre = new TextField();
     private TextField saisiAccessibilite = new TextField();
@@ -43,6 +50,7 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         int nbAttributs = attributs.size();
         int nbMethodes = methodes.size();
         etreMethode = false;
+        type = "";
         this.setMaxSize(50 + 20 * (nbAttributs + nbMethodes), 50 + 20 * (nbAttributs + nbMethodes));
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
@@ -68,6 +76,7 @@ public class VueClasse extends FlowPane implements ElementDeVue{
                 "-fx-font-weight: bold;" +
                 "-fx-text-fill: black;" +
                 "-fx-padding: 0 0 0 0;");
+        ajouterType();
         titlePane.getChildren().add(titleLabel);
         content.getChildren().add(titlePane);
     }
@@ -116,11 +125,13 @@ public class VueClasse extends FlowPane implements ElementDeVue{
     public void imageAdd(String id) {
         StackPane stackPaneImageView = new StackPane();
         ImageView imageView = new ImageView("add.png");
+        imageView.setSmooth(true);
         imageView.setFitHeight(20);
         imageView.setFitWidth(20);
-        imageView.setId(id);
+        stackPaneImageView.setId(id);
         stackPaneImageView.getChildren().add(imageView);
         stackPaneImageView.setAlignment(Pos.CENTER_RIGHT);
+        stackPaneImageView.setOnMouseClicked(controlleurAjouterClasse);
         imageViews.add(imageView);
         content.getChildren().add(stackPaneImageView);
     }
@@ -133,13 +144,9 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         // Ajout des attributs
         HBox hbox = new HBox();
         hbox.getChildren().clear();
-        saisiTitre = new TextField("");
-        saisiAccessibilite = new TextField("");
-        saisiType = new TextField("");
         saisiAccessibilite = textfield("Accessibilité");
-        saisiType = textfield("Type");
-        hbox.getChildren().addAll(saisiAccessibilite, saisiType);
-        int placement = attributs.size() + 3;
+        hbox.getChildren().addAll(saisiAccessibilite);
+        int placement = attributs.size() + 4;
         if (nom.equals("Methode")) {
             placement += methodes.size() + 2;
         }
@@ -201,6 +208,8 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         hBox.setAlignment(Pos.CENTER);
 
         saisiTitre = textfield(nom);
+        saisiType = textfield("Type");
+
 
         ImageView imageView = image("check.png");
         imageView.setId("check");
@@ -208,7 +217,7 @@ public class VueClasse extends FlowPane implements ElementDeVue{
 
 
         // On ajoute tous les éléments aux la vue
-        hBox.getChildren().addAll(saisiTitre,imageView);
+        hBox.getChildren().addAll(saisiType,saisiTitre,imageView);
     }
 
     public void ajouterTitre() {
@@ -217,4 +226,38 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         content.getChildren().add(box);
     }
 
+    private void ajouterType() {
+        StackPane type = new StackPane();
+        Circle circle = new Circle(10);
+        circle.setStroke(Color.BLACK);
+        circle.setStrokeWidth(0.2);
+        circle.setEffect(new GaussianBlur(2));
+        Text text = new Text();
+        text.setTextAlignment(TextAlignment.CENTER);
+        text.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        String typeClasse = this.type.toLowerCase();
+        if (typeClasse.equals("interface")) {
+            circle.setFill(Color.BLUEVIOLET);
+            text.setText("I");
+        } else if (typeClasse.equals("classe")) {
+            circle.setFill(Color.GREEN);
+            text.setText("C");
+        } else if (typeClasse.equals("enum")) {
+            circle.setFill(Color.ORANGE);
+            text.setText("E");
+        } else if (typeClasse.equals("annotation")) {
+            circle.setFill(Color.BLUE);
+            text.setText("@");
+        } else if (typeClasse.equals("abstract class")) {
+            circle.setFill(Color.LIGHTGREEN);
+            text.setText("A");
+        }
+        type.getChildren().addAll(circle,text);
+        type.setAlignment(Pos.CENTER);
+        content.getChildren().add(type);
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
