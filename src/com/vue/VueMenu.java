@@ -93,7 +93,12 @@ public class VueMenu extends MenuBar implements Observateur {
         itemExporterPng.setId("btnExpImg");
         itemExporterPng.setOnAction(controlleurMenu);
 
-        menuExporter.getItems().add(itemExporterPng);
+        MenuItem itemExporterPuml = new MenuItem("PlantUML (.plantuml)");
+        itemExporterPuml.setAccelerator(new KeyCodeCombination(KeyCode.U, KeyCombination.CONTROL_DOWN));
+        itemExporterPuml.setId("btnExpPuml");
+        itemExporterPuml.setOnAction(controlleurMenu);
+
+        menuExporter.getItems().addAll(itemExporterPng, itemExporterPuml);
 
 
         // on crée un bouton pour enregistrer le diagramme

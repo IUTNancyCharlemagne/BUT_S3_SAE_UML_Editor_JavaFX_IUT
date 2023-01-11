@@ -2,6 +2,7 @@ package com.vue;
 
 import com.modele.Sujet;
 import com.modele.export.ImageFormat;
+import com.modele.export.PlantUMLFormat;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -30,7 +31,19 @@ public class VueExporter extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        ImageFormat format = (ImageFormat) ImageFormat.getInstance();
-        format.exporter(vueFabriqueClasses.exportImage(), primaryStage);
+        switch (typeExport) {
+            case "png" -> {
+                ImageFormat formatPng = (ImageFormat) ImageFormat.getInstance();
+                formatPng.exporter(vueFabriqueClasses.exportImage(), primaryStage);
+            }
+            case "puml" -> {
+                PlantUMLFormat formatPuml = (PlantUMLFormat) PlantUMLFormat.getInstance();
+                formatPuml.exporter(modele, primaryStage);
+            }
+            default -> {
+                System.err.println("Format inconnu...");
+            }
+        }
+
     }
 }
