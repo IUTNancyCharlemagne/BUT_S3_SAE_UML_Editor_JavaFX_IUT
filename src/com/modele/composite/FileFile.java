@@ -6,7 +6,7 @@ import java.lang.reflect.Constructor;
 public class FileFile extends FileComposite{
 
     /**
-     * Constructeur de FileFile qui prend en paramètre le nom et le chemin du fichier
+     * Constructeur de FileFile qui prend en paramètre les attributs name et path
      * @param name le nom de la classe
      * @param path l'extension du fichier
      */
@@ -80,9 +80,9 @@ public class FileFile extends FileComposite{
             /**
              * On ajoute l'attribut à l'affichage
              */
-            aff.append(Modifier.toString(f.getModifiers())).append(" "); /** On récupère l'accessibilité de l'attribut */
-            aff.append(f.getType().getSimpleName()).append(" "); /** On récupère le type de l'attribut */
-            aff.append(f.getName().replace("java.lang.", "")); /** On récupère le nom de l'attribut */
+            aff.append(Modifier.toString(f.getModifiers())).append(" "); // On récupère l'accessibilité de l'attribut
+            aff.append(f.getType().getSimpleName()).append(" "); // On récupère le type de l'attribut
+            aff.append(f.getName().replace("java.lang.", "")); // On récupère le nom de l'attribut
             aff.append("\n");
         }
         aff.append("ATTRIBUTS");
@@ -96,11 +96,11 @@ public class FileFile extends FileComposite{
             /**
              * On ajoute le constructeur à l'affichage
              */
-            aff.append(Modifier.toString(c.getModifiers())).append(" "); /** On récupère l'accessibilité du constructeur */
-            aff.append(c.getName().replace(classe.getPackageName()+".", "")); /** On récupère le nom du constructeur */
+            aff.append(Modifier.toString(c.getModifiers())).append(" "); // On récupère l'accessibilité du constructeur
+            aff.append(c.getName().replace(classe.getPackageName()+".", "")); // On récupère le nom du constructeur
             aff.append("(");
             if (c.getParameterCount() > 0) {
-                aff.append(this.affichageParametres(c.getParameters())); /** On récupère les paramètres du constructeur */
+                aff.append(this.affichageParametres(c.getParameters())); // On récupère les paramètres du constructeur
             }
             aff.append(")");
             aff.append("\n");
@@ -116,12 +116,12 @@ public class FileFile extends FileComposite{
             /**
              * On ajoute la méthode à l'affichage
              */
-            aff.append(Modifier.toString(m.getModifiers())).append(" "); /** On récupère de l'accessibilité */
-            aff.append(m.getReturnType().getSimpleName()).append(" "); /** On récupère le type de retour */
+            aff.append(Modifier.toString(m.getModifiers())).append(" "); // On récupère de l'accessibilité
+            aff.append(m.getReturnType().getSimpleName()).append(" "); // On récupère le type de retour
             aff.append(m.getName()); // Récupération du nom de la méthode
             aff.append("(");
             if (m.getParameterCount() > 0) {
-                aff.append(this.affichageParametres(m.getParameters())); /** On récupère les paramètres */
+                aff.append(this.affichageParametres(m.getParameters())); // On récupère les paramètres
             }
             aff.append(")");
             aff.append("\n");
@@ -140,7 +140,7 @@ public class FileFile extends FileComposite{
         /**
          * On récupère le premier paramètre du tableau
          */
-        aff.append(params[0].getType().getSimpleName()); /** On récupère le type du paramètre */
+        aff.append(params[0].getType().getSimpleName()); // On récupère le type du paramètre
         int i = 1;
 
         /**
@@ -148,7 +148,7 @@ public class FileFile extends FileComposite{
          */
         while (i < params.length){
             aff.append(", ");
-            aff.append(params[i].getType().getSimpleName()); /** On récupère le type du paramètre */
+            aff.append(params[i].getType().getSimpleName()); // On récupère le type du paramètre
             i++;
         }
         return aff.toString();

@@ -1,67 +1,105 @@
 package com.modele;
 
+import com.modele.composite.FileComposite;
 import com.modele.composite.FileDirectory;
 import com.modele.elements.ClasseInterface;
-import com.modele.elements.Element;
-import com.vue.Observateur;
-import com.modele.composite.FileComposite;
 import com.modele.export.Format;
+import com.vue.Observateur;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ *
+ */
 public class Modele implements Sujet
 {
+    /**
+     * Attributs privés
+     */
     private List<Observateur> observateurs;
     private List<ClasseInterface> elements;
     private FileDirectory dossier;
     private Format format;
 
+    /**
+     * Constructeur de Modele
+     */
     public Modele()
     {
         this.observateurs = new ArrayList<Observateur>();
         this.elements = new ArrayList<>();
     }
 
+    /**
+     * Methode ajouterFichiers
+     */
     public void ajouterFichiers()
     {
 
     }
 
+    /**
+     * Methode deplacerFichier qui prend en paramètre les attributs dx et dy
+     * @param dx
+     * @param dy
+     */
     public void deplacerFichier(int dx, int dy)
     {
 
     }
 
+    /**
+     * Methode getFichiers qui retourne l'attribut arborescence de dossier
+     * @return
+     */
     public String getFichiers()
     {
         return this.dossier.arborescence();
     }
 
 
-
+    /**
+     * Methode supprimierFichiers qui prend en paramètre l'attribut fichier
+     * @param fichier
+     */
     public void supprimerFichiers(FileComposite fichier)
     {
     }
 
 
+    /**
+     * Methode enregistrerObservateur qui prend en paramètre l'attribut obs
+     * @param obs
+     */
     @Override
     public void enregistrerObservateur(Observateur obs) {
         this.observateurs.add(obs);
     }
 
+    /**
+     * * Methode supprimerObservateur qui prend en paramètre l'attribut obs
+     * @param obs
+     */
     @Override
     public void supprimerObservateur(Observateur obs) {
         this.observateurs.remove(obs);
     }
 
+    /**
+     * * Methode notifierObservateur
+     */
     @Override
     public void notifierObservateurs() {
         for (Observateur obs : this.observateurs)
             obs.actualiser(this);
     }
 
+    /**
+     * Methode getClasses qui retourne l'attribut elements
+     * @return
+     */
     @Override
     public List<ClasseInterface> getClasses() {
         return elements;
@@ -76,6 +114,9 @@ public class Modele implements Sujet
         notifierObservateurs();
     }
 
+    /**
+     * Methode lireDossier qui permet de lire un dossier
+     */
     public void lireDossier(){
         try {
             String classes = this.dossier.list();

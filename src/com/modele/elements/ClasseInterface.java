@@ -1,11 +1,16 @@
 package com.modele.elements;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+/**
+ *
+ */
 public class ClasseInterface implements Element
 {
+    /**
+     * Attributs privés
+     */
     private String nom;
 
     private String type;
@@ -16,6 +21,10 @@ public class ClasseInterface implements Element
     private List<Implementation> implementation;
     private boolean selectionne, modification, isInterface;
 
+    /**
+     *
+     * @param nom
+     */
     public ClasseInterface(String nom) {
         String[] nomSplit = nom.split("\\.");
         this.nom = nomSplit[nomSplit.length-1];
@@ -33,34 +42,66 @@ public class ClasseInterface implements Element
         this.heritage = null;
     }
 
+    /**
+     * Methode getNom qui retourne l'attribut nom
+     * @return
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     * Méthode setNom qui prend en paramètre l'attribut nom
+     * @param nom
+     */
     public void setNom(String nom) {
         this.nom = nom;
     }
 
+    /**
+     * Méthode getAttributs qui retourne l'attribut attributs
+     * @return
+     */
     public List<Attribut> getAttributs() {
         return attributs;
     }
 
+    /**
+     * Méthode getMethodes qui retourne l'attribut methodes
+     * @return
+     */
     public List<Methode> getMethodes() {
         return methodes;
     }
 
+    /**
+     * Méthode getAssociations qui retourne l'attribut associations
+     * @return
+     */
     public List<Association> getAssociations() {
         return associations;
     }
 
+    /**
+     * Methode getImplementations qui retourne l'attribut implementation
+     * @return
+     */
     public List<Implementation> getImplementations() {
         return implementation;
     }
 
+    /**
+     * Methode getHeritage qui retourne l'attribut heritage
+     * @return
+     */
     public Heritage getHeritage() {
         return heritage;
     }
 
+    /**
+     * Methode ajouterAttribut qui prend en paramètre l'attribut attributs et qui permet d'ajouter un attribut
+     * @param attributs
+     */
     public void ajouterAttribut(String attributs) {
         try{
             System.out.println("Attribut: " + attributs);
@@ -77,6 +118,10 @@ public class ClasseInterface implements Element
         }
     }
 
+    /**
+     * Methode ajouterMethode qui prend en paramètre l'attribut methodes et qui permet d'ajouter une methode
+     * @param methodes
+     */
     public void ajouterMethode(String methodes) {
         try {
             String[] methodesTab = methodes.split("\\n");
@@ -92,6 +137,10 @@ public class ClasseInterface implements Element
         }
     }
 
+    /**
+     * Methode ajouterConstructeur qui prend en paramètre l'attribut methodes et qui permet d'ajouter une methode
+     * @param methodes
+     */
     public void ajouterConstructeur(String methodes) {
         try {
             String[] methodesTab = methodes.split("\\n");
@@ -107,6 +156,11 @@ public class ClasseInterface implements Element
         }
     }
 
+    /**
+     * Methode determinerAttributs qui prend en paramètre l'attribut methode et qui permet de retourner une liste d'attributs
+     * @param methode
+     * @return
+     */
     private List<Attribut> determinerAttributs(String methode) {
         String[] parametres = methode.split("\\(")[1].replace(")", "").split(",");
         List<Attribut> parametresList = new ArrayList<>();
@@ -117,6 +171,11 @@ public class ClasseInterface implements Element
         return parametresList;
     }
 
+    /**
+     * Methode determinerAccessibilite qui prend en paramètre l'attribut element et qui permet de retourner l'accessibilité d'un élément
+     * @param element
+     * @return
+     */
     private String determinerAccessibilite(String element){
         if (element.contains("public")){
             return "public";
@@ -129,59 +188,127 @@ public class ClasseInterface implements Element
         }
     }
 
+    /**
+     * Methode ajouterAssociation qui prend en paramètre l'attribut association et qui permet d'ajouter une association
+     * @param association
+     */
     public void ajouterAssociation(Association association) {
         this.associations.add(association);
     }
 
+    /**
+     * Methode ajouterImplementation qui prend en paramètre l'attribut implementation et qui permet d'ajouter une implementation
+     * @param implementation
+     */
     public void ajouterImplementation(String implementation) {
         //this.implementation.add(implementation);
     }
 
+    /**
+     * Methode ajouterHeritage qui prend en paramètre l'attribut heritage
+     * @param heritage
+     */
     public void ajouterHeritage(String heritage) {
         //this.heritage = heritage;
     }
 
+    /**
+     * Methode isInterface qui retourne l'attribut isInterface
+     * @return
+     */
     public boolean isInterface() {
         return isInterface;
     }
 
+    /**
+     * Methode setInterface qui prend en paramètre l'attribut isInterface
+     * @param isInterface
+     */
     public void setInterface(boolean isInterface) {
         this.isInterface = isInterface;
     }
 
+    /**
+     * Methode modifierAttribut qui permet de modifier un attribut
+     * @param attribut
+     * @param visibilite
+     * @param type
+     * @param nom
+     */
     public void modifierAttribut(Attribut attribut, String visibilite, String type, String nom)
     {
         attribut.modifier(visibilite, type, nom);
     }
 
+    /**
+     * Methode modifierMethode qui permet de modifier une methode
+     * @param methode
+     * @param visibilite
+     * @param type
+     * @param nom
+     * @param parametres
+     */
     public void modifierMethode(Methode methode, String visibilite, String type, String nom, List<Attribut> parametres)
     {
         methode.modifier(visibilite, type, nom, parametres);
     }
 
+    /**
+     * Methode modifierHeritage qui permet de modifier un heritage à partir de l'attribut heritage
+     * @param heritage
+     * @param initClasse
+     * @param destinationClasse
+     */
     public void modifierHeritage(Heritage heritage, ClasseInterface initClasse, ClasseInterface destinationClasse)
     {
         heritage.modifier(initClasse, destinationClasse);
     }
 
+    /**
+     * Methode modifierHeritage qui permet de modifier un heritage à partir de l'attribut implementation
+     * @param implementation
+     * @param initClasse
+     * @param destinationClasse
+     */
     public void modifierHeritage(Implementation implementation, ClasseInterface initClasse, ClasseInterface destinationClasse)
     {
         implementation.modifier(initClasse, destinationClasse);
     }
 
+    /**
+     * Methode modifierAssociation qui permet de modifier une association
+     * @param association
+     * @param visibilite
+     * @param nom
+     * @param initClasse
+     * @param destinationClasse
+     */
     public void modifierAssociation(Association association, String visibilite, String nom, ClasseInterface initClasse, ClasseInterface destinationClasse)
     {
         association.modifier(visibilite, nom, initClasse, destinationClasse);
     }
 
+    /**
+     * Methode getType qui retourne l'attribut type
+     * @return
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * Methode setType qui prend en paramètre l'attribut type
+     * @param type
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     * Methode modifier qui prend en paramètre les attributs nom et type
+     * @param nom
+     * @param type
+     */
     public void modifier(String nom, String type)
     {
         this.nom = nom;

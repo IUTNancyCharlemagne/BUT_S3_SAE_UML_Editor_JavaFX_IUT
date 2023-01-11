@@ -20,7 +20,7 @@ public class ControlleurSouris implements EventHandler<MouseEvent> {
     private final VueGlobal vueGlobal;
 
     /**
-     * Constructeur de ControlleurSouris qui prend en paramètre le modèle et la vue
+     * Constructeur de ControlleurSouris qui prend en paramètre les attributs modèle et vue
      * @param modele
      * @param vue
      */
