@@ -14,6 +14,7 @@ public class ControlleurGlisserDeposer implements EventHandler<MouseEvent> {
         if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED){
             mouseX = mouseEvent.getSceneX();
             mouseY = mouseEvent.getSceneY();
+            p.toFront();
         } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED){
             double deltaX = mouseEvent.getSceneX() - mouseX;
             double deltaY = mouseEvent.getSceneY() - mouseY;
