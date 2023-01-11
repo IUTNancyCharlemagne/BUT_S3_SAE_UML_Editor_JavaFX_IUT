@@ -35,6 +35,7 @@ public class VueMenu extends MenuBar implements Observateur {
         // On crée un bouton pour ouvrir un repertoire
         Menu ouvrir = new Menu();
         Label ouvrirLabel = new Label("Ouvrir");
+        ouvrirLabel.setPrefSize(35, 15);
         ouvrirLabel.setId("btnOuvrir");
         ouvrirLabel.setOnMouseClicked(controlleurSouris);
         ouvrir.setGraphic(ouvrirLabel);
@@ -108,7 +109,10 @@ public class VueMenu extends MenuBar implements Observateur {
         Menu btnEnregistrer = new Menu("Enregistrer");
         btnEnregistrer.setId("btnEnregistrer");
 
+        Menu separator = new Menu("|");
+        separator.setDisable(true);
+
         // On ajoute les boutons à la vue
-        this.getMenus().addAll(ouvrir, btnEnregistrer, new Menu("|"), menuClasses, menuAttributs, menuMethodes, menuHeritageImplem, menuAssos, new Menu("|"), menuExporter);
+        this.getMenus().addAll(ouvrir, btnEnregistrer, separator, menuClasses, menuAttributs, menuMethodes, menuHeritageImplem, menuAssos, separator, menuExporter);
     }
 }

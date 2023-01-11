@@ -16,9 +16,10 @@ public class VueDiagramme extends Pane implements Observateur {
         scrollPane.minWidthProperty().bind(this.widthProperty());
         scrollPane.minHeightProperty().bind(this.heightProperty());
         VueFabriqueClasses vueFabriqueClasses = new VueFabriqueClasses();
-        vueFabriqueClasses.generer(sujet, sujet.getClasses());
         scrollPane.setContent(vueFabriqueClasses);
+        vueFabriqueClasses.clear();
         vueFabriqueClasses.generer(sujet, sujet.getClasses());
+        vueFabriqueClasses.generer(sujet, sujet.getClassesUtilisateurs());
         this.getChildren().add(scrollPane);
     }
 
