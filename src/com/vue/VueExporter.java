@@ -22,7 +22,7 @@ public class VueExporter extends Application{
         try {
             start(new Stage());
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.err.println("Erreur: " + e.getMessage());
         }
     }
     public static void main(String[] args) {

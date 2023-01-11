@@ -1,15 +1,14 @@
 package com.modele.export;
 
-import com.modele.Modele;
 import com.modele.Sujet;
 import com.modele.composite.FileComposite;
 import com.modele.elements.Attribut;
 import com.modele.elements.ClasseInterface;
-import javafx.embed.swing.SwingFXUtils;
+import com.modele.elements.ElementVisibilite;
+import com.modele.elements.Methode;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -17,7 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class PlantUMLFormat implements Format
+public class PlantUMLFormat implements Format //extends Format
 {
     private static PlantUMLFormat instance;
 
@@ -39,24 +38,9 @@ public class PlantUMLFormat implements Format
 
     public void exporter(Sujet modele, Stage stage)
     {
-        StringBuilder plantUML = new StringBuilder("@startuml\n");
-        List<ClasseInterface> classes = modele.getClasses();
-        for (ClasseInterface classe : classes) {
-            plantUML.append(classe.getNom()).append(" {\n");
-            for (Attribut attribut : classe.getAttributs()) {
-                plantUML.append("\t").append(getVisibiliteUml(attribut)).append(" ").append(attribut.getNom()).append("\n");
-            }
-            plantUML.append(classe.getAttributs()).append("\n");
-            //plantUML.append(classe.getOperations()).append("\n");
-            plantUML.append("}\n");
-        }
-        plantUML.append("@enduml");
+        String plantUML = genererPlantUML(modele);
 
-
-
-        //--------------------
         FileChooser fileChooser = new FileChooser();
-
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
                 "PlantUML files (*.plantuml)", "*.plantuml");
         fileChooser.getExtensionFilters().add(extFilter);
@@ -71,7 +55,7 @@ public class PlantUMLFormat implements Format
             }
 
             try {
-                Files.writeString(Path.of(file.getAbsolutePath() + ".plantuml"), plantUML.toString(), StandardCharsets.UTF_8);
+                Files.writeString(Path.of(file.getAbsolutePath()), plantUML, StandardCharsets.UTF_8);
             }
             catch (IOException ex) {
                 System.err.println("Chemin invalide");
@@ -80,9 +64,32 @@ public class PlantUMLFormat implements Format
         //--------------------------------------------------------------------------------
     }
 
+    private String genererPlantUML(Sujet modele) {
+        StringBuilder plantUMLBuilder = new StringBuilder("@startuml\n");
+        List<ClasseInterface> classes = modele.getClasses();
+        for (ClasseInterface classe : classes) {
+            plantUMLBuilder.append("class ").append(classe.getNom()).append("{\n");
+            for (Attribut attribut : classe.getAttributs()) {
+                plantUMLBuilder.append("\t").append(getVisibiliteUml(attribut)).append(" ").append(attribut.getNom()).append(" : ").append(attribut.getType()).append("\n");
+            }
+            for (Methode methode : classe.getMethodes()) {
+                plantUMLBuilder.append("\t").append(getVisibiliteUml(methode)).append(" ").append(methode.getNom()).append("(");
+                for (Attribut parametre : methode.getParametres()) {
+                    plantUMLBuilder.append(parametre.getType()).append(parametre.getNom()).append(")");
+                }
+                plantUMLBuilder.append(") : ").append(methode.getType()).append("\n");
+            }
+            //plantUMLBuilder.append(classe.getAttributs()).append("\n");
+            //plantUML.append(classe.getOperations()).append("\n");
+            plantUMLBuilder.append("}\n");
+        }
+        plantUMLBuilder.append("@enduml");
+        return plantUMLBuilder.toString();
+    }
 
-    public static String getVisibiliteUml(Attribut attribut) {
-        return switch (attribut.getVisibilite()) {
+
+    public static String getVisibiliteUml(ElementVisibilite e) {
+        return switch (e.getVisibilite()) {
             case "public" -> "+";
             case "private" -> "-";
             case "protected" -> "#";

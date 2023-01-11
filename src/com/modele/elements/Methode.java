@@ -2,16 +2,13 @@ package com.modele.elements;
 
 import java.util.List;
 
-public class Methode
+public class Methode extends ElementVisibilite
 {
-    private String nom, type;
-    private String visibilite;
+    private String type;
     private List<Attribut> parametres;
 
     public Methode(String nom, String type, String visibilite, List<Attribut> parametres) {
-        this.nom = nom;
-        this.type = type;
-        this.visibilite = visibilite;
+        super(nom, type, visibilite);
         this.parametres = parametres;
     }
 

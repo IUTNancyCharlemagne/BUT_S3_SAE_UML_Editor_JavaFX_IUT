@@ -23,6 +23,8 @@ public class VueMenu extends MenuBar implements Observateur {
 
     private ArrayList<VueClasse> classesList;
 
+    private ControlleurSouris controlleurSouris;
+
 
     public VueMenu(Modele modele, VueGlobal vue) {
         super();
@@ -30,13 +32,14 @@ public class VueMenu extends MenuBar implements Observateur {
         this.vue = vue;
         this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
+        controlleurSouris = new ControlleurSouris(modele);
+        ControlleurMenu controlleurMenu = new ControlleurMenu(modele, vue);
     }
 
     @Override
     public void actualiser(Sujet sujet) {
         this.getMenus().clear();
-        ControlleurSouris controlleurSouris = new ControlleurSouris(modele);
-        ControlleurMenu controlleurMenu = new ControlleurMenu(modele, vue);
+
 
 
         // On crée un bouton pour chaque action
@@ -143,7 +146,7 @@ public class VueMenu extends MenuBar implements Observateur {
     }
 
     /**
-     * Genere le menu classe
+     * Genere le menu attributs
      * @return Menu
      */
     private Menu genererMenuAttributs() {
