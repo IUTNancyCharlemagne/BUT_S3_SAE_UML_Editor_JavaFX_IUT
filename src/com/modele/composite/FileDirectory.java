@@ -78,7 +78,6 @@ public class FileDirectory extends FileComposite{
         ArborescenceDossier arborescenceDossier = new ArborescenceDossier(file.getName());
         for (File f: Objects.requireNonNull(fichiers)) {
             if (f.isDirectory()) {
-                System.out.println(f.getName());
                 this.path = f.getPath();
                 arborescenceDossier.ajouterDossier(arborescence());
             } else if (f.isFile()) {
