@@ -16,7 +16,7 @@ public interface Sujet
 
     List<ClasseInterface> getClasses();
 
-    void ouvrirDossier(String name, String path);
+    void ouvrirDossier(String name, String path,String finalPath);
 
     void lireDossier();
 

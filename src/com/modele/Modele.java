@@ -1,5 +1,6 @@
 package com.modele;
 
+import com.modele.composite.ArborescenceDossier;
 import com.modele.composite.FileDirectory;
 import com.modele.elements.ClasseInterface;
 import com.vue.Observateur;
@@ -33,9 +34,11 @@ public class Modele implements Sujet
 
     }
 
-    public String getFichiers()
+    public ArborescenceDossier getFichiers()
     {
-        return this.dossier.arborescence();
+        ArborescenceDossier arborescence = this.dossier.arborescence();
+        this.dossier.setPath(this.dossier.getFinalPath());
+        return arborescence;
     }
 
 
@@ -70,8 +73,8 @@ public class Modele implements Sujet
      * Permet d'instancier un dossier à partir de son nom et de son chemin
      * @param path le chemin du dossier
      */
-    public void ouvrirDossier(String name, String path){
-        this.dossier = new FileDirectory(name, path);
+    public void ouvrirDossier(String name, String path,String finalPath){
+        this.dossier = new FileDirectory(name, path,finalPath);
         notifierObservateurs();
     }
 

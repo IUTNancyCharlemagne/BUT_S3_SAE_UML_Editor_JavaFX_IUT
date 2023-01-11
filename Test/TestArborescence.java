@@ -3,7 +3,7 @@ import com.modele.composite.FileDirectory;
 
 public class TestArborescence {
     public static void main(String[] args) {
-        FileDirectory root = new FileDirectory("","./src/com/");
+        FileDirectory root = new FileDirectory("","./src/com/","./src/com/");
         System.out.println(root.arborescence());
     }
 }
