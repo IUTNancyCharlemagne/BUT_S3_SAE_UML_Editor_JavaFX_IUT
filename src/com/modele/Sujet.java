@@ -6,7 +6,7 @@ import com.vue.Observateur;
 
 import java.util.List;
 
-public interface Sujet
+public interface  Sujet
 {
     public void enregistrerObservateur(Observateur obs);
 
