@@ -9,11 +9,22 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
+/**
+ *
+ */
 public class VueMenu extends MenuBar implements Observateur {
 
+    /**
+     * Attributs privés
+     */
     private Modele modele;
     private VueGlobal vue;
 
+    /**
+     * Constructeur de VueMenu qui prend en paramètre les attributs modele et vue
+     * @param modele
+     * @param vue
+     */
     public VueMenu(Modele modele, VueGlobal vue) {
         super();
         this.modele = modele;
@@ -22,6 +33,10 @@ public class VueMenu extends MenuBar implements Observateur {
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
     }
 
+    /**
+     * Methode actualiser qui prend en paramètre l'attribut sujet
+     * @param sujet
+     */
     @Override
     public void actualiser(Sujet sujet) {
         this.getMenus().clear();

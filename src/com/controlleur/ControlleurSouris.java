@@ -14,7 +14,7 @@ import javafx.scene.input.MouseEvent;
 public class ControlleurSouris implements EventHandler<MouseEvent> {
 
     /**
-     * attributs privés qu'on ne peut pas modifier (final)
+     * attributs privés et final
      */
     private final Modele modele;
     private final VueGlobal vueGlobal;
@@ -37,13 +37,13 @@ public class ControlleurSouris implements EventHandler<MouseEvent> {
     public void handle(MouseEvent event) {
         if (event.getSource() instanceof Label b) {
             switch (b.getId()) {
-                /**Instruction 1 */
+                //Instruction 1
                 case "btnOuvrir" -> {
                     VueSelectionRepertoire vueDirectorySelector = new VueSelectionRepertoire(modele);
                     vueDirectorySelector.generer();
                     modele.notifierObservateurs();
                 }
-                /**Instruction 2 */
+                //Instruction 2
                 case "btnExpImg" -> {
                     VueExporter vueExporter = new VueExporter(modele, vueGlobal.getVueFabriqueClasse());
                     vueExporter.generer();

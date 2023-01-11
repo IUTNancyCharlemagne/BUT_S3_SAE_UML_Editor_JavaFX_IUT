@@ -4,15 +4,24 @@ import com.modele.Modele;
 import com.modele.Sujet;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.layout.VBox;
 
 import java.util.Arrays;
 
+/**
+ *
+ */
 public class VueArborescence extends TreeView<String> implements Observateur {
+    /**
+     * Constructeur de VueArborescence
+     */
     public VueArborescence() {
         super();
     }
 
+    /**
+     * Methode actualiser qui prend en parametre l'attribut sujet et qui permet d'actualiser l'arborescence
+     * @param sujet
+     */
     @Override
     public void actualiser(Sujet sujet) {
         Modele modele = (Modele) sujet;

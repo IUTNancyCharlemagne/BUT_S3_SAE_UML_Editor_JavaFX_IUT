@@ -8,11 +8,18 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+/**
+ *
+ */
 class MethodeTest
 {
     Methode m;
     List<Attribut> params;
 
+    /**
+     * setUp
+     */
     @BeforeEach
     void setUp()
     {
@@ -22,6 +29,9 @@ class MethodeTest
         m = new Methode("test", "int", "public", params);
     }
 
+    /**
+     * Test du constructeur
+     */
     @Test
     public void test_constructeur_ok()
     {
@@ -32,6 +42,9 @@ class MethodeTest
         assertEquals(m.getParametres(), params, "doit avoir les memes parametres");
     }
 
+    /**
+     * Test de modification
+     */
     @Test
     void test_modifier()
     {

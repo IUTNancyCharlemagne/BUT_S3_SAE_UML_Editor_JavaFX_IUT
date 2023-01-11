@@ -1,23 +1,35 @@
 package com.vue;
 
 import com.modele.Modele;
-import com.modele.Sujet;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+
 import java.io.File;
 
+/**
+ *
+ */
 public class VueSelectionRepertoire extends Application{
 
+    /**
+     * Attributs privés
+     */
     private Modele modele;
     private String path;
     private String name;
 
+    /**
+     * Constructeur de VueSelectionRepertoire qui prend en paramètre l'attribut modele
+     * @param modele
+     */
     public VueSelectionRepertoire(Modele modele) {
         this.modele = modele;
     }
+
+    /**
+     * Methode generer
+     */
     public void generer() {
         try {
             start(new Stage());
@@ -29,6 +41,11 @@ public class VueSelectionRepertoire extends Application{
         launch(args);
     }
 
+    /**
+     * Methode start
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Selectionner un repertoire");

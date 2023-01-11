@@ -1,17 +1,20 @@
 package com;
 
 import com.modele.Modele;
-import com.modele.export.Format;
-import com.modele.export.ImageFormat;
 import com.vue.VueGlobal;
-import com.vue.VueSelectionRepertoire;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import com.vue.VueDiagramme;
 
+/**
+ *
+ */
 public class Main extends Application {
+    /**
+     * Methode start
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         Modele modele = new Modele();

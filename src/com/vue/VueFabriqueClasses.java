@@ -11,10 +11,20 @@ import javafx.scene.transform.Transform;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class VueFabriqueClasses extends FlowPane {
 
+    /**
+     * Attributs pruvés
+     */
     private ArrayList<VueClasse> classesList;
 
+    /**
+     * Methode generer qui prend en paramètre l'attribut sujet et qui permet de générer une vue de classes
+     * @param sujet
+     */
     public void generer(Sujet sujet) {
         classesList = new ArrayList<>();
         List<ClasseInterface> classes = sujet.getClasses();
@@ -68,7 +78,10 @@ public class VueFabriqueClasses extends FlowPane {
 
     }
 
-
+    /**
+     * Methode exportImage
+     * @return
+     */
     public WritableImage exportImage()
     {
         SnapshotParameters spa = new SnapshotParameters();

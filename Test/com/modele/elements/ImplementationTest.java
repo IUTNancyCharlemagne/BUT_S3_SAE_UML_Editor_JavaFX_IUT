@@ -5,11 +5,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ *
+ */
 class ImplementationTest
 {
     Implementation i;
     ClasseInterface depart, destination;
 
+    /**
+     * setUp
+     */
     @BeforeEach
     void setUp()
     {
@@ -18,6 +24,9 @@ class ImplementationTest
         i = new Implementation(depart, destination);
     }
 
+    /**
+     * Test du constructeur
+     */
     @Test
     public void test_constructeur_ok()
     {
@@ -26,6 +35,9 @@ class ImplementationTest
         assertEquals(i.getDestinationClasse(), destination, "doit etre la meme classe");
     }
 
+    /**
+     * Test de modification
+     */
     @Test
     void test_modifier()
     {

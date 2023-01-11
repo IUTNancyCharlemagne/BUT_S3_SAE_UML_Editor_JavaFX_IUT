@@ -3,15 +3,19 @@ package com.modele.elements;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ *
+ */
 class AssociationTest {
 
     Association a;
     ClasseInterface depart, destination;
 
+    /**
+     * setUp
+     */
     @BeforeEach
     void setUp()
     {
@@ -20,6 +24,9 @@ class AssociationTest {
         a = new Association(depart, destination, "test", "public");
     }
 
+    /**
+     * Test du constructeur d'association
+     */
     @Test
     public void test_constructeur_ok()
     {
@@ -30,6 +37,9 @@ class AssociationTest {
         assertEquals(a.getVisibilite(), "public", "doit etre de meme visibilite");
     }
 
+    /**
+     * modifier
+     */
     @Test
     void modifier()
     {

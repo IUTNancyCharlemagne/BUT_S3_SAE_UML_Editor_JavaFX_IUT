@@ -3,10 +3,20 @@ package com.vue;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 
+/**
+ *
+ */
 public class VueAssociation extends Pane implements ElementDeVue
 {
+    /**
+     * Methode afficher qui prend en paramètre les attributs startX, startY, endX et endY
+     * @param startX
+     * @param startY
+     * @param endX
+     * @param endY
+     */
     public void afficher(double startX, double startY, double endX, double endY) {
-        // get the slope of the line and find its angle
+        // obtenir la pente de la droite et trouver son angle
         double slope = (startY - endY) / (startX - endX);
         double lineAngle = Math.atan(slope);
 
@@ -17,7 +27,7 @@ public class VueAssociation extends Pane implements ElementDeVue
         double lineLength = Math.sqrt(Math.pow(startX - endX, 2) + Math.pow(startY - endY, 2));
         double arrowLength = lineLength / 10;
 
-        // create the arrow legs
+        // créer les jambes de la flèche
         Line arrow1 = new Line();
         arrow1.setStartX(line.getEndX());
         arrow1.setStartY(line.getEndY());

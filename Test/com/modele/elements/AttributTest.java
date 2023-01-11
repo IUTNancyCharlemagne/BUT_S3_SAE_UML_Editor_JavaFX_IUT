@@ -3,21 +3,27 @@ package com.modele.elements;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ *
+ */
 class AttributTest {
 
     Attribut a;
 
+    /**
+     * setUp
+     */
     @BeforeEach
     void setUp()
     {
         a = new Attribut("test", "int", "public");
     }
 
+    /**
+     * Test du constructeur d'attributs
+     */
     @Test
     public void test_constructeur_ok()
     {
@@ -27,6 +33,9 @@ class AttributTest {
         assertEquals(a.getVisibilite(), "public", "doit etre de meme visibilite");
     }
 
+    /**
+     * test de modification d'attributs
+     */
     @Test
     void test_modifier()
     {

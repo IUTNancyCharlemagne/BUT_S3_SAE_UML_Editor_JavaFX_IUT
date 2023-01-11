@@ -1,5 +1,8 @@
 package com.vue;
 
+/**
+ * Interface ElementDeVue
+ */
 public interface ElementDeVue {
     static final int MINLARGEURCLASSE = 200;
     static final int MINHAUTEURCLASSE = 150;

@@ -5,16 +5,25 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ *
+ */
 public class ClasseInterfaceTest {
 
     ClasseInterface classe;
 
+    /**
+     * setUp
+     */
     @BeforeEach
     public void setUp ()
     {
         classe = new ClasseInterface("Test");
     }
 
+    /**
+     * Test du constructeur de ClasseInterface
+     */
     @Test
     public void test00_constructeur_ok()
     {
@@ -25,6 +34,9 @@ public class ClasseInterfaceTest {
         assertEquals("TestClasse", c.getNom(), "le nom doit etre identique");
     }
 
+    /**
+     * Test d'ajout d'un attribut
+     */
     @Test
     public void test01_ajouterAttribut_Unique() {
         String attribut = "public int a";
@@ -34,6 +46,9 @@ public class ClasseInterfaceTest {
         assertEquals(classe.getAttributs().get(0).getVisibilite(), "public");
     }
 
+    /**
+     * Test d'ajout de plusieurs attributs
+     */
     @Test
     public void test02_ajouterAttribut_Multiple() {
         String attribut = "public int a";
@@ -53,6 +68,9 @@ public class ClasseInterfaceTest {
         assertEquals(classe.getAttributs().get(2).getVisibilite(), "protected");
     }
 
+    /**
+     * Test d'ajout d'un attribut avec l'accessibilité par défaut
+     */
     @Test
     public void test03_ajouterAttribut_AccessibiliteParDefaut() {
         String attribut = " int a";
@@ -62,6 +80,9 @@ public class ClasseInterfaceTest {
         assertEquals(classe.getAttributs().get(0).getVisibilite(), "public");
     }
 
+    /**
+     * Test d'ajout d'une méthode
+     */
     @Test
     public void test04_ajouterMethode_Unique() {
         String methode = "public void a()";
@@ -71,6 +92,9 @@ public class ClasseInterfaceTest {
         assertEquals(classe.getMethodes().get(0).getType(), "void");
     }
 
+    /**
+     * Test d'ajout de plusieurs méthodes
+     */
     @Test
     public void test05_ajouterMethode_Multiple() {
         String methode = "public void a()";
@@ -90,6 +114,9 @@ public class ClasseInterfaceTest {
         assertEquals(classe.getMethodes().get(2).getType(), "float");
     }
 
+    /**
+     * Test d'ajout d'une méthode avec des paramètres
+     */
     @Test
     public void test06_ajouterMethode_AvecParametre() {
         String methode = "public void a(int)";
@@ -100,34 +127,58 @@ public class ClasseInterfaceTest {
         assertEquals(classe.getMethodes().get(0).getParametres().get(0).getType(), "int");
     }
 
+    /**
+     * Test d'ajout d'association
+     */
     @Test
     void ajouterAssociation() {
     }
 
+    /**
+     * Test d'ajout d'implémentation
+     */
     @Test
     void ajouterImplementation() {
     }
 
+    /**
+     * Test d'ajout d'héritage
+     */
     @Test
     void ajouterHeritage() {
     }
 
+    /**
+     * Test de modification d'attribut
+     */
     @Test
     void modifierAttribut() {
     }
 
+    /**
+     * Test de modification de méthode
+     */
     @Test
     void modifierMethode() {
     }
 
+    /**
+     * Test de modification d'héritage
+     */
     @Test
     void modifierHeritage() {
     }
 
+    /**
+     * Test de modification d'association
+     */
     @Test
     void modifierAssociation() {
     }
 
+    /**
+     * Test de modification
+     */
     @Test
     void test_modifier() {
         //Methode
