@@ -61,20 +61,22 @@ public class ClasseInterface implements Element
     }
 
     public void ajouterAttribut(String attributs) {
-        try{
+
             String[] attributSplit = attributs.split("\\n");
             for (String attribut : attributSplit) {
-                String accessibilite = this.determinerAccessibilite(attribut);
-                String motCle = determinerMotCle(attributs);
-                String[] temp = attributs.split(" ");
-                String type = temp[temp.length-2];
-                String nom = temp[temp.length-1];
-                this.attributs.add(new Attribut(nom, type, accessibilite, motCle));
+                try {
+                    String accessibilite = this.determinerAccessibilite(attribut);
+                    String motCle = determinerMotCle(attribut);
+                    String[] temp = attribut.split(" ");
+                    String type = temp[temp.length - 2];
+                    String nom = temp[temp.length - 1];
+                    System.out.println(nom);
+                    this.attributs.add(new Attribut(nom, type, accessibilite, motCle));
+                }catch (Exception e) {
+                    System.out.println("Erreur lors de l'ajout de l'attribut " + attribut);
+                }
             }
-        } catch (Exception e) {
-            System.out.println("Erreur lors de l'ajout de l'attribut " + attributs);
         }
-    }
 
     public void ajouterMethode(String methodes) {
         try {

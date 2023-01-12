@@ -32,10 +32,10 @@ public class VueClasse extends FlowPane implements ElementDeVue{
     private final List<ImageView> imageViews;
     private String type;
 
-    private TextField saisiTitre = new TextField();
-    private TextField saisiAccessibilite = new TextField();
-    private TextField saisiType = new TextField();
-    private Boolean etreMethode = false;
+    private TextField saisiTitre;
+    private TextField saisiAccessibilite;
+    private TextField saisiType;
+    private Boolean etreMethode;
     private HBox ajoutElem;
 
 

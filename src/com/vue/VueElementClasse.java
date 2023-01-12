@@ -13,55 +13,57 @@ import java.util.List;
 
 public class VueElementClasse extends HBox implements ElementDeVue {
 
-    private Label nameText;
-    private Rectangle accessibilityRect;
-
-    private Label motCle;
-    private Label[] parametersText;
-    private Label typeText;
     public VueElementClasse() {
         super();
         this.setAlignment(Pos.BASELINE_LEFT);
     }
 
     public void setName(String name) {
-        this.nameText = new Label(name);
+        if (name == null || name.equals("")) return;
+        Label nameText = new Label(name);
+        nameText.setPadding(new Insets(0, 0, 0, 10));
         this.getChildren().add(nameText);
     }
 
     public void setParameters(List<Attribut> parameters) {
-        this.parametersText = new Label[parameters.size()];
-        int i = 0;
+        if (parameters.size() == 0) return;
+
+        Label[] parametersText = new Label[parameters.size()];
         Label parametersLabel = new Label("(");
         Label parametersLabel2 = new Label(")");
         this.getChildren().add(parametersLabel);
-        for (Attribut parameter : parameters) {
-            this.parametersText[i] = new Label(parameter.getType());
-            this.getChildren().add(this.parametersText[i]);
-            i++;
+        for (int i = 0; i < parameters.size(); i++) {
+            parametersText[i] = new Label(parameters.get(0).getType());
+            this.getChildren().add(parametersText[i]);
+            if (parameters.size() - 1 > i) {
+                Label virgule = new Label(", ");
+                this.getChildren().add(virgule);
+            }
         }
         this.getChildren().add(parametersLabel2);
     }
 
     public void setType(String type) {
-        this.typeText = new Label(type);
-        this.typeText.setPadding(new Insets(0, 10, 0, 10));
+        if (type == null || type.equals("")) return;
+        Label typeText = new Label(type);
+        typeText.setPadding(new Insets(0, 0, 0, 10));
         this.getChildren().add(typeText);
     }
 
     public void setMotCle(String motCle) {
-        this.motCle = new Label(motCle);
-        this.motCle.setPadding(new Insets(0, 10, 0, 10));
-        this.getChildren().add(this.motCle);
+        if (motCle == null || motCle.equals("")) return;
+        Label motCle1 = new Label(motCle);
+        motCle1.setPadding(new Insets(0, 0, 0,10));
+        this.getChildren().add(motCle1);
     }
 
     public void setAccessibility(String accessibility) {
-        this.accessibilityRect = new Rectangle(10,10);
+        Rectangle accessibilityRect = new Rectangle(10, 10);
         switch (accessibility) {
-            case "public" -> this.accessibilityRect.setFill(Color.GREEN);
-            case "private" -> this.accessibilityRect.setFill(Color.RED);
-            case "protected" -> this.accessibilityRect.setFill(Color.YELLOW);
-            default -> this.accessibilityRect.setFill(Color.WHITE);
+            case "public" -> accessibilityRect.setFill(Color.GREEN);
+            case "private" -> accessibilityRect.setFill(Color.RED);
+            case "protected" -> accessibilityRect.setFill(Color.YELLOW);
+            default -> accessibilityRect.setFill(Color.WHITE);
         }
         this.getChildren().add(accessibilityRect);
     }
