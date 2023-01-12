@@ -81,23 +81,25 @@ public class PlantUMLFormat implements Format //extends Format
                 plantUMLBuilder.append(")");
                 setTypeUML(methode, plantUMLBuilder);
             }
-/*
+            plantUMLBuilder.append("}\n\n");
+
+
+            // Le modele doit etre revu, pas le temps avant la fin du projet
+            /*
             for (Association association : classe.getAssociations())
             {
                 plantUMLBuilder.append("\t").append(association.getDestination().getType()).append("<--").append(association.getInitClasse()).append(" : ").append(association.getNom()).append("\n");
             }
- */
+
             Heritage heritage = classe.getHeritage();
-            if (heritage != null) plantUMLBuilder.append("\t").append(heritage.getDestinationClasse().getType()).append("<|--").append(heritage.getInitClasse()).append("\n");
+            if (heritage != null) plantUMLBuilder.append("\t").append(heritage.getDestinationClasse().getNom()).append(" <|-- ").append(heritage.getInitClasse().getNom()).append("\n\n");
 
             for (Implementation implementation : classe.getImplementations())
             {
-                plantUMLBuilder.append("\t").append(implementation.getDestinationClasse().getType()).append("<|--").append(implementation.getInitClasse()).append("\n");
+                plantUMLBuilder.append("\t").append(implementation.getDestinationClasse().getNom()).append(" <|-- ").append(implementation.getInitClasse().getNom()).append("\n");
             }
-
-            //plantUMLBuilder.append(classe.getAttributs()).append("\n");
-            //plantUML.append(classe.getOperations()).append("\n");
-            plantUMLBuilder.append("}\n\n");
+            plantUMLBuilder.append("\n");
+             */
         }
         plantUMLBuilder.append("@enduml");
         return plantUMLBuilder.toString();

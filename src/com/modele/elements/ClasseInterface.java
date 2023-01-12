@@ -132,12 +132,13 @@ public class ClasseInterface implements Element
         this.associations.add(association);
     }
 
-    public void ajouterImplementation(String implementation) {
-        //this.implementation.add(implementation);
+    public void ajouterImplementation(ClasseInterface classe, String implementation) {
+        this.implementation.add(new Implementation(classe, new ClasseInterface(implementation)));
     }
 
-    public void ajouterHeritage(String heritage) {
-        //this.heritage = heritage;
+    public void ajouterHeritage(ClasseInterface classe, String heritageComplet) {
+        String res = heritageComplet.split("extends")[1].split("\n")[0];
+        this.heritage = new Heritage(classe, new ClasseInterface(res));
     }
 
     public boolean isInterface() {

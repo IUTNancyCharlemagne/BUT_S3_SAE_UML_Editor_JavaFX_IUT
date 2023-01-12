@@ -104,8 +104,8 @@ public class Modele implements Sujet
             tabImplementations = !Arrays.equals(tabImplementations, new String[0]) ? tabImplementations : new String[]{""};
 
             ClasseInterface classe = new ClasseInterface(tabNomClasse[0]);
-            classe.ajouterHeritage(tabHeritage[0]);
-            classe.ajouterImplementation(tabImplementations[0]);
+            //if (!tabHeritage[0].equals("Object")) classe.ajouterHeritage(classe, tabHeritage[0]);
+            //classe.ajouterImplementation(classe, tabImplementations[0]);
             classe.ajouterAttribut(tabAttributs[0]);
             classe.ajouterConstructeur(tabConstructeurs[0]);
             classe.ajouterMethode(tabMethodes[0]);
