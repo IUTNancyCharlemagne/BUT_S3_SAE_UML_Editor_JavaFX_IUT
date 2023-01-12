@@ -3,7 +3,11 @@ package com.controlleur;
 import com.modele.composite.FileComposite;
 import com.modele.composite.FileDirectory;
 import com.modele.composite.FileFile;
+import com.vue.VueClasse;
 import javafx.event.EventHandler;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
@@ -43,7 +47,6 @@ public class ControlleurDeplacerClasse implements EventHandler<MouseEvent> {
             }
             dragboard.setContent(content);
             mouseEvent.consume();
-
         }
     }
 }

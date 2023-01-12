@@ -29,6 +29,7 @@ public class VueElementClasse extends HBox implements ElementDeVue {
         this.nom = name;
         Label nameText = new Label(name);
         nameText.setPadding(new Insets(0, 0, 0, 10));
+        this.setPadding(new Insets(0, 0, 0, 2));
         this.getChildren().add(nameText);
     }
 
