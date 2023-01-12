@@ -1,7 +1,6 @@
 package com.vue;
 
 import com.Main;
-import com.controlleur.ControlleurAjouterClasse;
 import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
@@ -40,8 +39,8 @@ public class VueClasse extends FlowPane implements ElementDeVue{
 
     public VueClasse() {
         super();
-        this.setOnMousePressed(Main.controlleurGlisserDeposer);
-        this.setOnMouseDragged(Main.controlleurGlisserDeposer);
+        this.setOnMousePressed(Main.controllerDeplacerClasse);
+        this.setOnMouseDragged(Main.controllerDeplacerClasse);
         content = new VBox();
         titleLabel = new Label();
         this.attributs = new ArrayList<>();

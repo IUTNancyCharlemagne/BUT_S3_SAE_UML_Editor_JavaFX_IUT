@@ -1,7 +1,7 @@
 package com;
 
 import com.controlleur.ControlleurAjouterClasse;
-import com.controlleur.ControlleurGlisserDeposer;
+import com.controlleur.ControlleurDeplacerClasse;
 import com.controlleur.ControlleurMenu;
 import com.controlleur.ControlleurSouris;
 import com.modele.Modele;
@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     public static ControlleurSouris controlleurSouris;
-    public static EventHandler<MouseEvent> controlleurGlisserDeposer;
+    public static EventHandler<MouseEvent> controllerDeplacerClasse;
     public static EventHandler<ActionEvent> controlleurMenu;
     public static ControlleurAjouterClasse controlleurAjouterClasse;
 
@@ -23,7 +23,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Modele modele = new Modele();
         VueGlobal vueGlobal = new VueGlobal(modele);
-        controlleurGlisserDeposer = new ControlleurGlisserDeposer();
+        controllerDeplacerClasse = new ControlleurDeplacerClasse();
         controlleurMenu = new ControlleurMenu(modele, vueGlobal);
         controlleurSouris = new ControlleurSouris(modele);
         controlleurAjouterClasse = new ControlleurAjouterClasse(modele);
