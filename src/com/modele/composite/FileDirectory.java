@@ -5,37 +5,36 @@ import java.util.*;
 
 public class FileDirectory extends FileComposite{
 
-    private final String finalPath;
+    public static String finalPath;
 
     public FileDirectory(String name, String path, String finalPath) {
         super(name, path);
-        this.finalPath = finalPath;
+        FileDirectory.finalPath = finalPath;
     }
     @Override
     public String list() {
         StringBuilder aff = new StringBuilder();
         File monDossier = new File(this.path);
         File[] fichiers = monDossier.listFiles();
-        for (File fichier : Objects.requireNonNull(fichiers)) {
+        for (File fichier : fichiers != null ? fichiers : new File[0]) {
             FileComposite f;
             if (fichier.isDirectory()) {
-                f = new FileDirectory("", fichier.getPath(),this.finalPath);
+                f = new FileDirectory("", fichier.getPath(),FileDirectory.finalPath);
                 aff.append(f.list());
             } else {
                 if (fichier.getName().endsWith(".java")) {
-                    String name = fichier.getName().substring(0, fichier.getName().length() - 5);
                     String classPackage = this.getPackageName(fichier);
-                    String className;
                     if (!classPackage.equals("")) {
-                        className = classPackage + "." + name;
+                        classPackage += "."+fichier.getName();
                     } else {
-                        className = name;
+                        classPackage = fichier.getName();
                     }
 
-                    if (className.equals("module-info")) {
-                        className = "";
+                    if (classPackage.equals("module-info.java")) {
+                        classPackage = "";
                     }
-                    f = new FileFile(className, fichier.getPath());
+                    classPackage = classPackage.replace(".java", "");
+                    f = new FileFile(classPackage, this.path, FileDirectory.finalPath);
                     aff.append("##########\n").append(f.list());
                 }
             }
@@ -75,7 +74,7 @@ public class FileDirectory extends FileComposite{
         String path = this.path;
         File file = new File(path);
         File[] fichiers = file.listFiles();
-        ArborescenceDossier arborescenceDossier = new ArborescenceDossier(file.getName());
+        ArborescenceDossier arborescenceDossier = new ArborescenceDossier(file.getName(), file.getPath());
         for (File f: Objects.requireNonNull(fichiers)) {
             if (f.isDirectory()) {
                 this.path = f.getPath();
@@ -83,7 +82,7 @@ public class FileDirectory extends FileComposite{
             } else if (f.isFile()) {
                 if (f.getName().endsWith(".java")) {
                     name = f.getName().substring(0, f.getName().length() - 5);
-                    arborescenceDossier.ajouterFile(name);
+                    arborescenceDossier.ajouterFile(name, f.getPath());
                 }
             }
         }

@@ -2,12 +2,15 @@ package com.vue;
 
 import com.modele.Modele;
 import com.modele.Sujet;
+import com.modele.composite.FileFile;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 public class VueSelectionRepertoire extends Application{
 

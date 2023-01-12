@@ -1,9 +1,6 @@
 package com;
 
-import com.controlleur.ControlleurAjouterClasse;
-import com.controlleur.ControlleurDeplacerClasse;
-import com.controlleur.ControlleurMenu;
-import com.controlleur.ControlleurSouris;
+import com.controlleur.*;
 import com.modele.Modele;
 import com.vue.VueGlobal;
 import javafx.application.Application;
@@ -18,6 +15,7 @@ public class Main extends Application {
     public static EventHandler<MouseEvent> controllerDeplacerClasse;
     public static EventHandler<ActionEvent> controlleurMenu;
     public static ControlleurAjouterClasse controlleurAjouterClasse;
+    public static ControlleurGlisserDeposer controlleurGlisserDeposer;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -27,6 +25,7 @@ public class Main extends Application {
         controlleurMenu = new ControlleurMenu(modele, vueGlobal);
         controlleurSouris = new ControlleurSouris(modele);
         controlleurAjouterClasse = new ControlleurAjouterClasse(modele);
+        controlleurGlisserDeposer = new ControlleurGlisserDeposer(modele);
 
         primaryStage.setTitle("Diagramme de classe");
         primaryStage.setScene(new Scene(vueGlobal, 800, 600));

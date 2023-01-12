@@ -2,19 +2,18 @@ package com.modele.composite;
 
 import java.lang.reflect.*;
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.TreeMap;
 
 public class FileFile extends FileComposite{
 
     //Constructeur
     /**
      * Constructeur de FileFile qui prend en paramètre le nom et le chemin du fichier
-     * @param name le nom de la classe
-     * @param path l'extension du fichier
+     *
+     * @param name      le nom de la classe
+     * @param path      l'extension du fichier
+     * @param finalPath
      */
-    public FileFile(String name, String path){
+    public FileFile(String name, String path, String finalPath){
         super(name, path);
     }
 
