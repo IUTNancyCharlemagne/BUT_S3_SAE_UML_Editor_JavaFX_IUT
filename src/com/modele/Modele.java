@@ -9,6 +9,7 @@ import com.modele.export.Format;
 
 import java.util.*;
 
+
 public class Modele implements Sujet
 {
     private List<Observateur> observateurs;
@@ -75,7 +76,7 @@ public class Modele implements Sujet
      * @param path le chemin du dossier
      */
     public void ouvrirDossier(String name, String path,String finalPath){
-        this.dossier = new FileDirectory(name, path,finalPath);
+        this.dossier = new FileDirectory(name, path, finalPath);
         notifierObservateurs();
     }
 

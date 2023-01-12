@@ -5,69 +5,38 @@ import java.util.*;
 
 public class FileDirectory extends FileComposite{
 
-    private final String finalPath;
+
 
     public FileDirectory(String name, String path, String finalPath) {
-        super(name, path);
-        this.finalPath = finalPath;
+        super(name, path, finalPath);
     }
     @Override
     public String list() {
         StringBuilder aff = new StringBuilder();
         File monDossier = new File(this.path);
         File[] fichiers = monDossier.listFiles();
+
         for (File fichier : Objects.requireNonNull(fichiers)) {
             FileComposite f;
             if (fichier.isDirectory()) {
-                f = new FileDirectory("", fichier.getPath(),this.finalPath);
+                System.out.println(fichier.getName());
+                f = new FileDirectory(this.name + fichier.getName() + "." , fichier.getPath(), finalPath);
                 aff.append(f.list());
             } else {
-                if (fichier.getName().endsWith(".java")) {
-                    String name = fichier.getName().substring(0, fichier.getName().length() - 5);
-                    String classPackage = this.getPackageName(fichier);
-                    String className;
-                    if (!classPackage.equals("")) {
-                        className = classPackage + "." + name;
-                    } else {
-                        className = name;
-                    }
+                if (fichier.getName().endsWith(".class")) {
+                    String name = fichier.getName().replace(".class", "");
+                    String classPackage = this.name+name;
+                    System.out.println(classPackage);
 
-                    if (className.equals("module-info")) {
-                        className = "";
+                    if (name.equals("module-info")) {
+                        classPackage = "";
                     }
-                    f = new FileFile(className, fichier.getPath());
+                    f = new FileFile(classPackage, fichier.getPath(), finalPath);
                     aff.append("##########\n").append(f.list());
                 }
             }
         }
         return aff.toString();
-    }
-
-    private String getPackageName(File fichier) {
-        BufferedReader br;
-        try {
-            br = new BufferedReader(new FileReader(fichier));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String line;
-        String name = "";
-        try {
-            while ((line = br.readLine()) != null) {
-                if (line.startsWith("package")) {
-                    name = line.substring(8, line.length() - 1);
-                    break;
-                }
-                else if (line.startsWith("import") || line.startsWith("public class") || line.startsWith("public interface")) {
-                    break;
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        return name;
     }
 
 
@@ -81,8 +50,8 @@ public class FileDirectory extends FileComposite{
                 this.path = f.getPath();
                 arborescenceDossier.ajouterDossier(arborescence());
             } else if (f.isFile()) {
-                if (f.getName().endsWith(".java")) {
-                    name = f.getName().substring(0, f.getName().length() - 5);
+                if (f.getName().endsWith(".class")) {
+                    String name = f.getName().replace(".class", "");
                     arborescenceDossier.ajouterFile(name);
                 }
             }
@@ -90,7 +59,4 @@ public class FileDirectory extends FileComposite{
         return arborescenceDossier;
     }
 
-    public String getFinalPath() {
-        return finalPath;
-    }
 }

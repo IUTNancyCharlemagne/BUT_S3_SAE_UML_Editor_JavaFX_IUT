@@ -10,6 +10,7 @@ public abstract class FileComposite{
      * 2 attributs de type String correspondant au nom et au chemin du fichier
      */
     protected String name, path;
+    protected String finalPath;
 
     // Constructeur
     /**
@@ -17,9 +18,10 @@ public abstract class FileComposite{
      * @param name le nom du fichier
      * @param path le chemin du fichier
      */
-    public FileComposite(String name, String path){
+    public FileComposite(String name, String path, String finalPath){
         this.name = name;
         this.path = path;
+        this.finalPath = finalPath;
     }
 
     // Méthodes
@@ -31,5 +33,13 @@ public abstract class FileComposite{
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getFinalPath() {
+        return finalPath;
+    }
+
+    public String getName() {
+        return name;
     }
 }
