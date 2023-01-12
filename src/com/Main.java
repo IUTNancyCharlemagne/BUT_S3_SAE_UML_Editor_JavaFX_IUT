@@ -12,19 +12,21 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     public static ControlleurSouris controlleurSouris;
-    public static EventHandler<MouseEvent> controlleurGlisserDeposer;
+    public static EventHandler<MouseEvent> controllerDeplacerClasse;
     public static EventHandler<ActionEvent> controlleurMenu;
     public static ControlleurAjouterClasse controlleurAjouterClasse;
     public static ControlleurContextMenu controlleurContextMenu;
+    public static ControlleurGlisserDeposer controlleurGlisserDeposer;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         Modele modele = new Modele();
         VueGlobal vueGlobal = new VueGlobal(modele);
-        controlleurGlisserDeposer = new ControlleurGlisserDeposer();
+        controllerDeplacerClasse = new ControlleurDeplacerClasse();
         controlleurMenu = new ControlleurMenu(modele, vueGlobal);
         controlleurSouris = new ControlleurSouris(modele);
         controlleurAjouterClasse = new ControlleurAjouterClasse(modele);
+        controlleurGlisserDeposer = new ControlleurGlisserDeposer(modele);
         controlleurContextMenu = new ControlleurContextMenu();
 
         primaryStage.setTitle("Diagramme de classe");

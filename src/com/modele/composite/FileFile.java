@@ -15,10 +15,12 @@ public class FileFile extends FileComposite{
     //Constructeur
     /**
      * Constructeur de FileFile qui prend en paramètre le nom et le chemin du fichier
-     * @param name le nom de la classe
-     * @param path l'extension du fichier
+     *
+     * @param name      le nom de la classe
+     * @param path      l'extension du fichier
+     * @param finalPath
      */
-    public FileFile(String name, String path, String finalPath) {
+    public FileFile(String name, String path, String finalPath){
         super(name, path, finalPath);
     }
 

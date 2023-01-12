@@ -79,31 +79,43 @@ public class Modele implements Sujet
     }
 
     public void lireDossier(){
+        String classes = this.dossier.list();
+        lireDossier(classes);
+    }
+
+    public void lireDossier(String classes){
         try {
-            String classes = this.dossier.list();
             String[] tabClasses = classes.split("##########");
             for (int i = 1; i < tabClasses.length; i++) {
-                String[] tabNomClasse = tabClasses[i].split("NOMCLASSE");
-                String[] tabHeritage = tabNomClasse[1].split("HERITAGE");
-                String[] tabImplementations = tabHeritage[1].split("IMPLEMENTATION");
-                String[] tabAttributs = tabImplementations[1].split("ATTRIBUTS");
-                String[] tabConstructeurs = tabAttributs[1].split("CONSTRUCTEURS");
-                String[] tabMethodes = tabConstructeurs[1].split("METHODES");
-                tabMethodes = !Arrays.equals(tabMethodes, new String[0]) ? tabMethodes : new String[]{""};
-                tabConstructeurs = !Arrays.equals(tabConstructeurs, new String[0]) ? tabConstructeurs : new String[]{""};
-                tabHeritage = !Arrays.equals(tabHeritage, new String[0]) ? tabHeritage : new String[]{""};
-                tabAttributs = !Arrays.equals(tabAttributs, new String[0]) ? tabAttributs : new String[]{""};
-                tabImplementations = !Arrays.equals(tabImplementations, new String[0]) ? tabImplementations : new String[]{""};
-
-                ClasseInterface classe = new ClasseInterface(tabNomClasse[0]);
-                classe.ajouterHeritage(tabHeritage[0]);
-                classe.ajouterImplementation(tabImplementations[0]);
-                classe.ajouterAttribut(tabAttributs[0]);
-                classe.ajouterConstructeur(tabConstructeurs[0]);
-                classe.ajouterMethode(tabMethodes[0]);
-                this.elements.add(classe);
+                this.lireClasse(tabClasses[i]);
             }
         } catch (Exception e) {
+            System.out.println("La classe n'existe pas");
+        }
+    }
+
+    public void lireClasse(String classe){
+        try {
+            String[] tabNomClasse = classe.split("NOMCLASSE");
+            String[] tabHeritage = tabNomClasse[1].split("HERITAGE");
+            String[] tabImplementations = tabHeritage[1].split("IMPLEMENTATION");
+            String[] tabAttributs = tabImplementations[1].split("ATTRIBUTS");
+            String[] tabConstructeurs = tabAttributs[1].split("CONSTRUCTEURS");
+            String[] tabMethodes = tabConstructeurs[1].split("METHODES");
+            tabMethodes = !Arrays.equals(tabMethodes, new String[0]) ? tabMethodes : new String[]{""};
+            tabConstructeurs = !Arrays.equals(tabConstructeurs, new String[0]) ? tabConstructeurs : new String[]{""};
+            tabHeritage = !Arrays.equals(tabHeritage, new String[0]) ? tabHeritage : new String[]{""};
+            tabAttributs = !Arrays.equals(tabAttributs, new String[0]) ? tabAttributs : new String[]{""};
+            tabImplementations = !Arrays.equals(tabImplementations, new String[0]) ? tabImplementations : new String[]{""};
+
+            ClasseInterface classeInterface = new ClasseInterface(tabNomClasse[0]);
+            classeInterface.ajouterHeritage(tabHeritage[0]);
+            classeInterface.ajouterImplementation(tabImplementations[0]);
+            classeInterface.ajouterAttribut(tabAttributs[0]);
+            classeInterface.ajouterConstructeur(tabConstructeurs[0]);
+            classeInterface.ajouterMethode(tabMethodes[0]);
+            this.elements.add(classeInterface);
+        }catch (Exception e){
             System.out.println("La classe n'existe pas");
         }
     }

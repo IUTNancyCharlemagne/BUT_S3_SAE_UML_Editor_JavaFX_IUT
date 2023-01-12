@@ -1,26 +1,42 @@
 package com.controlleur;
 
+import com.modele.Modele;
+import com.modele.composite.FileComposite;
+import com.modele.composite.FileDirectory;
+import com.modele.composite.FileFile;
 import javafx.event.EventHandler;
 import javafx.scene.input.*;
-import javafx.scene.layout.FlowPane;
 
-public class ControlleurGlisserDeposer implements EventHandler<MouseEvent> {
+public class ControlleurGlisserDeposer implements EventHandler<DragEvent> {
 
-    private double mouseX;
-    private double mouseY;
+    private Modele modele;
+
+    public ControlleurGlisserDeposer(Modele modele) {
+        this.modele = modele;
+    }
     @Override
-    public void handle(MouseEvent mouseEvent) {
-        FlowPane p = (FlowPane) mouseEvent.getSource();
-        if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED){
-            mouseX = mouseEvent.getSceneX();
-            mouseY = mouseEvent.getSceneY();
-            p.toFront();
-        } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED){
-            double deltaX = mouseEvent.getSceneX() - mouseX;
-            double deltaY = mouseEvent.getSceneY() - mouseY;
-            p.relocate(p.getLayoutX() + deltaX, p.getLayoutY() + deltaY);
-            mouseX = mouseEvent.getSceneX();
-            mouseY = mouseEvent.getSceneY();
+    public void handle(DragEvent dragEvent) {
+        Dragboard db = dragEvent.getDragboard();
+        if (dragEvent.getEventType() == DragEvent.DRAG_OVER){
+            if (db.hasString()){
+                dragEvent.acceptTransferModes(TransferMode.MOVE);
+                dragEvent.consume();
+            }
+        } else if (dragEvent.getEventType() == DragEvent.DRAG_DROPPED){
+            if (db.hasString()){
+                String classe = db.getString();
+                String[] file = classe.split("DOSSIER");
+                if (file.length == 2) {
+                    modele.lireDossier(file[1]);
+                }
+                else {
+                    System.out.println(classe);
+                    modele.lireClasse(classe);
+                }
+                modele.notifierObservateurs();
+                dragEvent.setDropCompleted(true);
+                dragEvent.consume();
+            }
         }
     }
 }
