@@ -1,6 +1,9 @@
 package com.controlleur;
 
 import com.modele.Modele;
+import com.modele.composite.FileComposite;
+import com.modele.composite.FileDirectory;
+import com.modele.composite.FileFile;
 import javafx.event.EventHandler;
 import javafx.scene.input.*;
 
@@ -22,8 +25,14 @@ public class ControlleurGlisserDeposer implements EventHandler<DragEvent> {
         } else if (dragEvent.getEventType() == DragEvent.DRAG_DROPPED){
             if (db.hasString()){
                 String classe = db.getString();
-                System.out.println(classe);
-                modele.lireClasse(classe);
+                String[] file = classe.split("DOSSIER");
+                if (file.length == 2) {
+                    modele.lireDossier(file[1]);
+                }
+                else {
+                    System.out.println(classe);
+                    modele.lireClasse(classe);
+                }
                 modele.notifierObservateurs();
                 dragEvent.setDropCompleted(true);
                 dragEvent.consume();

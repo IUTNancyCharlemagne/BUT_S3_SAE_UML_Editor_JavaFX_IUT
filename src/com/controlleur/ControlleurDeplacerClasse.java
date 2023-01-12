@@ -31,16 +31,17 @@ public class ControlleurDeplacerClasse implements EventHandler<MouseEvent> {
             Dragboard dragboard = text.startDragAndDrop(TransferMode.MOVE);
             String[] file = text.getId().split("DOSSIER");
             FileComposite fileComposite;
+            ClipboardContent content = new ClipboardContent();
             if (file.length == 2) {
-                fileComposite = new FileDirectory(text.getText(), text.getId(), FileDirectory.finalPath);
+                fileComposite = new FileDirectory(text.getText(), file[1], FileDirectory.finalPath);
+                content.putString("DOSSIER"+fileComposite.list());
             }
             else {
+                System.out.println(text.getId());
                 fileComposite = new FileFile(text.getText(), text.getId(), FileDirectory.finalPath);
+                content.putString(fileComposite.list());
             }
-            ClipboardContent content = new ClipboardContent();
-            content.putString(fileComposite.list());
             dragboard.setContent(content);
-            //draggingTab.set(tab);
             mouseEvent.consume();
 
         }
