@@ -116,6 +116,9 @@ public class ClasseInterface implements Element
         String[] parametres = methode.split("\\(")[1].replace(")", "").split(",");
         List<Attribut> parametresList = new ArrayList<>();
         for (String parametre : parametres) {
+            if (parametre.equals("")) {
+                continue;
+            }
             Attribut attribut = new Attribut("", parametre, "", "");
             parametresList.add(attribut);
         }
@@ -210,5 +213,14 @@ public class ClasseInterface implements Element
     {
         this.nom = nom;
         this.type = type;
+    }
+
+    public Methode getMethode(String nom) {
+        for (Methode methode : methodes) {
+            if (methode.getNom().equals(nom)) {
+                return methode;
+            }
+        }
+        return null;
     }
 }

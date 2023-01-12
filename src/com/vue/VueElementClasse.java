@@ -4,6 +4,8 @@ import com.modele.elements.Attribut;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -11,7 +13,11 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.List;
 
+import static com.Main.controlleurAjouterClasse;
+
 public class VueElementClasse extends HBox implements ElementDeVue {
+
+    private String nom;
 
     public VueElementClasse() {
         super();
@@ -20,14 +26,13 @@ public class VueElementClasse extends HBox implements ElementDeVue {
 
     public void setName(String name) {
         if (name == null || name.equals("")) return;
+        this.nom = name;
         Label nameText = new Label(name);
         nameText.setPadding(new Insets(0, 0, 0, 10));
         this.getChildren().add(nameText);
     }
 
     public void setParameters(List<Attribut> parameters) {
-        if (parameters.size() == 0) return;
-
         Label[] parametersText = new Label[parameters.size()];
         Label parametersLabel = new Label("(");
         Label parametersLabel2 = new Label(")");
@@ -69,4 +74,36 @@ public class VueElementClasse extends HBox implements ElementDeVue {
     }
 
 
+    public void imageAdd(String id) {
+        StackPane stackPaneImageView = new StackPane();
+        ImageView imageView = new ImageView("add.png");
+        imageView.setFitHeight(15);
+        imageView.setFitWidth(15);
+        stackPaneImageView.setId(id);
+        imageView.setId(nom);
+        stackPaneImageView.getChildren().add(imageView);
+        stackPaneImageView.setAlignment(Pos.BOTTOM_LEFT);
+        stackPaneImageView.setOnMouseClicked(controlleurAjouterClasse);
+        this.getChildren().add(this.getChildren().size() - 1,stackPaneImageView);
+    }
+
+    public TextField ajouterParametre() {
+        HBox parametre = new HBox();
+        ImageView imageView = new ImageView("check.png");
+        imageView.setFitHeight(40);
+        imageView.setFitWidth(40);
+        imageView.setSmooth(true);
+        imageView.setId("checkParam."+nom);
+        imageView.setOnMouseClicked(controlleurAjouterClasse);
+        TextField textField = new TextField();
+        textField.setPromptText("Type");
+        parametre.getChildren().addAll(textField, imageView);
+        parametre.setAlignment(Pos.CENTER);
+        this.getChildren().add(this.getChildren().size() - 2,parametre);
+        return textField;
+    }
+
+    public String getNom() {
+        return nom;
+    }
 }
