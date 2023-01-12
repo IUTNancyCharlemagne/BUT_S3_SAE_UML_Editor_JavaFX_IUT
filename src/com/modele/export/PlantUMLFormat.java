@@ -2,10 +2,7 @@ package com.modele.export;
 
 import com.modele.Sujet;
 import com.modele.composite.FileComposite;
-import com.modele.elements.Attribut;
-import com.modele.elements.ClasseInterface;
-import com.modele.elements.ElementVisibilite;
-import com.modele.elements.Methode;
+import com.modele.elements.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -84,6 +81,19 @@ public class PlantUMLFormat implements Format //extends Format
                 plantUMLBuilder.append(")");
                 setTypeUML(methode, plantUMLBuilder);
             }
+/*
+            for (Association association : classe.getAssociations())
+            {
+                plantUMLBuilder.append("\t").append(association.getDestination().getType()).append("<--").append(association.getInitClasse()).append(" : ").append(association.getNom()).append("\n");
+            }
+ */
+            Heritage heritage = classe.getHeritage();
+            if (heritage != null) plantUMLBuilder.append("\t").append(heritage.getDestinationClasse().getType()).append("<|--").append(heritage.getInitClasse()).append("\n");
+
+            for (Implementation implementation : classe.getImplementations())
+            {
+                plantUMLBuilder.append("\t").append(implementation.getDestinationClasse().getType()).append("<|--").append(implementation.getInitClasse()).append("\n");
+            }
 
             //plantUMLBuilder.append(classe.getAttributs()).append("\n");
             //plantUML.append(classe.getOperations()).append("\n");
@@ -105,6 +115,7 @@ public class PlantUMLFormat implements Format //extends Format
             case "public" -> "+";
             case "private" -> "-";
             case "protected" -> "#";
+            case "package private" -> "~";
             default -> "";
         };
     }
