@@ -16,26 +16,25 @@ public class FileDirectory extends FileComposite{
         StringBuilder aff = new StringBuilder();
         File monDossier = new File(this.path);
         File[] fichiers = monDossier.listFiles();
-        for (File fichier : Objects.requireNonNull(fichiers)) {
+        for (File fichier : fichiers != null ? fichiers : new File[0]) {
             FileComposite f;
             if (fichier.isDirectory()) {
-                f = new FileDirectory("", fichier.getPath(),this.finalPath);
+                f = new FileDirectory("", fichier.getPath(),finalPath);
                 aff.append(f.list());
             } else {
                 if (fichier.getName().endsWith(".java")) {
-                    String name = fichier.getName().substring(0, fichier.getName().length() - 5);
                     String classPackage = this.getPackageName(fichier);
-                    String className;
                     if (!classPackage.equals("")) {
-                        className = classPackage + "." + name;
-                    } else {
-                        className = name;
+                        classPackage += "."+fichier.getName();
+                    }else {
+                        classPackage = fichier.getName();
                     }
 
-                    if (className.equals("module-info")) {
-                        className = "";
+                    if (classPackage.equals("module-info.java")) {
+                        classPackage = "";
                     }
-                    f = new FileFile(className, fichier.getPath());
+                    classPackage = classPackage.replace(".java", "");
+                    f = new FileFile(classPackage, this.path);
                     aff.append("##########\n").append(f.list());
                 }
             }
