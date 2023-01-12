@@ -70,21 +70,33 @@ public class PlantUMLFormat implements Format //extends Format
         for (ClasseInterface classe : classes) {
             plantUMLBuilder.append("class ").append(classe.getNom()).append("{\n");
             for (Attribut attribut : classe.getAttributs()) {
-                plantUMLBuilder.append("\t").append(getVisibiliteUml(attribut)).append(" ").append(attribut.getNom()).append(" : ").append(attribut.getType()).append("\n");
+                plantUMLBuilder.append("\t").append(getVisibiliteUml(attribut)).append(" ").append(attribut.getNom());
+                setTypeUML(attribut, plantUMLBuilder);
             }
             for (Methode methode : classe.getMethodes()) {
                 plantUMLBuilder.append("\t").append(getVisibiliteUml(methode)).append(" ").append(methode.getNom()).append("(");
-                for (Attribut parametre : methode.getParametres()) {
-                    plantUMLBuilder.append(parametre.getType()).append(parametre.getNom()).append(")");
+                List<Attribut> parametres = methode.getParametres();
+                for (Attribut parametre : parametres) {
+                    plantUMLBuilder.append(parametre.getType()).append(parametre.getNom());
+                    if (parametres.indexOf(parametre) != parametres.size() - 1)
+                        plantUMLBuilder.append(",");
                 }
-                plantUMLBuilder.append(") : ").append(methode.getType()).append("\n");
+                plantUMLBuilder.append(")");
+                setTypeUML(methode, plantUMLBuilder);
             }
+
             //plantUMLBuilder.append(classe.getAttributs()).append("\n");
             //plantUML.append(classe.getOperations()).append("\n");
-            plantUMLBuilder.append("}\n");
+            plantUMLBuilder.append("}\n\n");
         }
         plantUMLBuilder.append("@enduml");
         return plantUMLBuilder.toString();
+    }
+
+    private void setTypeUML(ElementVisibilite element, StringBuilder plantUMLBuilder) {
+        if (element.getType() != null)
+            plantUMLBuilder.append(" : ").append(element.getType()).append("\n");
+        else plantUMLBuilder.append("\n");
     }
 
 
