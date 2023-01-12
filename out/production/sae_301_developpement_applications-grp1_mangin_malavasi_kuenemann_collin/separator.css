@@ -1,5 +1,5 @@
 .separator .line{
     -fx-background-color: black;
-    -fx-pref-height: 3px;
-    -fx-border-color: #ffc75a;
+    -fx-pref-height: 1px;
+    -fx-border-color: null;
 }

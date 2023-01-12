@@ -1,7 +1,6 @@
 package com.vue;
 
 import com.Main;
-import com.controlleur.ControlleurAjouterClasse;
 import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
@@ -37,6 +36,8 @@ public class VueClasse extends FlowPane implements ElementDeVue{
     private TextField saisiAccessibilite = new TextField();
     private TextField saisiType = new TextField();
     private Boolean etreMethode = false;
+    private HBox ajoutElem;
+
 
     public VueClasse() {
         super();
@@ -142,17 +143,17 @@ public class VueClasse extends FlowPane implements ElementDeVue{
 
     public void ajouterAttribut(String nom) {
         // Ajout des attributs
-        HBox hbox = new HBox();
-        hbox.getChildren().clear();
+        ajoutElem = new HBox();
+        ajoutElem.getChildren().clear();
         saisiAccessibilite = textfield("Accessibilité");
-        hbox.getChildren().addAll(saisiAccessibilite);
+        ajoutElem.getChildren().addAll(saisiAccessibilite);
         int placement = attributs.size() + 4;
         if (nom.equals("Methode")) {
             placement += methodes.size() + 2;
         }
-        content.getChildren().add(placement,hbox);
-        addNom(hbox,nom);
-        hbox.setAlignment(Pos.CENTER);
+        content.getChildren().add(placement, ajoutElem);
+        addNom(ajoutElem,nom);
+        ajoutElem.setAlignment(Pos.CENTER);
     }
 
     public void ajouterMethode() {
@@ -259,5 +260,9 @@ public class VueClasse extends FlowPane implements ElementDeVue{
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void cancelAjout() {
+        ajoutElem.getChildren().clear();
     }
 }

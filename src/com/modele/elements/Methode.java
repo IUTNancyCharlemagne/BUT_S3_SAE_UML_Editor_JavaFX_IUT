@@ -4,14 +4,14 @@ import java.util.List;
 
 public class Methode
 {
-    private String nom, type;
-    private String visibilite;
+    private String nom, type, visibilite, motCle;
     private List<Attribut> parametres;
 
-    public Methode(String nom, String type, String visibilite, List<Attribut> parametres) {
+    public Methode(String nom, String type, String visibilite, String motCle, List<Attribut> parametres) {
         this.nom = nom;
         this.type = type;
         this.visibilite = visibilite;
+        this.motCle = motCle;
         this.parametres = parametres;
     }
 
@@ -56,5 +56,7 @@ public class Methode
         this.parametres = parametres;
     }
 
-
+    public String getMotCle() {
+        return motCle;
+    }
 }

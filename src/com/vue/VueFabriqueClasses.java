@@ -4,20 +4,28 @@ import com.modele.Sujet;
 import com.modele.elements.*;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 
 import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.PopupControl;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Transform;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static com.Main.controlleurContextMenu;
 
 public class VueFabriqueClasses extends AnchorPane {
     private ArrayList<VueClasse> classesList;
@@ -30,11 +38,15 @@ public class VueFabriqueClasses extends AnchorPane {
             if (classe == null) continue;
             FabriqueDeVue fabriqueDeVue = new FabriqueVueClasse();
             VueClasse vueElement = (VueClasse) fabriqueDeVue.creerVueElement();
+
+            ajouterContextMenu(vueElement);
             vueElement.setType(classe.getType());
             vueElement.setTitle(classe.getNom());
             vueElement.ajouterSeparateur();
 
-            vueElement.imageAdd("AjouterAttribut");
+            if (sujet.getClasseCourante() != null) {
+                vueElement.imageAdd("AjouterAttribut");
+            }
 
             Random random = new Random();
             ReadOnlyDoubleProperty x = this.prefWidthProperty();
@@ -46,7 +58,7 @@ public class VueFabriqueClasses extends AnchorPane {
                 Node vueClasse = classeVue.getChildren().get(i);
                 if (vueClasse instanceof VueClasse) {
                     if (randX >= vueClasse.getLayoutX() && randX <= vueClasse.getBoundsInParent().getWidth()
-                    && randY >= vueClasse.getLayoutY() && randY <= vueClasse.getBoundsInParent().getHeight()) {
+                            && randY >= vueClasse.getLayoutY() && randY <= vueClasse.getBoundsInParent().getHeight()) {
                         randX = random.nextDouble();
                         randY = random.nextDouble();
                         i = 0;
@@ -64,6 +76,7 @@ public class VueFabriqueClasses extends AnchorPane {
                 VueElementClasse vueAttribut = (VueElementClasse) fabriqueDeVue.creerVueElement();
 
                 vueAttribut.setAccessibility(attribut.getVisibilite());
+                vueAttribut.setMotCle(attribut.getMotCle());
                 vueAttribut.setType(attribut.getType());
                 vueAttribut.setName(attribut.getNom());
 
@@ -71,7 +84,9 @@ public class VueFabriqueClasses extends AnchorPane {
             }
 
             vueElement.ajouterSeparateur();
-            vueElement.imageAdd("AjouterMethode");
+            if (sujet.getClasseCourante() != null) {
+                vueElement.imageAdd("AjouterAttribut");
+            }
 
             for (Methode methode : classe.getMethodes()) {
                 fabriqueDeVue = new FabriqueVueMethode();
@@ -79,6 +94,7 @@ public class VueFabriqueClasses extends AnchorPane {
                 VueElementClasse vueMethode = (VueElementClasse) fabriqueDeVue.creerVueElement();
 
                 vueMethode.setAccessibility(methode.getVisibilite());
+                vueMethode.setMotCle(methode.getMotCle());
                 vueMethode.setType(methode.getType());
                 vueMethode.setName(methode.getNom());
                 vueMethode.setParameters(methode.getParametres());
@@ -112,5 +128,9 @@ public class VueFabriqueClasses extends AnchorPane {
 
     public void clear() {
         this.getChildren().clear();
+    }
+
+    public void ajouterContextMenu(VueClasse v) {
+        v.setOnContextMenuRequested(controlleurContextMenu);
     }
 }
