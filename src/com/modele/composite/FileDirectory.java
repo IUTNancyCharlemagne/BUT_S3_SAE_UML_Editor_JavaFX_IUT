@@ -24,15 +24,6 @@ public class FileDirectory extends FileComposite{
             } else {
                 if (fichier.getName().endsWith(".java")) {
                     String classPackage = this.getPackageName(fichier);
-                    if (!classPackage.equals("")) {
-                        classPackage += "."+fichier.getName();
-                    } else {
-                        classPackage = fichier.getName();
-                    }
-
-                    if (classPackage.equals("module-info.java")) {
-                        classPackage = "";
-                    }
                     classPackage = classPackage.replace(".java", "");
                     f = new FileFile(classPackage, this.path, FileDirectory.finalPath);
                     aff.append("##########\n").append(f.list());
@@ -65,6 +56,15 @@ public class FileDirectory extends FileComposite{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        if (!name.equals("")) {
+            name += "."+fichier.getName();
+        } else {
+            name = fichier.getName();
+        }
+
+        if (name.equals("module-info.java")) {
+            name = "";
+        }
 
         return name;
     }
@@ -81,8 +81,9 @@ public class FileDirectory extends FileComposite{
                 arborescenceDossier.ajouterDossier(arborescence());
             } else if (f.isFile()) {
                 if (f.getName().endsWith(".java")) {
-                    name = f.getName().substring(0, f.getName().length() - 5);
-                    arborescenceDossier.ajouterFile(name, f.getPath());
+                    String classPackage = this.getPackageName(f);
+                    classPackage = classPackage.replace(".java", "");
+                    arborescenceDossier.ajouterFile(classPackage, f.getPath());
                 }
             }
         }
