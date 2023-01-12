@@ -3,9 +3,6 @@ package com.modele.elements;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class AttributTest {
@@ -15,7 +12,7 @@ class AttributTest {
     @BeforeEach
     void setUp()
     {
-        a = new Attribut("test", "int", "public");
+        a = new Attribut("test", "int", "public", "");
     }
 
     @Test

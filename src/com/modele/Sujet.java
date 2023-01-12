@@ -29,4 +29,6 @@ public interface  Sujet
     List<ClasseInterface> getClassesUtilisateurs();
 
     void retirerClasseCourante();
+
+    void reinitialiser();
 }

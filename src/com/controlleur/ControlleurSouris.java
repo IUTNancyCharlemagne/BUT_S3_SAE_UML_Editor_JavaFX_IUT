@@ -34,7 +34,6 @@ public class ControlleurSouris implements EventHandler<MouseEvent> {
             {
                 VueSelectionRepertoire vueDirectorySelector = new VueSelectionRepertoire(modele);
                 vueDirectorySelector.generer();
-                modele.notifierObservateurs();
             }
         }
     }

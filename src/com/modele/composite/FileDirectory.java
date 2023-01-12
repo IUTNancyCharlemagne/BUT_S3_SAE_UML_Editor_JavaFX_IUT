@@ -19,7 +19,6 @@ public class FileDirectory extends FileComposite{
         for (File fichier : Objects.requireNonNull(fichiers)) {
             FileComposite f;
             if (fichier.isDirectory()) {
-                System.out.println(fichier.getName());
                 f = new FileDirectory(this.name + fichier.getName() + "." , fichier.getPath(), finalPath);
                 aff.append(f.list());
             } else {

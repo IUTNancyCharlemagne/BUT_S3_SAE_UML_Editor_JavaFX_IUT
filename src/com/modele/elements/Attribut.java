@@ -2,12 +2,13 @@ package com.modele.elements;
 
 public class Attribut implements Element
 {
-    private String nom, type, visibilite;
+    private String nom, type, visibilite, motCle;
 
-    public Attribut(String nom, String type, String visibilite) {
+    public Attribut(String nom, String type, String visibilite, String motCle) {
         this.nom = nom;
         this.type = type;
         this.visibilite = visibilite;
+        this.motCle = motCle;
     }
 
     public String getNom() {
@@ -38,5 +39,9 @@ public class Attribut implements Element
         this.visibilite = visibilite;
         this.type = type;
         this.nom = nom;
+    }
+
+    public String getMotCle() {
+        return motCle;
     }
 }

@@ -4,7 +4,6 @@ import com.modele.Sujet;
 import com.vue.VueAjouterClasse;
 
 import com.vue.VueClasse;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -40,10 +39,11 @@ public class ControlleurAjouterClasse implements EventHandler<MouseEvent> {
                     modele.getClasseCourante().setType(type);
                 } else if (!etreMethode && !accessibilite.equals("")) {
                     modele.getClasseCourante().ajouterAttribut(accessibilite + " " + type + " " + titre);
-                } else {
+                } else if (etreMethode && !accessibilite.equals("")) {
                     modele.getClasseCourante().ajouterMethode(accessibilite + " " + type + " " + titre + "()");
+                } else {
+                    vueClasse.cancelAjout();
                 }
-                //Clear le Hbox
                 VueAjouterClasse.genererPrev();
             }
         }
@@ -63,5 +63,4 @@ public class ControlleurAjouterClasse implements EventHandler<MouseEvent> {
     public void setVueClasse(VueClasse vue) {
         this.vueClasse = vue;
     }
-
 }

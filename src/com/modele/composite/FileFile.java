@@ -33,8 +33,8 @@ public class FileFile extends FileComposite{
             aff += this.contenu(this.name);
         }catch (ClassNotFoundException e){
             aff = ("La classe n'existe pas\n");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+        }catch (MalformedURLException e) {
+            aff = ("L'url n'est pas valide\n");
         }
         return aff;
     }

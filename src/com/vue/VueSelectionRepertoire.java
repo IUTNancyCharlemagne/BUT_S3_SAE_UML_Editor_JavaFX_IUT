@@ -19,26 +19,25 @@ public class VueSelectionRepertoire extends Application{
         this.modele = modele;
     }
     public void generer() {
-        try {
-            start(new Stage());
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        start(new Stage());
     }
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         primaryStage.setTitle("Selectionner un repertoire");
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setInitialDirectory(new File("src"));
         File selectedDirectory = directoryChooser.showDialog(primaryStage);
         if(selectedDirectory != null){
+            name = selectedDirectory.getName();
             path = selectedDirectory.getPath();
-            modele.ouvrirDossier("", path,path);
+            modele.reinitialiser();
+            modele.ouvrirDossier(name, path,path);
             modele.lireDossier();
+            modele.notifierObservateurs();
         }
     }
 }

@@ -16,6 +16,7 @@ public class VueElementClasse extends HBox implements ElementDeVue {
     private Label nameText;
     private Rectangle accessibilityRect;
 
+    private Label motCle;
     private Label[] parametersText;
     private Label typeText;
     public VueElementClasse() {
@@ -46,6 +47,12 @@ public class VueElementClasse extends HBox implements ElementDeVue {
         this.typeText = new Label(type);
         this.typeText.setPadding(new Insets(0, 10, 0, 10));
         this.getChildren().add(typeText);
+    }
+
+    public void setMotCle(String motCle) {
+        this.motCle = new Label(motCle);
+        this.motCle.setPadding(new Insets(0, 10, 0, 10));
+        this.getChildren().add(this.motCle);
     }
 
     public void setAccessibility(String accessibility) {

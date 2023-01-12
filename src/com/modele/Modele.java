@@ -9,7 +9,6 @@ import com.modele.export.Format;
 
 import java.util.*;
 
-
 public class Modele implements Sujet
 {
     private List<Observateur> observateurs;
@@ -77,7 +76,6 @@ public class Modele implements Sujet
      */
     public void ouvrirDossier(String name, String path,String finalPath){
         this.dossier = new FileDirectory(name, path, finalPath);
-        notifierObservateurs();
     }
 
     public void lireDossier(){
@@ -132,5 +130,11 @@ public class Modele implements Sujet
 
     public void retirerClasseCourante(){
         this.classeCourante = null;
+    }
+
+    public void reinitialiser() {
+        this.classesUtilisateurs = new ArrayList<>();
+        this.classeCourante = null;
+        this.elements = new ArrayList<>();
     }
 }
