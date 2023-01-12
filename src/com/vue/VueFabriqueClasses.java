@@ -74,7 +74,6 @@ public class VueFabriqueClasses extends AnchorPane {
                 fabriqueDeVue = new FabriqueVueAttribut();
 
                 VueElementClasse vueAttribut = (VueElementClasse) fabriqueDeVue.creerVueElement();
-
                 vueAttribut.setAccessibility(attribut.getVisibilite());
                 vueAttribut.setMotCle(attribut.getMotCle());
                 vueAttribut.setType(attribut.getType());
@@ -85,7 +84,7 @@ public class VueFabriqueClasses extends AnchorPane {
 
             vueElement.ajouterSeparateur();
             if (sujet.getClasseCourante() != null) {
-                vueElement.imageAdd("AjouterAttribut");
+                vueElement.imageAdd("AjouterMethode");
             }
 
             for (Methode methode : classe.getMethodes()) {
@@ -98,6 +97,9 @@ public class VueFabriqueClasses extends AnchorPane {
                 vueMethode.setType(methode.getType());
                 vueMethode.setName(methode.getNom());
                 vueMethode.setParameters(methode.getParametres());
+                if (sujet.getClasseCourante() != null) {
+                    vueMethode.imageAdd("AjouterParametre");
+                }
 
                 vueElement.setMethode(vueMethode);
             }

@@ -126,7 +126,6 @@ public class VueClasse extends FlowPane implements ElementDeVue{
     public void imageAdd(String id) {
         StackPane stackPaneImageView = new StackPane();
         ImageView imageView = new ImageView("add.png");
-        imageView.setSmooth(true);
         imageView.setFitHeight(20);
         imageView.setFitWidth(20);
         stackPaneImageView.setId(id);
@@ -192,16 +191,25 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         return false;
     }
 
-    public TextField getSaisiTitre() {
-        return saisiTitre;
+    public String getSaisiTitre() {
+        if (saisiTitre != null) {
+            return saisiTitre.getText();
+        }
+        return "";
     }
 
-    public TextField getSaisiType() {
-        return saisiType;
+    public String getSaisiType() {
+        if (saisiType != null) {
+            return saisiType.getText();
+        }
+        return "";
     }
 
-    public TextField getSaisiAccessibilite() {
-        return saisiAccessibilite;
+    public String getSaisiAccessibilite() {
+        if (saisiAccessibilite != null) {
+            return saisiAccessibilite.getText();
+        }
+        return "";
     }
 
     private void addNom(HBox hBox,String nom) {
@@ -264,5 +272,14 @@ public class VueClasse extends FlowPane implements ElementDeVue{
 
     public void cancelAjout() {
         ajoutElem.getChildren().clear();
+    }
+
+    public TextField ajouterParametre(String nom) {
+        for (VueElementClasse vueElementClasse : methodes) {
+            if (vueElementClasse.getNom().equals(nom)) {
+                return vueElementClasse.ajouterParametre();
+            }
+        }
+        return null;
     }
 }
