@@ -140,7 +140,7 @@ public class VueClasse extends FlowPane implements ElementDeVue {
         stackPaneImageView.setAlignment(Pos.CENTER_RIGHT);
         stackPaneImageView.setOnMouseClicked(controlleurAjouterClasse);
         imageViews.add(imageView);
-        content.getChildren().add(stackPaneImageView);
+       content.getChildren().add(stackPaneImageView);
     }
 
     public List<ImageView> getImageView() {
@@ -153,7 +153,7 @@ public class VueClasse extends FlowPane implements ElementDeVue {
         ajoutElem.getChildren().clear();
         saisiAccessibilite = textfield("Accessibilité");
         ajoutElem.getChildren().addAll(saisiAccessibilite);
-        int placement = attributs.size() + 4;
+        int placement = attributs.size() + 3;
         if (nom.equals("Methode")) {
             placement += methodes.size() + 2;
         }
