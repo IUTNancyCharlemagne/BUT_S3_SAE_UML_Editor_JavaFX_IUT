@@ -12,8 +12,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     public static ControlleurSouris controlleurSouris;
-    public static EventHandler<MouseEvent> controllerDeplacerClasse;
-    public static EventHandler<ActionEvent> controlleurMenu;
+    public static ControlleurDeplacerClasse controllerDeplacerClasse;
+    public static ControlleurMenu controlleurMenu;
     public static ControlleurAjouterClasse controlleurAjouterClasse;
     public static ControlleurContextMenu controlleurContextMenu;
     public static ControlleurGlisserDeposer controlleurGlisserDeposer;
