@@ -103,7 +103,7 @@ public class Modele implements Sujet
             tabAttributs = !Arrays.equals(tabAttributs, new String[0]) ? tabAttributs : new String[]{""};
             tabImplementations = !Arrays.equals(tabImplementations, new String[0]) ? tabImplementations : new String[]{""};
 
-            ClasseInterface classe = new ClasseInterface(tabNomClasse[0]);
+            ClasseInterface classe = new ClasseInterface(tabNomClasse[0].split("\n")[1]);
             //if (!tabHeritage[0].equals("Object")) classe.ajouterHeritage(classe, tabHeritage[0]);
             //classe.ajouterImplementation(classe, tabImplementations[0]);
             classe.ajouterAttribut(tabAttributs[0]);

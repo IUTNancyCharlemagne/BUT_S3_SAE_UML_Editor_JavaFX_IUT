@@ -13,6 +13,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.Main.controlleurMenu;
 
@@ -43,6 +44,7 @@ public class VueMenu extends MenuBar implements Observateur {
 
 
         // On crée un bouton pour chaque action
+
         // On crée un bouton pour ouvrir un repertoire
         Menu ouvrir = new Menu();
         Label ouvrirLabel = new Label("Ouvrir");
@@ -54,55 +56,10 @@ public class VueMenu extends MenuBar implements Observateur {
 
         Menu menuClasses = genererMenuClasses();
         Menu menuAttributs = genererMenuAttributs();
-
-
-        // on crée un menu methodes
-        Menu menuMethodes = new Menu("Méthodes");
-        menuMethodes.setId("btnMethodes");
-        // > on crée des items pour ajouter une methode et lister les existantes
-        MenuItem itemAjouterMethode = new MenuItem("+ Ajouter une méthode");
-        itemAjouterMethode.setId("ajouterMethode");
-        itemAjouterMethode.setOnAction(controlleurMenu);
-
-        menuMethodes.getItems().addAll(itemAjouterMethode, new SeparatorMenuItem());
-
-        // on crée un menu héritage/implementation
-        Menu menuHeritageImplem = new Menu("Héritages/Implémentations");
-        menuHeritageImplem.setId("btnHeritageImplem");
-        // > on crée des items pour ajouter une methode et lister les existantes
-        MenuItem itemAjouterHeritageImplem = new MenuItem("+ Ajouter un héritage/implémentation");
-        itemAjouterHeritageImplem.setId("ajouterHeritageImplem");
-        itemAjouterHeritageImplem.setOnAction(controlleurMenu);
-
-        menuHeritageImplem.getItems().addAll(itemAjouterHeritageImplem, new SeparatorMenuItem());
-
-
-        // on crée un menu associations
-        Menu menuAssos = new Menu("Associations");
-        menuAssos.setId("btnAssos");
-        // > on crée des items pour ajouter une methode et lister les existantes
-        MenuItem itemAjouterAsso = new MenuItem("+ Ajouter une association");
-        itemAjouterAsso.setId("ajouterAssos");
-        itemAjouterAsso.setOnAction(controlleurMenu);
-
-        menuAssos.getItems().addAll(itemAjouterAsso, new SeparatorMenuItem());
-
-
-        // on crée un menu pour exporter
-        Menu menuExporter = new Menu("\u2913 Exporter");
-        menuExporter.setId("btnExporter");
-        // > On crée un bouton pour exporter en image
-        MenuItem itemExporterPng = new MenuItem("Image (.png)");
-        itemExporterPng.setAccelerator(new KeyCodeCombination(KeyCode.I, KeyCombination.CONTROL_DOWN));
-        itemExporterPng.setId("btnExpImg");
-        itemExporterPng.setOnAction(controlleurMenu);
-
-        MenuItem itemExporterPuml = new MenuItem("PlantUML (.plantuml)");
-        itemExporterPuml.setAccelerator(new KeyCodeCombination(KeyCode.U, KeyCombination.CONTROL_DOWN));
-        itemExporterPuml.setId("btnExpPuml");
-        itemExporterPuml.setOnAction(controlleurMenu);
-
-        menuExporter.getItems().addAll(itemExporterPng, itemExporterPuml);
+        Menu menuMethodes = genererMenuMethodes();
+        Menu menuHeritageImplem = genererMenuHeritImplem();
+        Menu menuAssos = genererMenuAssos();
+        Menu menuExporter = genererMenuExporter();
 
 
         // on crée un bouton pour enregistrer le diagramme
@@ -163,14 +120,129 @@ public class VueMenu extends MenuBar implements Observateur {
         if (!modele.getClasses().isEmpty()) menuAttributs.getItems().add(new SeparatorMenuItem());
         for (ClasseInterface classe : modele.getClasses()) {
             if (classe == null) continue;
-            MenuItem item = new MenuItem("---" + classe.getNom() + "---");
+            List<Attribut> attributs = classe.getAttributs();
+            if (attributs.isEmpty()) continue;
+            MenuItem item = new MenuItem("--- " + classe.getNom() + " ---");
             menuAttributs.getItems().add(item);
-            /*for (Attribut attribut : modele.getClasseCourante().getAttributs()) {
+            for (Attribut attribut : attributs) {
                 if (attribut == null) continue;
-                MenuItem subitem = new MenuItem(attribut.getNom());
+                MenuItem subitem = new MenuItem("\t" + attribut.getNom());
                 menuAttributs.getItems().add(subitem);
-            }*/
+            }
         }
         return menuAttributs;
+    }
+
+    private Menu genererMenuMethodes() {
+        Menu menuMethodes = new Menu("Méthodes");
+        menuMethodes.setId("btnMethodes");
+        // > on crée des items pour ajouter une methode et lister les existantes
+        MenuItem itemAjouterMethode = new MenuItem("+ Ajouter une méthode");
+        itemAjouterMethode.setId("ajouterMethode");
+        itemAjouterMethode.setOnAction(controlleurMenu);
+
+        menuMethodes.getItems().add(itemAjouterMethode);
+
+        //Liste les noms des methodes
+        if (!modele.getClasses().isEmpty()) menuMethodes.getItems().add(new SeparatorMenuItem());
+        for (ClasseInterface classe : modele.getClasses()) {
+            if (classe == null) continue;
+            List<Methode> methodes = classe.getMethodes();
+            if (methodes.isEmpty()) continue;
+            MenuItem item = new MenuItem("--- " + classe.getNom() + " ---");
+            menuMethodes.getItems().add(item);
+            for (Methode methode : methodes) {
+                if (methode == null) continue;
+                MenuItem subitem = new MenuItem("\t" + methode.getNom());
+                menuMethodes.getItems().add(subitem);
+            }
+        }
+        return menuMethodes;
+    }
+
+    private Menu genererMenuHeritImplem() {
+        Menu menuHeritageImplem = new Menu("Héritages/Implémentations");
+        menuHeritageImplem.setId("btnHeritageImplem");
+        // > on crée des items pour ajouter un heritage/implem et lister les existantes
+        MenuItem itemAjouterHeritageImplem = new MenuItem("+ Ajouter un héritage/implémentation");
+        itemAjouterHeritageImplem.setId("ajouterHeritageImplem");
+        itemAjouterHeritageImplem.setOnAction(controlleurMenu);
+
+        menuHeritageImplem.getItems().add(itemAjouterHeritageImplem);
+
+        //Liste les noms des heritage/implem
+        if (!modele.getClasses().isEmpty()) menuHeritageImplem.getItems().add(new SeparatorMenuItem());
+        for (ClasseInterface classe : modele.getClasses()) {
+            if (classe == null) continue;
+            Heritage heritage = classe.getHeritage();
+            List<Implementation> implementations = classe.getImplementations();
+
+            if (heritage == null && implementations.isEmpty()) continue;
+            MenuItem item = new MenuItem("--- " + classe.getNom() + " ---");
+            menuHeritageImplem.getItems().add(item);
+            if (heritage != null) {
+                MenuItem subitem = new MenuItem("\t ——▷ " + heritage.getDestinationClasse().getNom());
+                menuHeritageImplem.getItems().add(subitem);
+            }
+            if (implementations.isEmpty()) continue;
+
+            menuHeritageImplem.getItems().add(item);
+            for (Implementation implementation : implementations) {
+                if (implementation == null) continue;
+                MenuItem subitem = new MenuItem("\t --▷ " + implementation.getDestinationClasse().getNom());
+                menuHeritageImplem.getItems().add(subitem);
+            }
+        }
+        return menuHeritageImplem;
+    }
+
+    public Menu genererMenuAssos()
+    {
+        Menu menuAssos = new Menu("Associations");
+        menuAssos.setId("btnAssos");
+        // > on crée des items pour ajouter une association et lister les existantes
+        MenuItem itemAjouterAsso = new MenuItem("+ Ajouter une association");
+        itemAjouterAsso.setId("ajouterAssos");
+        itemAjouterAsso.setOnAction(controlleurMenu);
+
+        menuAssos.getItems().add(itemAjouterAsso);
+
+        //Liste les noms des associations
+        if (!modele.getClasses().isEmpty()) menuAssos.getItems().add(new SeparatorMenuItem());
+        for (ClasseInterface classe : modele.getClasses()) {
+            if (classe == null) continue;
+            List<Association> associations = classe.getAssociations();
+
+            if (associations.isEmpty()) continue;
+            MenuItem item = new MenuItem("--- " + classe.getNom() + " ---");
+            menuAssos.getItems().add(item);
+
+            for (Association association : associations) {
+                if (association == null) continue;
+                MenuItem subitem = new MenuItem("\t ——> " + association.getNom());
+                menuAssos.getItems().add(subitem);
+            }
+        }
+        return menuAssos;
+    }
+
+    public Menu genererMenuExporter()
+    {
+        Menu menuExporter = new Menu("\u2913 Exporter");
+        menuExporter.setId("btnExporter");
+        // > On crée un bouton pour exporter en image
+        MenuItem itemExporterPng = new MenuItem("Image (.png)");
+        itemExporterPng.setAccelerator(new KeyCodeCombination(KeyCode.I, KeyCombination.CONTROL_DOWN));
+        itemExporterPng.setId("btnExpImg");
+        itemExporterPng.setOnAction(controlleurMenu);
+
+        // > On crée un bouton pour exporter en PlantUML
+        MenuItem itemExporterPuml = new MenuItem("PlantUML (.plantuml)");
+        itemExporterPuml.setAccelerator(new KeyCodeCombination(KeyCode.U, KeyCombination.CONTROL_DOWN));
+        itemExporterPuml.setId("btnExpPuml");
+        itemExporterPuml.setOnAction(controlleurMenu);
+
+        menuExporter.getItems().addAll(itemExporterPng, itemExporterPuml);
+        return menuExporter;
     }
 }
