@@ -75,23 +75,28 @@ public class Modele implements Sujet
      * @param path le chemin du dossier
      */
     public void ouvrirDossier(String name, String path,String finalPath){
-        this.dossier = new FileDirectory(name, path,finalPath);
-        notifierObservateurs();
+        this.dossier = new FileDirectory(name, path, finalPath);
     }
 
     public void lireDossier(){
+        String classes = this.dossier.list();
+        lireDossier(classes);
+    }
+
+    public void lireDossier(String classes){
         try {
-            String classes = this.dossier.list();
-            this.lireClasse(classes);
+            String[] tabClasses = classes.split("##########");
+            for (int i = 1; i < tabClasses.length; i++) {
+                this.lireClasse(tabClasses[i]);
+            }
         } catch (Exception e) {
             System.out.println("La classe n'existe pas");
         }
     }
 
-    public void lireClasse(String classes){
-        String[] tabClasses = classes.split("##########");
-        for (int i = 1; i < tabClasses.length; i++) {
-            String[] tabNomClasse = tabClasses[i].split("NOMCLASSE");
+    public void lireClasse(String classe){
+        try {
+            String[] tabNomClasse = classe.split("NOMCLASSE");
             String[] tabHeritage = tabNomClasse[1].split("HERITAGE");
             String[] tabImplementations = tabHeritage[1].split("IMPLEMENTATION");
             String[] tabAttributs = tabImplementations[1].split("ATTRIBUTS");
@@ -103,13 +108,15 @@ public class Modele implements Sujet
             tabAttributs = !Arrays.equals(tabAttributs, new String[0]) ? tabAttributs : new String[]{""};
             tabImplementations = !Arrays.equals(tabImplementations, new String[0]) ? tabImplementations : new String[]{""};
 
-            ClasseInterface classe = new ClasseInterface(tabNomClasse[0].split("\n")[1]);
+            ClasseInterface classeInterface = new ClasseInterface(tabNomClasse[0].split("\n")[1]);
             //if (!tabHeritage[0].equals("Object")) classe.ajouterHeritage(classe, tabHeritage[0]);
             //classe.ajouterImplementation(classe, tabImplementations[0]);
-            classe.ajouterAttribut(tabAttributs[0]);
-            classe.ajouterConstructeur(tabConstructeurs[0]);
-            classe.ajouterMethode(tabMethodes[0]);
-            this.elements.add(classe);
+            classeInterface.ajouterAttribut(tabAttributs[0]);
+            classeInterface.ajouterConstructeur(tabConstructeurs[0]);
+            classeInterface.ajouterMethode(tabMethodes[0]);
+            this.elements.add(classeInterface);
+        }catch (Exception e){
+            System.out.println("La classe n'existe pas");
         }
     }
 
@@ -135,5 +142,11 @@ public class Modele implements Sujet
 
     public void retirerClasseCourante(){
         this.classeCourante = null;
+    }
+
+    public void reinitialiser() {
+        this.classesUtilisateurs = new ArrayList<>();
+        this.classeCourante = null;
+        this.elements = new ArrayList<>();
     }
 }

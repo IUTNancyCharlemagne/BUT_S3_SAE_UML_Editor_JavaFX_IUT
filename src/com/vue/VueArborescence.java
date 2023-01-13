@@ -1,13 +1,18 @@
 package com.vue;
 
+import com.Main;
 import com.modele.Modele;
 import com.modele.Sujet;
 import com.modele.composite.ArborescenceDossier;
+import javafx.application.Platform;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.text.Text;
 
 import java.util.*;
+
+import static com.Main.controllerDeplacerClasse;
+import static com.Main.controlleurGlisserDeposer;
 
 public class VueArborescence extends TreeView<Text> implements Observateur {
     public VueArborescence() {
@@ -19,14 +24,22 @@ public class VueArborescence extends TreeView<Text> implements Observateur {
     public void actualiser(Sujet sujet) {
         Modele modele = (Modele) sujet;
         ArborescenceDossier arborescence = modele.getFichiers();
-        TreeItem<Text> root = new TreeItem<>(new Text(arborescence.getNom()));
+        TreeItem<Text> root = new TreeItem<>(new Text());
+        root.setGraphic(new Text(arborescence.getNom()));
+        root.getGraphic().setId("DOSSIER"+arborescence.getPath());
+        root.getGraphic().setOnDragDetected(controllerDeplacerClasse);
+        root.setExpanded(true);
         this.setRoot(root);
         ajouterDossier(arborescence, root);
     }
 
     public void ajouterDossier(ArborescenceDossier arborescence,TreeItem<Text> root) {
         for (ArborescenceDossier dossier : arborescence.getArborescence()) {
-            TreeItem<Text> treeItem = new TreeItem<>(new Text(dossier.getNom()));
+            Text nomDossier = new Text(dossier.getNom());
+            TreeItem<Text> treeItem = new TreeItem<>(new Text());
+            treeItem.setGraphic(nomDossier);
+            treeItem.getGraphic().setOnDragDetected(controllerDeplacerClasse);
+            treeItem.getGraphic().setId("DOSSIER"+dossier.getPath());
             root.getChildren().add(treeItem);
             ajouterDossier(dossier,treeItem);
         }
@@ -34,8 +47,11 @@ public class VueArborescence extends TreeView<Text> implements Observateur {
     }
 
     public void ajouterFichier(ArborescenceDossier arborescence, TreeItem<Text> root) {
-        for (String file : arborescence.getFiles()) {
-            TreeItem<Text> item2 = new TreeItem<>(new Text(file));
+        for (List<String> file : arborescence.getFiles()) {
+            TreeItem<Text> item2 = new TreeItem<>(new Text());
+            item2.setGraphic(new Text(file.get(0)));
+            item2.getGraphic().setOnDragDetected(controllerDeplacerClasse);
+            item2.getGraphic().setId(file.get(1));
             root.getChildren().add(item2);
         }
     }

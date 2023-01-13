@@ -4,20 +4,29 @@ import com.modele.Sujet;
 import com.modele.elements.*;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 
 import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.PopupControl;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Transform;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static com.Main.controlleurContextMenu;
+import static com.Main.controlleurSouris;
 
 public class VueFabriqueClasses extends AnchorPane {
     private ArrayList<VueClasse> classesList;
@@ -30,11 +39,11 @@ public class VueFabriqueClasses extends AnchorPane {
             if (classe == null) continue;
             FabriqueDeVue fabriqueDeVue = new FabriqueVueClasse();
             VueClasse vueElement = (VueClasse) fabriqueDeVue.creerVueElement();
+
+            vueElement.setOnContextMenuRequested(controlleurContextMenu);
             vueElement.setType(classe.getType());
             vueElement.setTitle(classe.getNom());
-            vueElement.ajouterSeparateur();
 
-            vueElement.imageAdd("AjouterAttribut");
 
             Random random = new Random();
             ReadOnlyDoubleProperty x = this.prefWidthProperty();
@@ -46,7 +55,7 @@ public class VueFabriqueClasses extends AnchorPane {
                 Node vueClasse = classeVue.getChildren().get(i);
                 if (vueClasse instanceof VueClasse) {
                     if (randX >= vueClasse.getLayoutX() && randX <= vueClasse.getBoundsInParent().getWidth()
-                    && randY >= vueClasse.getLayoutY() && randY <= vueClasse.getBoundsInParent().getHeight()) {
+                            && randY >= vueClasse.getLayoutY() && randY <= vueClasse.getBoundsInParent().getHeight()) {
                         randX = random.nextDouble();
                         randY = random.nextDouble();
                         i = 0;
@@ -57,33 +66,40 @@ public class VueFabriqueClasses extends AnchorPane {
             }
             vueElement.setLayoutX(randX);
             vueElement.setLayoutY(randY);
-
+            List<VueElementClasse> elements = new ArrayList<>();
             for (Attribut attribut : classe.getAttributs()) {
                 fabriqueDeVue = new FabriqueVueAttribut();
 
                 VueElementClasse vueAttribut = (VueElementClasse) fabriqueDeVue.creerVueElement();
-
                 vueAttribut.setAccessibility(attribut.getVisibilite());
+                vueAttribut.setMotCle(attribut.getMotCle());
                 vueAttribut.setType(attribut.getType());
                 vueAttribut.setName(attribut.getNom());
-
-                vueElement.setAttribut(vueAttribut);
+                elements.add(vueAttribut);
             }
+            vueElement.setAttribut(elements);
+            if (sujet.getClasseCourante() != null) vueElement.imageAdd("AjouterAttribut");
 
-            vueElement.ajouterSeparateur();
-            vueElement.imageAdd("AjouterMethode");
 
+            elements.clear();
             for (Methode methode : classe.getMethodes()) {
                 fabriqueDeVue = new FabriqueVueMethode();
 
                 VueElementClasse vueMethode = (VueElementClasse) fabriqueDeVue.creerVueElement();
 
                 vueMethode.setAccessibility(methode.getVisibilite());
+                vueMethode.setMotCle(methode.getMotCle());
                 vueMethode.setType(methode.getType());
                 vueMethode.setName(methode.getNom());
                 vueMethode.setParameters(methode.getParametres());
-
-                vueElement.setMethode(vueMethode);
+                if (sujet.getClasseCourante() != null) {
+                    vueMethode.imageAdd("AjouterParametre");
+                }
+                elements.add(vueMethode);
+            }
+            vueElement.setMethode(elements);
+            if (sujet.getClasseCourante() != null) {
+                vueElement.imageAdd("AjouterMethode");
             }
 
             for (Association association : classe.getAssociations()) {
@@ -112,5 +128,9 @@ public class VueFabriqueClasses extends AnchorPane {
 
     public void clear() {
         this.getChildren().clear();
+    }
+
+    public void ajouterContextMenu(VueClasse v) {
+        v.setOnMouseClicked(controlleurSouris);
     }
 }

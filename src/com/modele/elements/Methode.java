@@ -4,11 +4,12 @@ import java.util.List;
 
 public class Methode extends ElementVisibilite
 {
-    private String type;
+    private String motCle;
     private List<Attribut> parametres;
 
-    public Methode(String nom, String type, String visibilite, List<Attribut> parametres) {
+    public Methode(String nom, String type, String visibilite, String motCle, List<Attribut> parametres) {
         super(nom, type, visibilite);
+        this.motCle = motCle;
         this.parametres = parametres;
     }
 
@@ -53,5 +54,7 @@ public class Methode extends ElementVisibilite
         this.parametres = parametres;
     }
 
-
+    public String getMotCle() {
+        return motCle;
+    }
 }

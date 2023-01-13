@@ -2,6 +2,7 @@ package com.modele.elements;
 
 public class Attribut extends ElementVisibilite implements Element
 {
+    private String motCle;
 
     public Attribut(String nom, String type, String visibilite) {
         super(nom, type, visibilite);
@@ -19,5 +20,9 @@ public class Attribut extends ElementVisibilite implements Element
         this.visibilite = visibilite;
         this.type = type;
         this.nom = nom;
+    }
+
+    public String getMotCle() {
+        return motCle;
     }
 }

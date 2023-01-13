@@ -1,5 +1,6 @@
 package com.vue;
 
+import com.Main;
 import com.modele.Modele;
 import javafx.scene.layout.BorderPane;
 

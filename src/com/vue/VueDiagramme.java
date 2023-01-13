@@ -1,5 +1,6 @@
 package com.vue;
 
+import com.Main;
 import com.modele.Sujet;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.ScrollPane;
@@ -11,15 +12,16 @@ public class VueDiagramme extends Pane implements Observateur {
     VueFabriqueClasses vueFabriqueClasses;
 
     public void actualiser(Sujet sujet) {
-        ScrollPane scrollPane = new ScrollPane();
         this.getChildren().clear();
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setOnDragDropped(Main.controlleurGlisserDeposer);
+        scrollPane.setOnDragOver(Main.controlleurGlisserDeposer);
         scrollPane.minWidthProperty().bind(this.widthProperty());
         scrollPane.minHeightProperty().bind(this.heightProperty());
         vueFabriqueClasses = new VueFabriqueClasses();
         scrollPane.setContent(vueFabriqueClasses);
         vueFabriqueClasses.clear();
         vueFabriqueClasses.generer(sujet, sujet.getClasses());
-        vueFabriqueClasses.generer(sujet, sujet.getClassesUtilisateurs());
         this.getChildren().add(scrollPane);
     }
 

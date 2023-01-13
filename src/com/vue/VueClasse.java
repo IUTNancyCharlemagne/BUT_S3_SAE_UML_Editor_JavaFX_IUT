@@ -23,19 +23,26 @@ import java.util.List;
 
 import static com.Main.controlleurAjouterClasse;
 
-public class VueClasse extends FlowPane implements ElementDeVue{
+public class VueClasse extends FlowPane implements ElementDeVue {
 
     private final Label titleLabel;
-    private static VBox content;
+    private final VBox content;
     private final ArrayList<VueElementClasse> attributs;
     private final ArrayList<VueElementClasse> methodes;
     private final List<ImageView> imageViews;
-    private String type;
+    private Separator attributsSeparator;
+    private Separator methodesSeparator;
 
-    private TextField saisiTitre = new TextField();
-    private TextField saisiAccessibilite = new TextField();
-    private TextField saisiType = new TextField();
-    private Boolean etreMethode = false;
+    private String type;
+    private boolean attributsVisible = true;
+    private boolean methodesVisible = true;
+
+    private TextField saisiTitre;
+    private TextField saisiAccessibilite;
+    private TextField saisiType;
+    private Boolean etreMethode;
+    private HBox ajoutElem;
+
 
     public VueClasse() {
         super();
@@ -52,7 +59,6 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         type = "";
         this.setMaxSize(50 + 20 * (nbAttributs + nbMethodes), 50 + 20 * (nbAttributs + nbMethodes));
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-
 
         imageViews = new ArrayList<>();
         this.setAlignment(Pos.CENTER);
@@ -80,14 +86,16 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         content.getChildren().add(titlePane);
     }
 
-    public void setAttribut(VueElementClasse vueAttribut){
-        this.attributs.add(vueAttribut);
-        content.getChildren().add(vueAttribut);
+    public void setAttribut(List<VueElementClasse> vueAttribut){
+        this.attributsSeparator = this.ajouterSeparateur();
+        this.attributs.addAll(vueAttribut);
+        content.getChildren().addAll(vueAttribut);
     }
 
-    public void setMethode(VueElementClasse vueElementClasse){
-        this.methodes.add(vueElementClasse);
-        content.getChildren().add(vueElementClasse);
+    public void setMethode(List<VueElementClasse> vueElementClasse){
+        this.methodesSeparator = this.ajouterSeparateur();
+        this.methodes.addAll(vueElementClasse);
+        content.getChildren().addAll(vueElementClasse);
     }
 
     public void setPos(double posX, double posY) {
@@ -95,13 +103,14 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         this.setLayoutY(posY);
     }
 
-    public void ajouterSeparateur() {
+    public Separator ajouterSeparateur() {
         Separator separator = new Separator(Orientation.HORIZONTAL);
         separator.setHalignment(HPos.CENTER);
         Platform.runLater(() -> separator.setPrefWidth(this.getWidth()));
         separator.getStylesheets().add("separator.css");
         separator.setPadding(new javafx.geometry.Insets(1.5, 0, 1.5, 0));
         content.getChildren().add(separator);
+        return separator;
     }
 
     public double getLargeur() {
@@ -124,7 +133,6 @@ public class VueClasse extends FlowPane implements ElementDeVue{
     public void imageAdd(String id) {
         StackPane stackPaneImageView = new StackPane();
         ImageView imageView = new ImageView("add.png");
-        imageView.setSmooth(true);
         imageView.setFitHeight(20);
         imageView.setFitWidth(20);
         stackPaneImageView.setId(id);
@@ -132,7 +140,7 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         stackPaneImageView.setAlignment(Pos.CENTER_RIGHT);
         stackPaneImageView.setOnMouseClicked(controlleurAjouterClasse);
         imageViews.add(imageView);
-        content.getChildren().add(stackPaneImageView);
+       content.getChildren().add(stackPaneImageView);
     }
 
     public List<ImageView> getImageView() {
@@ -141,17 +149,17 @@ public class VueClasse extends FlowPane implements ElementDeVue{
 
     public void ajouterAttribut(String nom) {
         // Ajout des attributs
-        HBox hbox = new HBox();
-        hbox.getChildren().clear();
+        ajoutElem = new HBox();
+        ajoutElem.getChildren().clear();
         saisiAccessibilite = textfield("Accessibilité");
-        hbox.getChildren().addAll(saisiAccessibilite);
-        int placement = attributs.size() + 4;
+        ajoutElem.getChildren().addAll(saisiAccessibilite);
+        int placement = attributs.size() + 3;
         if (nom.equals("Methode")) {
             placement += methodes.size() + 2;
         }
-        content.getChildren().add(placement,hbox);
-        addNom(hbox,nom);
-        hbox.setAlignment(Pos.CENTER);
+        content.getChildren().add(placement, ajoutElem);
+        addNom(ajoutElem,nom);
+        ajoutElem.setAlignment(Pos.CENTER);
     }
 
     public void ajouterMethode() {
@@ -190,16 +198,25 @@ public class VueClasse extends FlowPane implements ElementDeVue{
         return false;
     }
 
-    public TextField getSaisiTitre() {
-        return saisiTitre;
+    public String getSaisiTitre() {
+        if (saisiTitre != null) {
+            return saisiTitre.getText();
+        }
+        return "";
     }
 
-    public TextField getSaisiType() {
-        return saisiType;
+    public String getSaisiType() {
+        if (saisiType != null) {
+            return saisiType.getText();
+        }
+        return "";
     }
 
-    public TextField getSaisiAccessibilite() {
-        return saisiAccessibilite;
+    public String getSaisiAccessibilite() {
+        if (saisiAccessibilite != null) {
+            return saisiAccessibilite.getText();
+        }
+        return "";
     }
 
     private void addNom(HBox hBox,String nom) {
@@ -258,5 +275,62 @@ public class VueClasse extends FlowPane implements ElementDeVue{
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void cancelAjout() {
+        ajoutElem.getChildren().clear();
+    }
+
+    public TextField ajouterParametre(String nom) {
+        for (VueElementClasse vueElementClasse : methodes) {
+            if (vueElementClasse.getNom().equals(nom)) {
+                return vueElementClasse.ajouterParametre();
+            }
+        }
+        return null;
+    }
+
+    public void masquerMethodes() {
+        content.getChildren().remove(methodesSeparator);
+        content.getChildren().removeAll(methodes);
+        methodesVisible = false;
+    }
+
+    public void masquerAttributs() {
+        content.getChildren().remove(attributsSeparator);
+        content.getChildren().removeAll(attributs);
+        attributsVisible = false;
+    }
+
+    public void masquerTout() {
+        masquerAttributs();
+        masquerMethodes();
+    }
+
+    public void agrandirAttributs() {
+        content.getChildren().add(2,attributsSeparator);
+        content.getChildren().addAll(3,attributs);
+        attributsVisible = true;
+    }
+
+    public void agrandirMethodes() {
+        int index = attributs.size() + 3;
+        content.getChildren().add(index,methodesSeparator);
+        index += 1;
+        content.getChildren().addAll(index,methodes);
+        methodesVisible = true;
+    }
+
+    public void agrandirTout() {
+        agrandirAttributs();
+        agrandirMethodes();
+    }
+
+    public boolean isAttributsVisible() {
+        return attributsVisible;
+    }
+
+    public boolean isMethodesVisible() {
+        return methodesVisible;
     }
 }

@@ -16,10 +16,10 @@ class MethodeTest
     @BeforeEach
     void setUp()
     {
-        Attribut param1 = new Attribut("att", "String", null);
+        Attribut param1 = new Attribut("att", "String", null, "");
         params = new ArrayList<>();
         params.add(param1);
-        m = new Methode("test", "int", "public", params);
+        m = new Methode("test", "int", "public", "", params);
     }
 
     @Test
@@ -36,7 +36,7 @@ class MethodeTest
     void test_modifier()
     {
         //Init
-        Attribut param2 = new Attribut("yoyo", "double", null);
+        Attribut param2 = new Attribut("yoyo", "double", null, "");
         List<Attribut> params2 = new ArrayList<>();
         params2.add(param2);
 

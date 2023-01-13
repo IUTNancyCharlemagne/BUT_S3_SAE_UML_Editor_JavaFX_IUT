@@ -1,7 +1,6 @@
 package com.modele.elements;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ClasseInterface implements Element
@@ -26,7 +25,6 @@ public class ClasseInterface implements Element
         } else if (nom.contains("class")) {
             this.type = "classe";
         }
-        //this.nom = nom;
         this.attributs = new ArrayList<>();
         this.methodes = new ArrayList<>();
         this.associations = new ArrayList<>();
@@ -63,29 +61,37 @@ public class ClasseInterface implements Element
     }
 
     public void ajouterAttribut(String attributs) {
-        try{
+
             String[] attributSplit = attributs.split("\\n");
             for (String attribut : attributSplit) {
-
-                String accessibilite = this.determinerAccessibilite(attribut);
-                String type = attribut.split(" ")[1];
-                String nom = attribut.split(" ")[2];
-                this.attributs.add(new Attribut(nom, type, accessibilite));
+                try {
+                    String accessibilite = this.determinerAccessibilite(attribut);
+                    String motCle = determinerMotCle(attribut);
+                    String[] temp = attribut.split(" ");
+                    String type = temp[temp.length - 2];
+                    String nom = temp[temp.length - 1];
+                    System.out.println(nom);
+                    this.attributs.add(new Attribut(nom, type, accessibilite, motCle));
+                }catch (Exception e) {
+                    System.out.println("Erreur lors de l'ajout de l'attribut " + attribut);
+                }
             }
-        } catch (Exception e) {
-            System.out.println("Erreur lors de l'ajout de l'attribut " + attributs);
         }
-    }
 
     public void ajouterMethode(String methodes) {
         try {
             String[] methodesTab = methodes.split("\\n");
             for (String methode : methodesTab) {
                 String accessibilite = determinerAccessibilite(methode);
-                String type = methode.split(" ")[1];
-                String nom = methode.split(" ")[2].split("\\(")[0];
+                String motCle = determinerMotCle(methode);
+
+                String[] temp = methode.split("\\(");
+                temp = temp[0].split(" ");
+                String type = temp[temp.length-2];
+                String nom = temp[temp.length-1].split("\\(")[0];
+
                 List<Attribut> attributs = determinerAttributs(methode);
-                this.methodes.add(new Methode(nom, type, accessibilite,attributs));
+                this.methodes.add(new Methode(nom, type, accessibilite, motCle, attributs));
             }
         } catch (Exception e) {
             System.out.println("Erreur lors de l'ajout de la methode " + methodes);
@@ -99,7 +105,7 @@ public class ClasseInterface implements Element
                 String accessibilite = determinerAccessibilite(methode);
                 String nom = methode.split(" ")[1].split("\\(")[0].replace("  ","");
                 List<Attribut> attributs = determinerAttributs(methode);
-                this.methodes.add(new Methode(nom, "", accessibilite,attributs));
+                this.methodes.add(new Methode(nom, "", accessibilite, "", attributs));
             }
         } catch (Exception e) {
             System.out.println("Erreur lors de l'ajout du constructeur " + methodes);
@@ -110,7 +116,10 @@ public class ClasseInterface implements Element
         String[] parametres = methode.split("\\(")[1].replace(")", "").split(",");
         List<Attribut> parametresList = new ArrayList<>();
         for (String parametre : parametres) {
-            Attribut attribut = new Attribut("", parametre, "");
+            if (parametre.equals("")) {
+                continue;
+            }
+            Attribut attribut = new Attribut("", parametre, "", "");
             parametresList.add(attribut);
         }
         return parametresList;
@@ -126,6 +135,25 @@ public class ClasseInterface implements Element
         } else {
             return "public";
         }
+    }
+
+    private String determinerMotCle(String element) {
+        String str = "";
+        if (element.contains("abstract")){
+            return "abstract";
+        } else if (element.contains("final")){
+            str += "final ";
+        }
+        if (element.contains("volatile")){
+            str += "volatile ";
+        }
+        if (element.contains("static")){
+            str += "static ";
+        }
+        if (element.contains("synchronized")){
+            str += "synchronized ";
+        }
+        return str;
     }
 
     public void ajouterAssociation(Association association) {
@@ -186,5 +214,14 @@ public class ClasseInterface implements Element
     {
         this.nom = nom;
         this.type = type;
+    }
+
+    public Methode getMethode(String nom) {
+        for (Methode methode : methodes) {
+            if (methode.getNom().equals(nom)) {
+                return methode;
+            }
+        }
+        return null;
     }
 }
