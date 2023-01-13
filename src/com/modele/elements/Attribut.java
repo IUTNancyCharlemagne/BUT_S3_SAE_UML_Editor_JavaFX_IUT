@@ -4,8 +4,9 @@ public class Attribut extends ElementVisibilite implements Element
 {
     private String motCle;
 
-    public Attribut(String nom, String type, String visibilite) {
+    public Attribut(String nom, String type, String visibilite, String motCle) {
         super(nom, type, visibilite);
+        this.motCle = motCle;
     }
 
     public String getVisibilite() {

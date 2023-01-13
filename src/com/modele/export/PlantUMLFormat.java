@@ -106,7 +106,7 @@ public class PlantUMLFormat implements Format //extends Format
     }
 
     private void setTypeUML(ElementVisibilite element, StringBuilder plantUMLBuilder) {
-        if (element.getType() != null)
+        if (element.getType() != null && !element.getType().isEmpty())
             plantUMLBuilder.append(" : ").append(element.getType()).append("\n");
         else plantUMLBuilder.append("\n");
     }

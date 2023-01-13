@@ -12,8 +12,8 @@ public class FileFile extends FileComposite {
      * @param name le nom de la classe
      * @param path l'extension du fichier
      */
-    public FileFile(String name, String path){
-        super(name, path);
+    public FileFile(String name, String path, String finalPath){
+        super(name, path, finalPath);
     }
 
     /**
