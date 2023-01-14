@@ -33,7 +33,7 @@ public class VueFabriqueClasses extends AnchorPane {
 
     public void generer(Sujet sujet, List<ClasseInterface> classes) {
         classesList = new ArrayList<>();
-        this.setPrefSize(1000, 1000);
+        this.setPrefSize(750, 750);
         Group classeVue = new Group();
         for (ClasseInterface classe : classes) {
             if (classe == null) continue;
