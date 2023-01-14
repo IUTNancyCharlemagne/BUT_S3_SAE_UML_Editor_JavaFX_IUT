@@ -32,13 +32,12 @@ public class VueSelectionRepertoire extends Application{
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Selectionner un repertoire");
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setInitialDirectory(new File("src"));
+        directoryChooser.setInitialDirectory(new File("out/production/"));
         File selectedDirectory = directoryChooser.showDialog(primaryStage);
         if(selectedDirectory != null){
             path = selectedDirectory.getPath();
             modele.reinitialiser();
             modele.ouvrirDossier("", path,path);
-            modele.lireDossier();
             modele.notifierObservateurs();
         }
     }

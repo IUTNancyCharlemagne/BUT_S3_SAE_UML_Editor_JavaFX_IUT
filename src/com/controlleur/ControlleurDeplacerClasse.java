@@ -37,12 +37,11 @@ public class ControlleurDeplacerClasse implements EventHandler<MouseEvent> {
             FileComposite fileComposite;
             ClipboardContent content = new ClipboardContent();
             if (file.length == 2) {
-                fileComposite = new FileDirectory(text.getText(), file[1], FileDirectory.finalPath);
+                fileComposite = new FileDirectory(text.getText(), "", FileDirectory.finalPath);
                 content.putString("DOSSIER"+fileComposite.list());
             }
             else {
-                System.out.println(text.getId());
-                fileComposite = new FileFile(text.getText(), text.getId(), FileDirectory.finalPath);
+                fileComposite = new FileFile(text.getText(), "", FileDirectory.finalPath);
                 content.putString(fileComposite.list());
             }
             dragboard.setContent(content);

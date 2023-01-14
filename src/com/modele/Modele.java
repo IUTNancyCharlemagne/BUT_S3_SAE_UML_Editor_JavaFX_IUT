@@ -108,15 +108,14 @@ public class Modele implements Sujet
             tabAttributs = !Arrays.equals(tabAttributs, new String[0]) ? tabAttributs : new String[]{""};
             tabImplementations = !Arrays.equals(tabImplementations, new String[0]) ? tabImplementations : new String[]{""};
 
-            ClasseInterface classeInterface = new ClasseInterface(tabNomClasse[0].split("\n")[1]);
-            //if (!tabHeritage[0].equals("Object")) classe.ajouterHeritage(classe, tabHeritage[0]);
-            //classe.ajouterImplementation(classe, tabImplementations[0]);
+            String nomClasse = tabNomClasse[0].split("\n").length == 2 ? tabNomClasse[0].split("\n")[1] : tabNomClasse[0].split("\n")[0];
+            ClasseInterface classeInterface = new ClasseInterface(nomClasse);
             classeInterface.ajouterAttribut(tabAttributs[0]);
             classeInterface.ajouterConstructeur(tabConstructeurs[0]);
             classeInterface.ajouterMethode(tabMethodes[0]);
             this.elements.add(classeInterface);
         }catch (Exception e){
-            System.out.println("La classe n'existe pas");
+            System.out.println("Problème lors de la récupération de la classe");
         }
     }
 

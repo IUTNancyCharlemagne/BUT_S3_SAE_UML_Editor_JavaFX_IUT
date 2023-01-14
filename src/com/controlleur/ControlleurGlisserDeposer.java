@@ -30,7 +30,6 @@ public class ControlleurGlisserDeposer implements EventHandler<DragEvent> {
                     modele.lireDossier(file[1]);
                 }
                 else {
-                    System.out.println(classe);
                     modele.lireClasse(classe);
                 }
                 modele.notifierObservateurs();

@@ -19,7 +19,7 @@ public class FileDirectory extends FileComposite{
         for (File fichier : Objects.requireNonNull(fichiers)) {
             FileComposite f;
             if (fichier.isDirectory()) {
-                f = new FileDirectory(this.name + fichier.getName() + "." , fichier.getPath(), finalPath);
+                f = new FileDirectory(this.name + fichier.getName() + ".", fichier.getPath(), finalPath);
                 aff.append(f.list());
             } else {
                 if (fichier.getName().endsWith(".class")) {
@@ -35,23 +35,24 @@ public class FileDirectory extends FileComposite{
 
     private String getPackageName(File fichier) {
         String name = fichier.getName().replace(".class", "");
-        String classPackage = this.name+name;
+        String classPackage;
         if (name.equals("module-info")) {
             classPackage = "";
+        } else {
+            classPackage = this.name+name;
         }
         return classPackage;
     }
 
 
     public ArborescenceDossier arborescence(){
-        String path = this.path;
         File file = new File(path);
         File[] fichiers = file.listFiles();
         ArborescenceDossier arborescenceDossier = new ArborescenceDossier(file.getName(), file.getPath());
         for (File f: Objects.requireNonNull(fichiers)) {
             if (f.isDirectory()) {
-                this.path = f.getPath();
-                arborescenceDossier.ajouterDossier(arborescence());
+                FileDirectory fileDirectory = new FileDirectory(this.name + f.getName() + ".", f.getPath(), finalPath);
+                arborescenceDossier.ajouterDossier(fileDirectory.arborescence());
             } else if (f.isFile()) {
                 if (f.getName().endsWith(".class")) {
                     String name = this.getPackageName(f);

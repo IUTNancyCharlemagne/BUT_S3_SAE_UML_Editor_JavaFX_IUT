@@ -48,7 +48,7 @@ public class FileFile extends FileComposite{
      * @throws ClassNotFoundException si la classe n'existe pas
      */
     public String contenu(String className) throws ClassNotFoundException, MalformedURLException {
-        URLClassLoader classLoader = new URLClassLoader(new URL[]{new File(finalPath).toURI().toURL()});
+        URLClassLoader classLoader = new URLClassLoader(new URL[]{new File(FileDirectory.finalPath).toURI().toURL()});
         // On récupère la classe
         Class<?> classe = classLoader.loadClass(className);
         //On crée un StringBuilder qui contiendra l'affichage de la classe
