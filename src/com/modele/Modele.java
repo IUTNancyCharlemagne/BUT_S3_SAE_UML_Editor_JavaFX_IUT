@@ -97,7 +97,9 @@ public class Modele implements Sujet
     public void lireClasse(String classe){
         try {
             String[] tabNomClasse = classe.split("NOMCLASSE");
+            System.out.println("from problem");
             String[] tabHeritage = tabNomClasse[1].split("HERITAGE");
+            System.out.println("select *");
             String[] tabImplementations = tabHeritage[1].split("IMPLEMENTATION");
             String[] tabAttributs = tabImplementations[1].split("ATTRIBUTS");
             String[] tabConstructeurs = tabAttributs[1].split("CONSTRUCTEURS");

@@ -25,13 +25,7 @@ public class ControlleurGlisserDeposer implements EventHandler<DragEvent> {
         } else if (dragEvent.getEventType() == DragEvent.DRAG_DROPPED){
             if (db.hasString()){
                 String classe = db.getString();
-                String[] file = classe.split("DOSSIER");
-                if (file.length == 2) {
-                    modele.lireDossier(file[1]);
-                }
-                else {
-                    modele.lireClasse(classe);
-                }
+                modele.lireClasse(classe);
                 modele.notifierObservateurs();
                 dragEvent.setDropCompleted(true);
                 dragEvent.consume();
