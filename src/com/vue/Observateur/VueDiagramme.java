@@ -1,7 +1,8 @@
-package com.vue;
+package com.vue.Observateur;
 
 import com.Main;
 import com.modele.Sujet;
+import com.vue.Fabrique.VueFabriqueClasses;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.WritableImage;

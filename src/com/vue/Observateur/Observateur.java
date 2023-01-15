@@ -1,4 +1,4 @@
-package com.vue;
+package com.vue.Observateur;
 
 import com.modele.Sujet;
 

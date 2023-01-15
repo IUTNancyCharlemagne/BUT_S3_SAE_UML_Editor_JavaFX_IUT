@@ -1,6 +1,6 @@
 package com.controlleur;
 
-import com.vue.VueClasse;
+import com.vue.Fabrique.elements.VueClasse;
 import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;

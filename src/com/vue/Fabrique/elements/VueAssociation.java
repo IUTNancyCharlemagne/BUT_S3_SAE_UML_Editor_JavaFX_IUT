@@ -1,5 +1,6 @@
-package com.vue;
+package com.vue.Fabrique.elements;
 
+import com.vue.Fabrique.elements.ElementDeVue;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 

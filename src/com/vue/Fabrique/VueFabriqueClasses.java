@@ -1,24 +1,16 @@
-package com.vue;
+package com.vue.Fabrique;
 
 import com.modele.Sujet;
 import com.modele.elements.*;
-import javafx.application.Platform;
+import com.vue.Fabrique.elements.VueClasse;
+import com.vue.Fabrique.elements.VueElementClasse;
 import javafx.beans.property.ReadOnlyDoubleProperty;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 
 import javafx.scene.Node;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.PopupControl;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Transform;
 
 import java.util.ArrayList;

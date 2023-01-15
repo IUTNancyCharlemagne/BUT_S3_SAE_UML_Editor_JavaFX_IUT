@@ -1,7 +1,10 @@
 package com.vue;
 
-import com.Main;
 import com.modele.Modele;
+import com.vue.Fabrique.VueFabriqueClasses;
+import com.vue.Observateur.VueArborescence;
+import com.vue.Observateur.VueDiagramme;
+import com.vue.Observateur.VueMenu;
 import javafx.scene.layout.BorderPane;
 
 public class VueGlobal extends BorderPane {

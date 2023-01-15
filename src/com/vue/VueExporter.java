@@ -3,6 +3,7 @@ package com.vue;
 import com.modele.Sujet;
 import com.modele.export.ImageFormat;
 import com.modele.export.PlantUMLFormat;
+import com.vue.Fabrique.VueFabriqueClasses;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

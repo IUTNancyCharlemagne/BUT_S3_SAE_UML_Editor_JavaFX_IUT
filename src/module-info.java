@@ -7,4 +7,7 @@ module sae.developpement.applications.grpUn.mangin.malavasi.kuenemann.collin {
     exports com.controlleur;
     exports com.vue;
     exports com.modele;
+    exports com.vue.Observateur;
+    exports com.vue.Fabrique;
+    exports com.vue.Fabrique.elements;
 }

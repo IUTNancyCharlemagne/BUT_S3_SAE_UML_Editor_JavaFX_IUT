@@ -3,21 +3,16 @@ package com.controlleur;
 import com.modele.Sujet;
 import com.modele.elements.Attribut;
 import com.modele.elements.Methode;
-import com.vue.Observateur;
 import com.vue.VueAjouterClasse;
 
-import com.vue.VueClasse;
+import com.vue.Fabrique.elements.VueClasse;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ControlleurAjouterClasse implements EventHandler<MouseEvent> {

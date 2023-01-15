@@ -1,10 +1,9 @@
-package com.vue;
+package com.vue.Observateur;
 
-import com.Main;
 import com.modele.Modele;
 import com.modele.Sujet;
 import com.modele.composite.ArborescenceDossier;
-import javafx.application.Platform;
+import com.vue.Observateur.Observateur;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.text.Text;
@@ -12,7 +11,6 @@ import javafx.scene.text.Text;
 import java.util.*;
 
 import static com.Main.controllerDeplacerClasse;
-import static com.Main.controlleurGlisserDeposer;
 
 public class VueArborescence extends TreeView<Text> implements Observateur {
     public VueArborescence() {

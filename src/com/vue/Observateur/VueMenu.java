@@ -1,10 +1,12 @@
-package com.vue;
+package com.vue.Observateur;
 
 import com.controlleur.ControlleurMenu;
 import com.controlleur.ControlleurSouris;
 import com.modele.Modele;
 import com.modele.Sujet;
 import com.modele.elements.*;
+import com.vue.Fabrique.elements.VueClasse;
+import com.vue.VueGlobal;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;

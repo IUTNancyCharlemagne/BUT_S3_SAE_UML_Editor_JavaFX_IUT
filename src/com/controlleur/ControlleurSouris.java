@@ -1,19 +1,9 @@
 package com.controlleur;
 import com.modele.Sujet;
-import com.vue.VueAjouterClasse;
-import com.vue.VueClasse;
-import com.modele.Modele;
-import com.vue.VueExporter;
-import com.vue.VueGlobal;
-import com.vue.VueExporter;
-import com.vue.VueGlobal;
+import com.vue.Fabrique.elements.VueClasse;
 import com.vue.VueSelectionRepertoire;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class ControlleurSouris implements EventHandler<MouseEvent> {

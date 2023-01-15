@@ -1,4 +1,4 @@
-package com.vue;
+package com.vue.Fabrique.elements;
 
 import com.Main;
 import javafx.application.Platform;
