@@ -5,6 +5,8 @@
 ###### `COLLIN Hugo`
 ###### `MALAVASI Valentin`<br><br><br>
 
+### Démonstration vidéo de la maquette Balsamiq : https://youtu.be/N84x9Ar5btI
+
 ## ***Liste de nos questions / commentaires :***<br>
 
 a) <br>
